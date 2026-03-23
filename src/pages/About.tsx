@@ -18,8 +18,8 @@ const About = () => {
           >
             <div className="aspect-square rounded-3xl overflow-hidden border border-zinc-800 shadow-2xl">
               <img 
-                src="/foto/foto-06.jpeg" 
-                alt="Betrouw Bouw B.V. - Our team at work" 
+                src="/foto/logo.jpeg" 
+                alt="Betrouw Bouw B.V. Logo" 
                 className="w-full h-full object-cover"
                 loading="lazy"
               />

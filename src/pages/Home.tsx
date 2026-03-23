@@ -99,23 +99,15 @@ const WhyUs = () => {
               </div>
             </div>
             
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-4">
-                <div className="h-48 rounded-2xl overflow-hidden">
-                  <img src="/foto/foto-03.jpeg" className="w-full h-full object-cover" alt="Window frame installation detail" loading="lazy" />
-                </div>
-                <div className="h-64 rounded-2xl overflow-hidden">
-                  <img src="/foto/foto-04.jpeg" className="w-full h-full object-cover" alt="Completed door installation project" loading="lazy" />
-                </div>
-              </div>
-              <div className="space-y-4 pt-8">
-                <div className="h-64 rounded-2xl overflow-hidden">
-                  <img src="/foto/foto-07.jpeg" className="w-full h-full object-cover" alt="Professional PVC window fitting" loading="lazy" />
-                </div>
-                <div className="h-48 rounded-2xl overflow-hidden">
-                  <img src="/foto/foto-09.jpeg" className="w-full h-full object-cover" alt="Finished renovation with new windows" loading="lazy" />
-                </div>
-              </div>
+            <div className="rounded-2xl overflow-hidden">
+              <video
+                src="/wideo/WhatsApp%20Video%202026-03-15%20at%209.17.54%20PM.mp4"
+                className="w-full h-full object-cover rounded-2xl"
+                autoPlay
+                muted
+                loop
+                playsInline
+              />
             </div>
           </div>
         </div>

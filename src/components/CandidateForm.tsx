@@ -16,7 +16,9 @@ import {
   Trash2,
   Download,
   Send,
-  AlertCircle
+  AlertCircle,
+  Mail,
+  MessageCircle
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { jsPDF } from 'jspdf';
@@ -95,6 +97,7 @@ const CandidateForm = () => {
       transport: false,
       car: false,
       bsn: '',
+      iban: '',
       vca: false,
       zzp: false,
       btw: '',
@@ -127,12 +130,10 @@ const CandidateForm = () => {
   });
 
   const [files, setFiles] = useState<{ [key: string]: File | null }>({
-    photo: null,
-    cv: null,
-    certs: null,
-    license: null,
-    vca: null
+    photo: null
   });
+
+  const [photoPreview, setPhotoPreview] = useState<string | null>(null);
 
   const handlePersonalChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -292,6 +293,37 @@ const CandidateForm = () => {
     // Vertical separator line
     doc.setDrawColor(220, 220, 220);
     doc.line(75, 0, 75, 297);
+
+    // Logo in top-right corner
+    try {
+      const logoImg = new Image();
+      logoImg.src = '/foto/logo.jpeg';
+      await new Promise<void>((resolve) => {
+        logoImg.onload = () => resolve();
+        logoImg.onerror = () => resolve();
+      });
+      if (logoImg.complete && logoImg.naturalWidth > 0) {
+        const canvas = document.createElement('canvas');
+        canvas.width = logoImg.naturalWidth;
+        canvas.height = logoImg.naturalHeight;
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+          ctx.drawImage(logoImg, 0, 0);
+          const logoDataUrl = canvas.toDataURL('image/jpeg');
+          const logoW = 18;
+          const logoH = (logoImg.naturalHeight / logoImg.naturalWidth) * logoW;
+          const logoX = 197 - logoW;
+          const logoY = 4;
+          // Decorative frame
+          doc.setDrawColor(accentColor[0], accentColor[1], accentColor[2]);
+          doc.setLineWidth(0.5);
+          doc.roundedRect(logoX - 1.5, logoY - 1.5, logoW + 3, logoH + 3, 1.5, 1.5);
+          doc.addImage(logoDataUrl, 'JPEG', logoX, logoY, logoW, logoH);
+        }
+      }
+    } catch (e) {
+      console.error('Error adding logo to PDF:', e);
+    }
     
     let leftY = 20;
     const leftX = 10;
@@ -620,6 +652,7 @@ const CandidateForm = () => {
       [t.candidate.dutchWorkList.overtime, formData.dutchWork.overtime ? yesLabel : noLabel],
       [t.candidate.dutchWorkList.shifts, formData.dutchWork.shifts ? yesLabel : noLabel],
       [t.candidate.dutchWorkList.bsn, formData.dutchWork.bsn || '-'],
+      [t.candidate.dutchWorkList.iban || 'IBAN', formData.dutchWork.iban || '-'],
       [t.candidate.dutchWorkList.btw, formData.dutchWork.btw || '-'],
       [t.candidate.dutchWorkList.kvk, formData.dutchWork.kvk || '-']
     ];
@@ -683,44 +716,68 @@ const CandidateForm = () => {
     return doc.output('datauristring');
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const buildSummaryText = () => {
+    const p = formData.personal;
+    const pr = formData.professional;
+    const activeSkills = Object.entries(formData.skills)
+      .filter(([key, val]) => val === true && key !== 'other')
+      .map(([key]) => (t.candidate.skillsList as Record<string, string>)[key])
+      .join(', ');
+    const skillsOther = formData.skills.other ? `, ${formData.skills.other}` : '';
+    
+    let text = `--- ${t.candidate.personal} ---\n`;
+    text += `${t.candidate.firstName}: ${p.firstName}\n`;
+    text += `${t.candidate.lastName}: ${p.lastName}\n`;
+    text += `${t.candidate.dob}: ${p.dob}\n`;
+    text += `${t.candidate.nationality}: ${p.nationality}\n`;
+    text += `${t.candidate.phone}: ${p.phone}\n`;
+    text += `${t.candidate.email}: ${p.email}\n`;
+    text += `${t.candidate.address}: ${p.address}, ${p.zip} ${p.city}, ${p.country}\n\n`;
+    
+    text += `--- ${t.candidate.professional} ---\n`;
+    text += `${t.candidate.jobTitle}: ${pr.jobTitle}\n`;
+    text += `${t.candidate.desiredJob}: ${pr.desiredJob}\n`;
+    text += `${t.candidate.yearsExp}: ${pr.yearsExp}\n`;
+    text += `${t.candidate.availableFrom}: ${pr.availableFrom}\n\n`;
+    
+    text += `--- ${t.candidate.skills} ---\n`;
+    text += `${activeSkills}${skillsOther}\n\n`;
+    
+    if (formData.dutchWork.bsn) text += `BSN: ${formData.dutchWork.bsn}\n`;
+    if (formData.dutchWork.iban) text += `IBAN: ${formData.dutchWork.iban}\n`;
+    if (formData.dutchWork.btw) text += `BTW: ${formData.dutchWork.btw}\n`;
+    if (formData.dutchWork.kvk) text += `KVK: ${formData.dutchWork.kvk}\n`;
+    
+    return text;
+  };
+
+  const sendViaEmail = async () => {
     if (!formData.consent.data || !formData.consent.correct || !formData.consent.send) {
       setError(t.candidate.pdfConsentError || 'Please accept all conditions to continue.');
       return;
     }
-
-    setIsSubmitting(true);
     setError(null);
+    
+    // Generate and download PDF first
+    await generatePDF(true);
+    
+    const subject = encodeURIComponent(`Inschrijving - ${formData.personal.firstName} ${formData.personal.lastName}`);
+    const body = encodeURIComponent(buildSummaryText());
+    window.open(`mailto:tomasz_jaskiewicz@hotmail.com?subject=${subject}&body=${body}`, '_blank');
+  };
 
-    try {
-      const pdfBase64 = await generatePDF(false);
-      
-      const submitData = new FormData();
-      submitData.append('data', JSON.stringify(formData));
-      submitData.append('pdf', pdfBase64);
-      
-      if (files.photo) submitData.append('profilePhoto', files.photo);
-      if (files.cv) submitData.append('existingCv', files.cv);
-      if (files.certs) submitData.append('certificates', files.certs);
-      if (files.license) submitData.append('license', files.license);
-      if (files.vca) submitData.append('vcaDocument', files.vca);
-
-      const response = await fetch('/api/cv-submit', {
-        method: 'POST',
-        body: submitData
-      });
-
-      if (response.ok) {
-        setIsSuccess(true);
-      } else {
-        throw new Error('Submission failed');
-      }
-    } catch (err) {
-      setError(t.candidate.pdfSubmitError || 'An error occurred while submitting. Please try again later.');
-    } finally {
-      setIsSubmitting(false);
+  const sendViaWhatsApp = async () => {
+    if (!formData.consent.data || !formData.consent.correct || !formData.consent.send) {
+      setError(t.candidate.pdfConsentError || 'Please accept all conditions to continue.');
+      return;
     }
+    setError(null);
+    
+    // Generate and download PDF first
+    await generatePDF(true);
+    
+    const text = encodeURIComponent(buildSummaryText());
+    window.open(`https://wa.me/31684111366?text=${text}`, '_blank');
   };
 
   const steps = [
@@ -820,12 +877,12 @@ const CandidateForm = () => {
                     personal: { firstName: '', lastName: '', dob: '', nationality: '', phone: '', email: '', address: '', zip: '', city: '', country: '' },
                     professional: { jobTitle: '', desiredJob: '', yearsExp: '', specialization: '', summary: '', availableFrom: '', workType: 'Fulltime', region: '' },
                     skills: { ramen: false, deuren: false, kunststof: false, aluminium: false, hout: false, hst: false, dakramen: false, afwerking: false, gevel: false, renovatie: false, nieuwbouw: false, other: '' },
-                    dutchWork: { license: false, transport: false, car: false, bsn: '', vca: false, zzp: false, btw: '', kvk: '', permit: false, nlWide: false, overtime: false, shifts: false },
+                    dutchWork: { license: false, transport: false, car: false, bsn: '', iban: '', vca: false, zzp: false, btw: '', kvk: '', permit: false, nlWide: false, overtime: false, shifts: false },
                     languages: { nl: 'basis', en: 'basis', pl: 'basis', de: 'basis', other: '' },
                     experience: [], education: [], certificates: [],
                     extra: { motivation: '', salary: '', remarks: '' },
                     consent: { data: false, correct: false, send: false }
-                  }); setFiles({ photo: null, cv: null, certs: null, license: null, vca: null }); }}
+                  }); setFiles({ photo: null }); setPhotoPreview(null); }}
                   className="px-10 py-4 bg-zinc-800 text-white font-bold rounded-xl hover:bg-zinc-700 transition-all"
                 >
                   {t.candidateNav.newRegistration}
@@ -999,6 +1056,10 @@ const CandidateForm = () => {
                             <input type="text" value={formData.dutchWork.bsn} onChange={(e) => handleDutchWorkChange('bsn', e.target.value)} className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-xl text-white focus:outline-none focus:border-amber-500 transition-colors" />
                           </div>
                           <div className="space-y-2">
+                            <label className="text-zinc-400 text-xs font-medium ml-1">{t.candidate.dutchWorkList.iban || 'IBAN nummer'}</label>
+                            <input type="text" value={formData.dutchWork.iban} onChange={(e) => handleDutchWorkChange('iban', e.target.value)} className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-xl text-white focus:outline-none focus:border-amber-500 transition-colors" />
+                          </div>
+                          <div className="space-y-2">
                             <label className="text-zinc-400 text-xs font-medium ml-1">{t.candidate.dutchWorkList.btw}</label>
                             <input type="text" value={formData.dutchWork.btw} onChange={(e) => handleDutchWorkChange('btw', e.target.value)} className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-xl text-white focus:outline-none focus:border-amber-500 transition-colors" />
                           </div>
@@ -1130,28 +1191,34 @@ const CandidateForm = () => {
                     <div>
                       <h4 className="text-white font-bold mb-6 flex items-center space-x-2">
                         <Upload className="w-5 h-5 text-amber-500" />
-                        <span>{t.candidate.uploads}</span>
+                        <span>{(t.candidate.uploadFields as Record<string, string>).photo}</span>
                       </h4>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {Object.entries(t.candidate.uploadFields).map(([key, label]) => (
-                          <div key={key} className="space-y-2">
-                            <label className="text-zinc-500 text-xs font-bold uppercase tracking-widest">{label as string}</label>
-                            <div className="relative group">
-                              <input 
-                                type="file" 
-                                accept={key === 'photo' ? 'image/*' : undefined}
-                                onChange={(e) => handleFileChange(e, key)}
-                                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" 
-                              />
-                              <div className="w-full px-6 py-4 bg-zinc-950 border border-zinc-800 rounded-xl text-zinc-400 group-hover:border-amber-500 transition-colors flex items-center justify-between">
-                                <span className="truncate max-w-[200px]">
-                                  {files[key] ? files[key]?.name : (t.candidate.pdfChooseFile || 'Kies bestand...')}
-                                </span>
-                                <Upload className="w-4 h-4 text-zinc-600 group-hover:text-amber-500" />
-                              </div>
+                      <div className="flex flex-col items-center space-y-4">
+                        <div className="relative w-40 h-40 rounded-full overflow-hidden border-2 border-zinc-700 hover:border-amber-500 transition-colors group">
+                          {photoPreview ? (
+                            <img src={photoPreview} alt="Profile" className="w-full h-full object-cover" />
+                          ) : (
+                            <div className="w-full h-full bg-zinc-900 flex flex-col items-center justify-center text-zinc-500">
+                              <User className="w-12 h-12 mb-2" />
+                              <span className="text-xs">{t.candidate.pdfChooseFile || 'Kies bestand...'}</span>
                             </div>
-                          </div>
-                        ))}
+                          )}
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={(e) => {
+                              handleFileChange(e, 'photo');
+                              const file = e.target.files?.[0];
+                              if (file) {
+                                const reader = new FileReader();
+                                reader.onload = () => setPhotoPreview(reader.result as string);
+                                reader.readAsDataURL(file);
+                              }
+                            }}
+                            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                          />
+                        </div>
+                        <p className="text-zinc-500 text-sm">{files.photo ? files.photo.name : (t.candidate.pdfChooseFile || 'Kies bestand...')}</p>
                       </div>
                     </div>
                   </div>
@@ -1227,6 +1294,46 @@ const CandidateForm = () => {
                       </div>
                     )}
 
+                    {/* Required Documents Info */}
+                    <div className="p-6 bg-amber-500/5 border border-amber-500/20 rounded-2xl space-y-4">
+                      <h4 className="text-amber-500 font-bold text-lg flex items-center space-x-2">
+                        <FileText className="w-5 h-5" />
+                        <span>{t.candidate.requiredDocsTitle || 'VEREISTE DOCUMENTEN'}</span>
+                      </h4>
+                      <p className="text-zinc-400 text-sm italic">
+                        {t.candidate.requiredDocsSubtitle || 'Stuur een kopie van de volgende documenten per e-mail of WhatsApp:'}
+                      </p>
+                      <ul className="space-y-2">
+                        {(t.candidate.requiredDocsList as string[] || [
+                          'ID (paspoort of ID kaart)',
+                          'Rijbewijs',
+                          'Uittreksel KVK (recent)',
+                          'VCA certificaat',
+                          'Polis bedrijfsaansprakelijkheidsverzekering',
+                          'Polis of kopie pasje ziektekosten verzekering',
+                          'Getekende overeenkomst van Opdracht'
+                        ]).map((docItem: string, i: number) => (
+                          <li key={i} className="flex items-center space-x-3 text-zinc-300 text-sm">
+                            <div className="w-5 h-5 rounded border border-zinc-600 flex-shrink-0" />
+                            <span>{docItem}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      <div className="mt-4 p-4 bg-zinc-900/80 border border-zinc-800 rounded-xl space-y-2">
+                        <p className="text-amber-500 font-bold text-sm">{t.candidate.requiredDocsContact || 'Stuur documenten naar:'}</p>
+                        <div className="flex flex-col sm:flex-row sm:space-x-6 space-y-1 sm:space-y-0">
+                          <a href="mailto:tomasz_jaskiewicz@hotmail.com" className="text-zinc-300 text-sm hover:text-amber-500 transition-colors flex items-center space-x-2">
+                            <Mail className="w-4 h-4" />
+                            <span>tomasz_jaskiewicz@hotmail.com</span>
+                          </a>
+                          <a href="https://wa.me/31684111366" target="_blank" rel="noopener noreferrer" className="text-zinc-300 text-sm hover:text-green-500 transition-colors flex items-center space-x-2">
+                            <MessageCircle className="w-4 h-4" />
+                            <span>+31 6 84111366</span>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+
                     <div className="flex flex-col md:flex-row gap-4 pt-6">
                       <button 
                         type="button"
@@ -1237,18 +1344,20 @@ const CandidateForm = () => {
                         <span>{t.candidate.actions.download}</span>
                       </button>
                       <button 
-                        onClick={handleSubmit}
-                        disabled={isSubmitting}
-                        className="flex-[2] py-4 bg-amber-500 hover:bg-amber-600 text-black font-bold rounded-xl transition-all shadow-xl shadow-amber-500/20 flex items-center justify-center space-x-2 disabled:opacity-50"
+                        type="button"
+                        onClick={sendViaEmail}
+                        className="flex-1 py-4 bg-amber-500 hover:bg-amber-600 text-black font-bold rounded-xl transition-all shadow-xl shadow-amber-500/20 flex items-center justify-center space-x-2"
                       >
-                        {isSubmitting ? (
-                          <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin" />
-                        ) : (
-                          <>
-                            <Send className="w-5 h-5" />
-                            <span>{t.candidate.actions.submit}</span>
-                          </>
-                        )}
+                        <Mail className="w-5 h-5" />
+                        <span>{t.candidate.actions.sendEmail || 'Verstuur via E-mail'}</span>
+                      </button>
+                      <button 
+                        type="button"
+                        onClick={sendViaWhatsApp}
+                        className="flex-1 py-4 bg-green-600 hover:bg-green-700 text-white font-bold rounded-xl transition-all shadow-xl shadow-green-600/20 flex items-center justify-center space-x-2"
+                      >
+                        <MessageCircle className="w-5 h-5" />
+                        <span>{t.candidate.actions.sendWhatsApp || 'Verstuur via WhatsApp'}</span>
                       </button>
                     </div>
                   </div>

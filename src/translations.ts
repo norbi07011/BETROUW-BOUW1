@@ -50,7 +50,7 @@ export const translations = {
       validationPhone: 'Ongeldig telefoonnummer',
       region: 'Gewenste regio in Nederland',
       skillsList: {
-        ramen: 'Ramen montage',
+        ramen: 'Kozijnen montage',
         deuren: 'Deuren montage',
         kunststof: 'Kunststof kozijnen',
         aluminium: 'Aluminium kozijnen',
@@ -68,6 +68,7 @@ export const translations = {
         transport: 'Eigen vervoer',
         car: 'Eigen auto',
         bsn: 'BSN nummer',
+        iban: 'IBAN nummer',
         vca: 'VCA certificaat',
         zzp: 'ZZP / freelancer',
         btw: 'BTW nummer',
@@ -107,11 +108,7 @@ export const translations = {
         remarks: 'Extra opmerkingen'
       },
       uploadFields: {
-        photo: 'Profielfoto',
-        cv: 'Bestaand CV',
-        certs: 'Certificaten',
-        license: 'Rijbewijs',
-        vca: 'VCA document'
+        photo: 'Profielfoto'
       },
       consentFields: {
         data: 'Ik geef toestemming voor verwerking van mijn persoonsgegevens',
@@ -121,7 +118,9 @@ export const translations = {
       actions: {
         generate: 'Genereer CV',
         submit: 'Verstuur inschrijving',
-        download: 'Download PDF'
+        download: 'Download PDF',
+        sendEmail: 'Verstuur via E-mail',
+        sendWhatsApp: 'Verstuur via WhatsApp'
       },
       pdfAttachments: 'Bijlagen',
       pdfCandidateLabel: 'KANDIDAAT',
@@ -134,6 +133,18 @@ export const translations = {
       pdfChooseFile: 'Kies bestand...',
       pdfConsentError: 'Accepteer alle voorwaarden om door te gaan.',
       pdfSubmitError: 'Er is een fout opgetreden bij het verzenden. Probeer het later opnieuw.',
+      requiredDocsTitle: 'VEREISTE DOCUMENTEN',
+      requiredDocsSubtitle: 'Stuur een kopie van de volgende documenten per e-mail of WhatsApp:',
+      requiredDocsList: [
+        'ID (paspoort of ID kaart)',
+        'Rijbewijs',
+        'Uittreksel KVK (recent)',
+        'VCA certificaat',
+        'Polis bedrijfsaansprakelijkheidsverzekering',
+        'Polis of kopie pasje ziektekosten verzekering',
+        'Getekende overeenkomst van Opdracht'
+      ],
+      requiredDocsContact: 'Stuur documenten naar:',
       certFields: {
         title: 'Certificaten',
         addCert: 'Certificaat toevoegen',
@@ -151,7 +162,7 @@ export const translations = {
       items: [
         { 
           title: 'Kunststof kozijnen - Den Haag', 
-          desc: 'Volledige vervanging van oude houten kozijnen door moderne kunststof ramen met dubbel glas. Verbeterde isolatie en een frisse uitstraling voor de hele woning.',
+          desc: 'Volledige vervanging van oude houten kozijnen door moderne kunststof kozijnen met dubbel glas. Verbeterde isolatie en een frisse uitstraling voor de hele woning.',
           mainImage: '/foto/foto-01.jpeg',
           gallery: ['/foto/foto-02.jpeg', '/foto/foto-03.jpeg']
         },
@@ -179,32 +190,38 @@ export const translations = {
           mainImage: '/foto/foto-02.jpeg',
           gallery: ['/foto/foto-08.jpeg', '/foto/foto-10.jpeg']
         },
+        { 
+          title: 'Vliesgevel montage - Aalsmeer', 
+          desc: 'Professionele montage van een moderne vliesgevel op een bedrijfspand in Aalsmeer. Strakke aluminium profielen met grote glaspartijen zorgen voor een imposante, eigentijdse uitstraling. De vliesgevel biedt uitstekende thermische isolatie, maximale lichtinval en een naadloze, architectonische afwerking van de gehele gevel.',
+          mainImage: '/foto/aalsmeer-01.jpeg',
+          gallery: ['/foto/aalsmeer-02.jpeg', '/foto/aalsmeer-03.jpeg', '/foto/aalsmeer-04.jpeg', '/foto/aalsmeer-05.jpeg', '/foto/aalsmeer-06.jpeg', '/foto/aalsmeer-07.jpeg', '/foto/aalsmeer-08.jpeg']
+        },
       ]
     },
     hero: {
       title: 'BETROUW BOUW B.V.',
-      subtitle: 'Professionele montage van ramen en deuren',
-      description: 'Specialist in kunststof, aluminium en houten ramen. Nieuwbouw en renovatie projecten in Nederland.',
+      subtitle: 'Professionele montage van kozijnen en deuren',
+      description: 'Specialist in kunststof, aluminium en houten kozijnen. Nieuwbouw en renovatie projecten in Nederland.',
       cta1: 'Vraag een offerte aan',
       cta2: 'Neem contact op',
     },
     about: {
       title: 'Over Betrouw Bouw B.V.',
-      p1: 'Betrouw Bouw B.V. is gespecialiseerd in professionele montage van ramen en deuren voor nieuwbouw en renovatieprojecten.',
+      p1: 'Betrouw Bouw B.V. is gespecialiseerd in professionele montage van kozijnen en deuren voor nieuwbouw en renovatieprojecten.',
       p2: 'Onze vakmensen hebben ervaring met kunststof, aluminium en houten kozijnen en zorgen altijd voor een perfecte afwerking.',
       p3: 'Wij werken met hoogwaardige materialen en leveren duurzame oplossingen voor woningen en bedrijfspanden.',
     },
     services: {
       title: 'Onze Diensten',
-      subtitle: 'Wij bieden een breed scala aan professionele montageservices voor ramen, deuren en kozijnen. Van nieuwbouw tot renovatie — altijd met vakmanschap en oog voor detail.',
+      subtitle: 'Wij bieden een breed scala aan professionele montageservices voor kozijnen en deuren. Van nieuwbouw tot renovatie — altijd met vakmanschap en oog voor detail.',
       heroBadge: 'Premium Montageservice',
       learnMore: 'Meer informatie',
       items: [
-        { title: 'Kunststof Ramen', desc: 'Duurzame en onderhoudsvriendelijke PVC kozijnen met uitstekende thermische isolatie. Onze kunststof ramen bieden jarenlange betrouwbare prestaties en een strakke uitstraling.', image: '/foto/foto-02.jpeg', features: ['Energiezuinig', 'Onderhoudsvriendelijk', 'Geluidswerend', 'Inbraakbestendig'] },
-        { title: 'Aluminium Ramen', desc: 'Moderne en sterke aluminium profielen voor een slanke, eigentijdse uitstraling. Ideaal voor grote raampartijen waar sterkte en esthetiek samenkomen.', image: '/foto/foto-03.jpeg', features: ['Slanke profielen', 'Extreem sterk', 'Corrosiebestendig', 'Moderne uitstraling'] },
-        { title: 'Houten Ramen', desc: 'Klassieke en natuurlijke houten kozijnen met uitstekende isolatie-eigenschappen. Houten ramen bieden warmte en karakter aan elke woning.', image: '/foto/foto-04.jpeg', features: ['Natuurlijk materiaal', 'Uitstekende isolatie', 'Tijdloos design', 'Duurzaam hout'] },
+        { title: 'Kunststof Kozijnen', desc: 'Duurzame en onderhoudsvriendelijke PVC kozijnen met uitstekende thermische isolatie. Onze kunststof kozijnen bieden jarenlange betrouwbare prestaties en een strakke uitstraling.', image: '/foto/foto-02.jpeg', features: ['Energiezuinig', 'Onderhoudsvriendelijk', 'Geluidswerend', 'Inbraakbestendig'] },
+        { title: 'Aluminium Kozijnen', desc: 'Moderne en sterke aluminium profielen voor een slanke, eigentijdse uitstraling. Ideaal voor grote raampartijen waar sterkte en esthetiek samenkomen.', image: '/foto/foto-03.jpeg', features: ['Slanke profielen', 'Extreem sterk', 'Corrosiebestendig', 'Moderne uitstraling'] },
+        { title: 'Houten Kozijnen', desc: 'Klassieke en natuurlijke houten kozijnen met uitstekende isolatie-eigenschappen. Houten kozijnen bieden warmte en karakter aan elke woning.', image: '/foto/foto-04.jpeg', features: ['Natuurlijk materiaal', 'Uitstekende isolatie', 'Tijdloos design', 'Duurzaam hout'] },
         { title: 'Deuren Montage', desc: 'Professionele installatie van voordeuren, achterdeuren, schuifdeuren en binnendeuren. Elke deur wordt met precisie gemonteerd voor een perfecte werking.', image: '/foto/foto-05.jpeg', features: ['Voordeuren', 'Achterdeuren', 'Schuifdeuren', 'Binnendeuren'] },
-        { title: 'Schuifsystemen', desc: 'Hoogwaardige schuifpuien voor een naadloze overgang tussen binnen en buiten. Onze schuifsystemen combineren design, comfort en functionaliteit.', image: '/foto/foto-07.jpeg', features: ['Grote glaspartijen', 'Soepele werking', 'Thermisch geïsoleerd', 'Ruimtebesparend'] },
+        { title: 'Schuifpuien', desc: 'Hoogwaardige schuifpuien voor een naadloze overgang tussen binnen en buiten. Onze schuifpuien combineren design, comfort en functionaliteit.', image: '/foto/foto-07.jpeg', features: ['Grote glaspartijen', 'Soepele werking', 'Thermisch geïsoleerd', 'Ruimtebesparend'] },
         { title: 'Nieuwbouw Projecten', desc: 'Complete raam- en deuroplossingen voor grootschalige nieuwbouwprojecten. Wij werken nauw samen met aannemers en architecten voor een vlekkeloos resultaat.', image: '/foto/foto-08.jpeg', features: ['Projectbegeleiding', 'Maatwerk oplossingen', 'Tijdige levering', 'Volledige service'] },
         { title: 'Renovatie Projecten', desc: 'Vakkundige vervanging van oude kozijnen in bestaande woningen en bedrijfspanden. Wij zorgen voor minimale overlast en een perfect eindresultaat.', image: '/foto/foto-09.jpeg', features: ['Nauwkeurig inmeten', 'Minimale overlast', 'Nette afwerking', 'Afvoer oud materiaal'] },
       ],
@@ -230,7 +247,7 @@ export const translations = {
       steps: [
         { title: 'Offerte aanvragen', desc: 'Vraag eenvoudig een vrijblijvende offerte aan.' },
         { title: 'Advies en afspraak', desc: 'Wij komen langs voor advies en nauwkeurige inmeting.' },
-        { title: 'Professionele montage', desc: 'Onze vakmensen monteren uw ramen met uiterste precisie.' },
+        { title: 'Professionele montage', desc: 'Onze vakmensen monteren uw kozijnen met uiterste precisie.' },
         { title: 'Perfecte oplevering', desc: 'Wij leveren alles schoon en perfect afgewerkt op.' },
       ],
     },
@@ -243,7 +260,7 @@ export const translations = {
       ],
     },
     cta: {
-      title: 'Heeft u nieuwe ramen nodig?',
+      title: 'Heeft u nieuwe kozijnen nodig?',
       subtitle: 'Vraag vandaag nog een vrijblijvende offerte aan.',
       button: 'Vraag een offerte aan',
     },
@@ -305,7 +322,7 @@ export const translations = {
     termsPage: {
       intro: 'Deze algemene voorwaarden zijn van toepassing op alle diensten en aanbiedingen van Betrouw Bouw B.V.',
       art1Title: 'Artikel 1 – Definities',
-      art1Items: ["Opdrachtnemer: Betrouw Bouw B.V., gevestigd te 's-Gravenhage, KVK 87202050.", 'Opdrachtgever: De natuurlijke persoon of rechtspersoon die een overeenkomst aangaat met Opdrachtnemer.', 'Diensten: Alle werkzaamheden waartoe opdracht is gegeven, waaronder montage van ramen, deuren en kozijnen.'],
+      art1Items: ["Opdrachtnemer: Betrouw Bouw B.V., gevestigd te 's-Gravenhage, KVK 87202050.", 'Opdrachtgever: De natuurlijke persoon of rechtspersoon die een overeenkomst aangaat met Opdrachtnemer.', 'Diensten: Alle werkzaamheden waartoe opdracht is gegeven, waaronder montage van kozijnen en deuren.'],
       art2Title: 'Artikel 2 – Offertes',
       art2Desc: 'Alle offertes zijn vrijblijvend, tenzij in de offerte een termijn voor aanvaarding is opgenomen.',
       art3Title: 'Artikel 3 – Uitvoering',
@@ -344,7 +361,7 @@ export const translations = {
         },
         {
           name: 'Europakozijn',
-          desc: 'Specialist in kozijnen, ramen en deuren. Europakozijn levert en monteert hoogwaardige kunststof, aluminium en houten kozijnen voor nieuwbouw en renovatieprojecten in heel Nederland.',
+          desc: 'Specialist in kozijnen en deuren. Europakozijn levert en monteert hoogwaardige kunststof, aluminium en houten kozijnen voor nieuwbouw en renovatieprojecten in heel Nederland.',
           image: '/foto/wspolnik-europakozijn.jpeg',
           url: 'https://europakozijn.nl/',
         },
@@ -452,6 +469,7 @@ export const translations = {
         transport: 'Own Transport',
         car: 'Own Car',
         bsn: 'BSN Number',
+        iban: 'IBAN Number',
         vca: 'VCA Certificate',
         zzp: 'ZZP / Freelancer',
         btw: 'VAT Number',
@@ -491,11 +509,7 @@ export const translations = {
         remarks: 'Extra Remarks'
       },
       uploadFields: {
-        photo: 'Profile Photo',
-        cv: 'Existing CV',
-        certs: 'Certificates',
-        license: 'Driver\'s License',
-        vca: 'VCA Document'
+        photo: 'Profile Photo'
       },
       consentFields: {
         data: 'I give permission for the processing of my personal data',
@@ -505,7 +519,9 @@ export const translations = {
       actions: {
         generate: 'Generate CV',
         submit: 'Submit Registration',
-        download: 'Download PDF'
+        download: 'Download PDF',
+        sendEmail: 'Send via Email',
+        sendWhatsApp: 'Send via WhatsApp'
       },
       pdfAttachments: 'Attachments',
       pdfCandidateLabel: 'CANDIDATE',
@@ -518,6 +534,18 @@ export const translations = {
       pdfChooseFile: 'Choose file...',
       pdfConsentError: 'Please accept all terms to continue.',
       pdfSubmitError: 'An error occurred while submitting. Please try again later.',
+      requiredDocsTitle: 'REQUIRED DOCUMENTS',
+      requiredDocsSubtitle: 'Please send a copy of the following documents via email or WhatsApp:',
+      requiredDocsList: [
+        'ID (passport or ID card)',
+        'Driver\'s License',
+        'KVK extract (recent)',
+        'VCA certificate',
+        'Business liability insurance policy',
+        'Health insurance policy or card copy',
+        'Signed assignment agreement'
+      ],
+      requiredDocsContact: 'Send documents to:',
       certFields: {
         title: 'Certificates',
         addCert: 'Add Certificate',
@@ -568,7 +596,7 @@ export const translations = {
     hero: {
       title: 'BETROUW BOUW B.V.',
       subtitle: 'Professional installation of windows and doors',
-      description: 'Specialist in PVC, aluminum, and wooden windows. New construction and renovation projects in the Netherlands.',
+      description: 'Specialist in PVC, aluminum, and wooden window frames. New construction and renovation projects in the Netherlands.',
       cta1: 'Request a quote',
       cta2: 'Contact us',
     },
@@ -836,6 +864,7 @@ export const translations = {
         transport: 'Własny transport',
         car: 'Własny samochód',
         bsn: 'Numer BSN',
+        iban: 'Numer IBAN',
         vca: 'Certyfikat VCA',
         zzp: 'ZZP / Freelancer',
         btw: 'Numer BTW',
@@ -875,11 +904,7 @@ export const translations = {
         remarks: 'Dodatkowe uwagi'
       },
       uploadFields: {
-        photo: 'Zdjęcie profilowe',
-        cv: 'Istniejące CV',
-        certs: 'Certyfikaty',
-        license: 'Prawo jazdy',
-        vca: 'Dokument VCA'
+        photo: 'Zdjęcie profilowe'
       },
       consentFields: {
         data: 'Wyrażam zgodę na przetwarzanie moich danych osobowych',
@@ -889,7 +914,9 @@ export const translations = {
       actions: {
         generate: 'Generuj CV',
         submit: 'Wyślij zgłoszenie',
-        download: 'Pobierz PDF'
+        download: 'Pobierz PDF',
+        sendEmail: 'Wyślij e-mailem',
+        sendWhatsApp: 'Wyślij WhatsApp'
       },
       pdfAttachments: 'Załączniki',
       pdfCandidateLabel: 'KANDYDAT',
@@ -902,6 +929,18 @@ export const translations = {
       pdfChooseFile: 'Wybierz plik...',
       pdfConsentError: 'Zaakceptuj wszystkie warunki, aby kontynuować.',
       pdfSubmitError: 'Wystąpił błąd podczas wysyłania. Spróbuj ponownie później.',
+      requiredDocsTitle: 'WYMAGANE DOKUMENTY',
+      requiredDocsSubtitle: 'Prześlij kopię poniższych dokumentów e-mailem lub WhatsApp:',
+      requiredDocsList: [
+        'Dowód osobisty (paszport lub ID)',
+        'Prawo jazdy',
+        'Wypis z KVK (aktualny)',
+        'Certyfikat VCA',
+        'Polisa OC działalności',
+        'Polisa lub kopia karty ubezpieczenia zdrowotnego',
+        'Podpisana umowa zlecenia'
+      ],
+      requiredDocsContact: 'Wyślij dokumenty na:',
       certFields: {
         title: 'Certyfikaty',
         addCert: 'Dodaj certyfikat',
@@ -952,7 +991,7 @@ export const translations = {
     hero: {
       title: 'BETROUW BOUW B.V.',
       subtitle: 'Profesjonalny montaż okien i drzwi',
-      description: 'Specjalista w zakresie okien PCV, aluminiowych i drewnianych. Projekty nowobudowlane i renowacyjne w Holandii.',
+      description: 'Specjalista w zakresie ościeżnic PCV, aluminiowych i drewnianych. Projekty nowobudowlane i renowacyjne w Holandii.',
       cta1: 'Poproś o wycenę',
       cta2: 'Skontaktuj się',
     },
@@ -1220,6 +1259,7 @@ export const translations = {
         transport: 'Eigener Transport',
         car: 'Eigenes Auto',
         bsn: 'BSN-Nummer',
+        iban: 'IBAN-Nummer',
         vca: 'VCA-Zertifikat',
         zzp: 'ZZP / Freiberufler',
         btw: 'USt-IdNr.',
@@ -1259,11 +1299,7 @@ export const translations = {
         remarks: 'Zusätzliche Bemerkungen'
       },
       uploadFields: {
-        photo: 'Profilfoto',
-        cv: 'Bestehender Lebenslauf',
-        certs: 'Zertifikate',
-        license: 'Führerschein',
-        vca: 'VCA-Dokument'
+        photo: 'Profilfoto'
       },
       consentFields: {
         data: 'Ich stimme der Verarbeitung meiner personenbezogenen Daten zu',
@@ -1273,7 +1309,9 @@ export const translations = {
       actions: {
         generate: 'Lebenslauf erstellen',
         submit: 'Anmeldung absenden',
-        download: 'PDF herunterladen'
+        download: 'PDF herunterladen',
+        sendEmail: 'Per E-Mail senden',
+        sendWhatsApp: 'Per WhatsApp senden'
       },
       pdfAttachments: 'Anlagen',
       pdfCandidateLabel: 'KANDIDAT',
@@ -1286,6 +1324,18 @@ export const translations = {
       pdfChooseFile: 'Datei wählen...',
       pdfConsentError: 'Bitte akzeptieren Sie alle Bedingungen, um fortzufahren.',
       pdfSubmitError: 'Beim Senden ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.',
+      requiredDocsTitle: 'ERFORDERLICHE DOKUMENTE',
+      requiredDocsSubtitle: 'Bitte senden Sie eine Kopie der folgenden Dokumente per E-Mail oder WhatsApp:',
+      requiredDocsList: [
+        'Ausweis (Reisepass oder Personalausweis)',
+        'Führerschein',
+        'KVK-Auszug (aktuell)',
+        'VCA-Zertifikat',
+        'Betriebshaftpflichtversicherung',
+        'Krankenversicherungspolice oder Kartenkopie',
+        'Unterschriebener Auftragsvertrag'
+      ],
+      requiredDocsContact: 'Dokumente senden an:',
       certFields: {
         title: 'Zertifikate',
         addCert: 'Zertifikat hinzufügen',
@@ -1336,7 +1386,7 @@ export const translations = {
     hero: {
       title: 'BETROUW BOUW B.V.',
       subtitle: 'Professionelle Montage von Fenstern und Türen',
-      description: 'Spezialist für Kunststoff-, Aluminium- und Holzfenster. Neubau- und Renovierungsprojekte in den Niederlanden.',
+      description: 'Spezialist für Kunststoff-, Aluminium- und Holzrahmen. Neubau- und Renovierungsprojekte in den Niederlanden.',
       cta1: 'Angebot anfordern',
       cta2: 'Kontaktieren Sie uns',
     },
@@ -1604,6 +1654,7 @@ export const translations = {
         transport: 'Kendi ulaşımı',
         car: 'Kendi arabası',
         bsn: 'BSN numarası',
+        iban: 'IBAN numarası',
         vca: 'VCA sertifikası',
         zzp: 'ZZP / Serbest çalışan',
         btw: 'BTW numarası',
@@ -1643,11 +1694,7 @@ export const translations = {
         remarks: 'Ek notlar'
       },
       uploadFields: {
-        photo: 'Profil fotoğrafı',
-        cv: 'Mevcut CV',
-        certs: 'Sertifikalar',
-        license: 'Ehliyet',
-        vca: 'VCA belgesi'
+        photo: 'Profil fotoğrafı'
       },
       consentFields: {
         data: 'Kişisel verilerimin işlenmesine izin veriyorum',
@@ -1657,7 +1704,9 @@ export const translations = {
       actions: {
         generate: 'CV Oluştur',
         submit: 'Başvuruyu Gönder',
-        download: 'PDF İndir'
+        download: 'PDF İndir',
+        sendEmail: 'E-posta ile Gönder',
+        sendWhatsApp: 'WhatsApp ile Gönder'
       },
       pdfAttachments: 'Ekler',
       pdfCandidateLabel: 'ADAY',
@@ -1670,6 +1719,18 @@ export const translations = {
       pdfChooseFile: 'Dosya seç...',
       pdfConsentError: 'Devam etmek için tüm koşulları kabul edin.',
       pdfSubmitError: 'Gönderirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.',
+      requiredDocsTitle: 'GEREKLİ BELGELER',
+      requiredDocsSubtitle: 'Aşağıdaki belgelerin bir kopyasını e-posta veya WhatsApp ile gönderin:',
+      requiredDocsList: [
+        'Kimlik (pasaport veya kimlik kartı)',
+        'Ehliyet',
+        'KVK özeti (güncel)',
+        'VCA sertifikası',
+        'Ticari sorumluluk sigortası poliçesi',
+        'Sağlık sigortası poliçesi veya kart kopyası',
+        'İmzalı görev sözleşmesi'
+      ],
+      requiredDocsContact: 'Belgeleri gönderin:',
       certFields: {
         title: 'Sertifikalar',
         addCert: 'Sertifika ekle',
@@ -1720,7 +1781,7 @@ export const translations = {
     hero: {
       title: 'BETROUW BOUW B.V.',
       subtitle: 'Profesyonel pencere ve kapı montajı',
-      description: 'PVC, alüminyum ve ahşap pencerelerde uzman. Hollanda\'da yeni inşaat ve renovasyon projeleri.',
+      description: 'PVC, alüminyum ve ahşap pencere çerçevelerinde uzman. Hollanda\'da yeni inşaat ve renovasyon projeleri.',
       cta1: 'Teklif isteyin',
       cta2: 'Bize ulaşın',
     },

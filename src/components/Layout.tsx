@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
-  Hammer, 
   ChevronDown, 
   Menu, 
   X,
@@ -104,9 +103,7 @@ const Navbar = () => {
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled || location.pathname !== '/' ? 'bg-black/90 backdrop-blur-md py-4 border-b border-zinc-800' : 'bg-transparent py-6'}`}>
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         <Link to="/" className="flex items-center space-x-2">
-          <div className="w-10 h-10 bg-gradient-to-br from-amber-400 to-amber-600 rounded-lg flex items-center justify-center shadow-lg shadow-amber-500/20">
-            <Hammer className="text-black w-6 h-6" />
-          </div>
+          <img src="/foto/logo.jpeg" alt="Betrouw Bouw B.V. Logo" className="w-10 h-10 rounded-lg object-cover shadow-lg shadow-amber-500/20" />
           <span className="text-xl font-bold tracking-tighter text-white">
             BETROUW <span className="text-amber-500">BOUW</span>
           </span>
@@ -176,9 +173,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-6">
-              <div className="w-10 h-10 bg-amber-500 rounded-lg flex items-center justify-center">
-                <Hammer className="text-black w-6 h-6" />
-              </div>
+              <img src="/foto/logo.jpeg" alt="Betrouw Bouw B.V. Logo" className="w-10 h-10 rounded-lg object-cover" />
               <span className="text-2xl font-bold tracking-tighter text-white">
                 BETROUW <span className="text-amber-500">BOUW</span>
               </span>

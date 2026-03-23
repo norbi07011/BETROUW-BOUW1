@@ -139,6 +139,20 @@ const Contact = () => {
             <p className="text-zinc-400 text-lg mb-12 leading-relaxed">
               {t.contactIntro}
             </p>
+
+            {/* Logo */}
+            <div className="mb-12 flex justify-center">
+              <div className="relative group">
+                <div className="absolute -inset-1 bg-gradient-to-br from-amber-400 via-amber-500 to-amber-600 rounded-2xl blur-sm opacity-60 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="relative rounded-2xl overflow-hidden border-2 border-amber-500/30 shadow-2xl shadow-amber-500/10">
+                  <img 
+                    src="/foto/logo.jpeg" 
+                    alt="Betrouw Bouw B.V. Logo" 
+                    className="w-48 h-48 object-cover"
+                  />
+                </div>
+              </div>
+            </div>
             
             <div className="space-y-8">
               <div className="flex items-center space-x-6">
