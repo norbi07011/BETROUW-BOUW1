@@ -37,9 +37,7 @@ const Contact = () => {
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const validateField = (name: string, value: string): string | undefined => {
     switch (name) {
@@ -83,10 +81,11 @@ const Contact = () => {
     setErrors(prev => ({ ...prev, [name]: error }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // Validate all fields
+  const buildMessageText = (): string => {
+    return `${t.contact.name}: ${formData.name}\n${t.contact.phone}: ${formData.phone}\n${t.contact.email}: ${formData.email}\n\n${t.contact.message}:\n${formData.message}`;
+  };
+
+  const validateAll = (): boolean => {
     const newErrors: FormErrors = {};
     let hasErrors = false;
     
@@ -99,32 +98,29 @@ const Contact = () => {
     });
 
     setErrors(newErrors);
-    setTouched({
-      name: true,
-      phone: true,
-      email: true,
-      message: true,
-    });
+    setTouched({ name: true, phone: true, email: true, message: true });
+    return !hasErrors;
+  };
 
-    if (!hasErrors) {
-      setIsSubmitting(true);
-      try {
-        setSubmitError(null);
-        const response = await fetch('/api/contact', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData),
-        });
-        if (!response.ok) throw new Error('Failed to send');
-        setIsSuccess(true);
-        setFormData({ name: '', phone: '', email: '', message: '' });
-        setTouched({});
-      } catch (err) {
-        setSubmitError(t.contact.errors?.sendFailed || 'Could not send message. Please try again or contact us directly.');
-      } finally {
-        setIsSubmitting(false);
-      }
-    }
+  const sendViaEmail = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!validateAll()) return;
+    const subject = encodeURIComponent(`Offerte aanvraag - ${formData.name}`);
+    const body = encodeURIComponent(buildMessageText());
+    window.open(`mailto:tomasz_jaskiewicz@hotmail.com?subject=${subject}&body=${body}`, '_self');
+    setIsSuccess(true);
+    setFormData({ name: '', phone: '', email: '', message: '' });
+    setTouched({});
+  };
+
+  const sendViaWhatsApp = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!validateAll()) return;
+    const text = encodeURIComponent(`Offerte aanvraag\n\n${buildMessageText()}`);
+    window.open(`https://wa.me/31684111366?text=${text}`, '_blank');
+    setIsSuccess(true);
+    setFormData({ name: '', phone: '', email: '', message: '' });
+    setTouched({});
   };
 
   return (
@@ -226,13 +222,7 @@ const Contact = () => {
               )}
             </AnimatePresence>
 
-            {submitError && (
-              <div className="mb-6 p-4 bg-red-500/10 border border-red-500/30 rounded-xl flex items-center space-x-3 text-red-400">
-                <AlertCircle className="w-5 h-5 flex-shrink-0" />
-                <p className="text-sm">{submitError}</p>
-              </div>
-            )}
-            <form className="space-y-6" onSubmit={handleSubmit}>
+            <form className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label htmlFor="contact-name" className="text-zinc-400 text-sm font-medium ml-1">{t.contact.name}</label>
@@ -327,20 +317,24 @@ const Contact = () => {
                   <p className="text-red-500 text-xs ml-1">{errors.message}</p>
                 )}
               </div>
-              <button 
-                type="submit"
-                disabled={isSubmitting}
-                className={`w-full py-5 bg-amber-500 hover:bg-amber-600 text-black font-bold rounded-xl transition-all shadow-xl shadow-amber-500/20 flex items-center justify-center space-x-2 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
-              >
-                {isSubmitting ? (
-                  <>
-                    <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
-                    <span>{t.contact.errors.sending}</span>
-                  </>
-                ) : (
-                  <span>{t.contact.submit}</span>
-                )}
-              </button>
+              <div className="grid grid-cols-2 gap-4">
+                <button 
+                  type="button"
+                  onClick={sendViaEmail}
+                  className="py-5 bg-amber-500 hover:bg-amber-600 text-black font-bold rounded-xl transition-all shadow-xl shadow-amber-500/20 flex items-center justify-center space-x-2"
+                >
+                  <Mail className="w-5 h-5" />
+                  <span>{(t.contact as any).sendEmail || 'E-mail'}</span>
+                </button>
+                <button 
+                  type="button"
+                  onClick={sendViaWhatsApp}
+                  className="py-5 bg-[#25D366] hover:bg-[#128C7E] text-white font-bold rounded-xl transition-all shadow-xl shadow-green-500/20 flex items-center justify-center space-x-2"
+                >
+                  <MessageSquare className="w-5 h-5" />
+                  <span>{(t.contact as any).sendWhatsApp || 'WhatsApp'}</span>
+                </button>
+              </div>
             </form>
           </motion.div>
         </div>

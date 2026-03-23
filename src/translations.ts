@@ -271,6 +271,8 @@ export const translations = {
       email: 'E-mail',
       message: 'Bericht',
       submit: 'Offerte aanvragen',
+      sendEmail: 'Verstuur via E-mail',
+      sendWhatsApp: 'Verstuur via WhatsApp',
       whatsapp: 'Chat via WhatsApp',
       errors: {
         name: 'Naam is verplicht',
@@ -666,6 +668,8 @@ export const translations = {
       email: 'E-mail',
       message: 'Message',
       submit: 'Request a quote',
+      sendEmail: 'Send via Email',
+      sendWhatsApp: 'Send via WhatsApp',
       whatsapp: 'Chat via WhatsApp',
       errors: {
         name: 'Name is required',
@@ -1061,6 +1065,8 @@ export const translations = {
       email: 'E-mail',
       message: 'Wiadomość',
       submit: 'Poproś o wycenę',
+      sendEmail: 'Wyślij e-mailem',
+      sendWhatsApp: 'Wyślij WhatsApp',
       whatsapp: 'Czat przez WhatsApp',
       errors: {
         name: 'Imię jest wymagane',
@@ -1456,6 +1462,8 @@ export const translations = {
       email: 'E-Mail',
       message: 'Nachricht',
       submit: 'Angebot anfordern',
+      sendEmail: 'Per E-Mail senden',
+      sendWhatsApp: 'Per WhatsApp senden',
       whatsapp: 'Chat über WhatsApp',
       errors: {
         name: 'Name ist erforderlich',
@@ -1851,6 +1859,8 @@ export const translations = {
       email: 'E-posta',
       message: 'Mesaj',
       submit: 'Teklif isteyin',
+      sendEmail: 'E-posta ile Gönder',
+      sendWhatsApp: 'WhatsApp ile Gönder',
       whatsapp: 'WhatsApp ile sohbet et',
       errors: {
         name: 'İsim gerekli',
