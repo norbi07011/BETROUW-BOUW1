@@ -103,8 +103,7 @@ const WhyUs = () => {
               <video
                 src="/wideo/WhatsApp%20Video%202026-03-15%20at%209.17.54%20PM.mp4"
                 className="w-full h-full object-cover rounded-2xl"
-                autoPlay
-                muted
+                controls
                 loop
                 playsInline
               />

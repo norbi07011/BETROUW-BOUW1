@@ -196,6 +196,18 @@ export const translations = {
           mainImage: '/foto/aalsmeer-01.jpeg',
           gallery: ['/foto/aalsmeer-02.jpeg', '/foto/aalsmeer-03.jpeg', '/foto/aalsmeer-04.jpeg', '/foto/aalsmeer-05.jpeg', '/foto/aalsmeer-06.jpeg', '/foto/aalsmeer-07.jpeg', '/foto/aalsmeer-08.jpeg']
         },
+        { 
+          title: 'Houten kozijnen met gevel bekleding', 
+          desc: 'Vakkundige montage van massief houten kozijnen gecombineerd met stijlvolle gevelbekleding. Dit project omvat de complete vervanging en renovatie van de gevelpartij, waarbij duurzaam hout en hoogwaardige gevelpanelen zorgen voor een warme, natuurlijke uitstraling met uitstekende thermische isolatie en een tijdloos karakter.',
+          mainImage: '/foto/Houten%20kozijnen%20met%20gevel%20bekleding.jpeg',
+          gallery: ['/foto/Houten%20kozijnen%20met%20gevel%20bekleding1.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding2.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding3.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding4.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding5.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding6.jpeg']
+        },
+        { 
+          title: 'Schuifpuien', 
+          desc: 'Montage van elegante schuifpuien die zorgen voor een naadloze verbinding tussen de woonruimte en de tuin. De grote glaspartijen bieden maximale lichtinval en een ruimtelijk gevoel, terwijl de thermisch geïsoleerde aluminium profielen zorgen voor energiezuinigheid en wooncomfort het hele jaar door. Soepele bediening en een strak, modern design.',
+          mainImage: '/foto/Schuifpuien.jpeg',
+          gallery: ['/foto/Schuifpuien1.jpeg', '/foto/Schuifpuien2.jpeg', '/foto/Schuifpuien3.jpeg', '/foto/Schuifpuien4.jpeg', '/foto/Schuifpuien5.jpeg', '/foto/Schuifpuien6.jpeg', '/foto/Schuifpuien7.jpeg', '/foto/Schuifpuien8.jpeg']
+        },
       ]
     },
     hero: {
@@ -592,6 +604,18 @@ export const translations = {
           desc: 'Complete window and door installation for a new-build home. PVC frames with triple glazing and integrated ventilation grilles.',
           mainImage: '/foto/foto-02.jpeg',
           gallery: ['/foto/foto-08.jpeg', '/foto/foto-10.jpeg']
+        },
+        { 
+          title: 'Wooden Frames with Facade Cladding', 
+          desc: 'Expert installation of solid wooden window frames combined with stylish facade cladding. This project covers the complete replacement and renovation of the facade, where sustainable wood and high-quality facade panels create a warm, natural appearance with excellent thermal insulation and a timeless character.',
+          mainImage: '/foto/Houten%20kozijnen%20met%20gevel%20bekleding.jpeg',
+          gallery: ['/foto/Houten%20kozijnen%20met%20gevel%20bekleding1.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding2.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding3.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding4.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding5.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding6.jpeg']
+        },
+        { 
+          title: 'Sliding Doors', 
+          desc: 'Installation of elegant sliding doors providing a seamless connection between the living space and the garden. The large glass panels offer maximum natural light and a spacious feel, while the thermally insulated aluminum profiles ensure energy efficiency and year-round comfort. Smooth operation and a sleek, modern design.',
+          mainImage: '/foto/Schuifpuien.jpeg',
+          gallery: ['/foto/Schuifpuien1.jpeg', '/foto/Schuifpuien2.jpeg', '/foto/Schuifpuien3.jpeg', '/foto/Schuifpuien4.jpeg', '/foto/Schuifpuien5.jpeg', '/foto/Schuifpuien6.jpeg', '/foto/Schuifpuien7.jpeg', '/foto/Schuifpuien8.jpeg']
         },
       ]
     },
@@ -990,6 +1014,18 @@ export const translations = {
           mainImage: '/foto/foto-02.jpeg',
           gallery: ['/foto/foto-08.jpeg', '/foto/foto-10.jpeg']
         },
+        { 
+          title: 'Drewniane ościeżnice z okładziną elewacyjną', 
+          desc: 'Fachowy montaż masywnych drewnianych ościeżnic okiennych w połączeniu ze stylową okładziną elewacyjną. Projekt obejmuje kompletną wymianę i renowację elewacji, gdzie trwałe drewno i wysokiej jakości panele elewacyjne tworzą ciepły, naturalny wygląd z doskonałą izolacją termiczną i ponadczasowym charakterem.',
+          mainImage: '/foto/Houten%20kozijnen%20met%20gevel%20bekleding.jpeg',
+          gallery: ['/foto/Houten%20kozijnen%20met%20gevel%20bekleding1.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding2.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding3.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding4.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding5.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding6.jpeg']
+        },
+        { 
+          title: 'Drzwi przesuwne', 
+          desc: 'Montaż eleganckich drzwi przesuwnych zapewniających płynne połączenie między przestrzenią mieszkalną a ogrodem. Duże tafle szklane gwarantują maksymalne doświetlenie i poczucie przestrzeni, a termicznie izolowane profile aluminiowe zapewniają energooszczędność i komfort przez cały rok. Płynna obsługa i nowoczesny, elegancki design.',
+          mainImage: '/foto/Schuifpuien.jpeg',
+          gallery: ['/foto/Schuifpuien1.jpeg', '/foto/Schuifpuien2.jpeg', '/foto/Schuifpuien3.jpeg', '/foto/Schuifpuien4.jpeg', '/foto/Schuifpuien5.jpeg', '/foto/Schuifpuien6.jpeg', '/foto/Schuifpuien7.jpeg', '/foto/Schuifpuien8.jpeg']
+        },
       ]
     },
     hero: {
@@ -1387,6 +1423,18 @@ export const translations = {
           mainImage: '/foto/foto-02.jpeg',
           gallery: ['/foto/foto-08.jpeg', '/foto/foto-10.jpeg']
         },
+        { 
+          title: 'Holzrahmen mit Fassadenverkleidung', 
+          desc: 'Fachgerechte Montage massiver Holzfensterrahmen in Kombination mit stilvoller Fassadenverkleidung. Dieses Projekt umfasst den kompletten Austausch und die Renovierung der Fassade, wobei nachhaltiges Holz und hochwertige Fassadenpaneele ein warmes, natürliches Erscheinungsbild mit hervorragender Wärmedämmung und zeitlosem Charakter schaffen.',
+          mainImage: '/foto/Houten%20kozijnen%20met%20gevel%20bekleding.jpeg',
+          gallery: ['/foto/Houten%20kozijnen%20met%20gevel%20bekleding1.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding2.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding3.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding4.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding5.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding6.jpeg']
+        },
+        { 
+          title: 'Schiebetüren', 
+          desc: 'Montage eleganter Schiebetüren für einen nahtlosen Übergang zwischen Wohnraum und Garten. Die großen Glasflächen bieten maximalen Lichteinfall und ein großzügiges Raumgefühl, während die thermisch isolierten Aluminiumprofile für Energieeffizienz und ganzjährigen Wohnkomfort sorgen. Sanfter Lauf und ein schlankes, modernes Design.',
+          mainImage: '/foto/Schuifpuien.jpeg',
+          gallery: ['/foto/Schuifpuien1.jpeg', '/foto/Schuifpuien2.jpeg', '/foto/Schuifpuien3.jpeg', '/foto/Schuifpuien4.jpeg', '/foto/Schuifpuien5.jpeg', '/foto/Schuifpuien6.jpeg', '/foto/Schuifpuien7.jpeg', '/foto/Schuifpuien8.jpeg']
+        },
       ]
     },
     hero: {
@@ -1783,6 +1831,18 @@ export const translations = {
           desc: 'Yeni bir ev için eksiksiz pencere ve kapı montajı. Üçlü camlı ve entegre havalandırma ızgaralı PVC çerçeveler.',
           mainImage: '/foto/foto-02.jpeg',
           gallery: ['/foto/foto-08.jpeg', '/foto/foto-10.jpeg']
+        },
+        { 
+          title: 'Ahşap Çerçeveler ve Cephe Kaplaması', 
+          desc: 'Şık cephe kaplaması ile birlikte masif ahşap pencere çerçevelerinin uzman montajı. Bu proje, sürdürülebilir ahşap ve yüksek kaliteli cephe panellerinin sıcak, doğal bir görünüm, mükemmel ısı yalıtımı ve zamansız bir karakter sağladığı cephenin tam değişimi ve renovasyonunu kapsamaktadır.',
+          mainImage: '/foto/Houten%20kozijnen%20met%20gevel%20bekleding.jpeg',
+          gallery: ['/foto/Houten%20kozijnen%20met%20gevel%20bekleding1.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding2.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding3.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding4.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding5.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding6.jpeg']
+        },
+        { 
+          title: 'Sürgülü Kapılar', 
+          desc: 'Yaşam alanı ile bahçe arasında kesintisiz bağlantı sağlayan zarif sürgülü kapıların montajı. Büyük cam paneller maksimum doğal ışık ve ferah bir his sunarken, termal yalıtımlı alüminyum profiller enerji verimliliği ve yıl boyunca konfor sağlar. Akıcı çalışma ve şık, modern tasarım.',
+          mainImage: '/foto/Schuifpuien.jpeg',
+          gallery: ['/foto/Schuifpuien1.jpeg', '/foto/Schuifpuien2.jpeg', '/foto/Schuifpuien3.jpeg', '/foto/Schuifpuien4.jpeg', '/foto/Schuifpuien5.jpeg', '/foto/Schuifpuien6.jpeg', '/foto/Schuifpuien7.jpeg', '/foto/Schuifpuien8.jpeg']
         },
       ]
     },

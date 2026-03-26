@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, CheckCircle2 } from 'lucide-react';
+import { X, CheckCircle2, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
@@ -15,20 +15,41 @@ const Projects = () => {
   const { t } = useLanguage();
   useDocumentTitle(t.nav.projects);
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  // Lock body scroll + Escape key when modal open
+  // All images: mainImage + gallery
+  const allImages = selectedProject
+    ? [selectedProject.mainImage, ...selectedProject.gallery]
+    : [];
+
+  const goToNext = useCallback(() => {
+    setCurrentImageIndex((prev) => (prev + 1) % allImages.length);
+  }, [allImages.length]);
+
+  const goToPrev = useCallback(() => {
+    setCurrentImageIndex((prev) => (prev - 1 + allImages.length) % allImages.length);
+  }, [allImages.length]);
+
+  // Reset image index when project changes
+  useEffect(() => {
+    setCurrentImageIndex(0);
+  }, [selectedProject]);
+
+  // Lock body scroll + keyboard navigation
   useEffect(() => {
     if (!selectedProject) return;
     document.body.style.overflow = 'hidden';
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setSelectedProject(null);
+      if (e.key === 'ArrowRight') goToNext();
+      if (e.key === 'ArrowLeft') goToPrev();
     };
     document.addEventListener('keydown', handleKey);
     return () => {
       document.body.style.overflow = '';
       document.removeEventListener('keydown', handleKey);
     };
-  }, [selectedProject]);
+  }, [selectedProject, goToNext, goToPrev]);
 
   return (
     <div className="pt-32 pb-20 bg-black">
@@ -88,25 +109,75 @@ const Projects = () => {
               className="bg-zinc-900 w-full max-w-5xl max-h-[90vh] rounded-[2.5rem] overflow-hidden border border-zinc-800 shadow-2xl flex flex-col lg:flex-row"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Image Section */}
-              <div className="lg:w-3/5 h-64 lg:h-auto overflow-y-auto custom-scrollbar bg-black">
-                <img 
-                  src={selectedProject.mainImage} 
-                  alt={selectedProject.title} 
-                  className="w-full aspect-video lg:aspect-auto object-cover"
-                  referrerPolicy="no-referrer"
-                />
-                <div className="grid grid-cols-2 gap-2 p-2">
-                  {selectedProject.gallery.map((img: string, i: number) => (
-                    <img 
-                      key={i} 
-                      src={img} 
-                      alt={`${selectedProject.title} ${i}`} 
-                      className="w-full aspect-square object-cover rounded-xl"
+              {/* Image Gallery Section */}
+              <div className="lg:w-3/5 flex flex-col bg-black">
+                {/* Main image with navigation */}
+                <div className="relative aspect-video lg:aspect-[4/3] flex-shrink-0 group/gallery select-none">
+                  <AnimatePresence mode="wait">
+                    <motion.img 
+                      key={currentImageIndex}
+                      src={allImages[currentImageIndex]} 
+                      alt={`${selectedProject.title} ${currentImageIndex + 1}`} 
+                      className="w-full h-full object-cover absolute inset-0"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.25 }}
                       referrerPolicy="no-referrer"
+                      draggable={false}
                     />
-                  ))}
+                  </AnimatePresence>
+
+                  {/* Navigation arrows */}
+                  {allImages.length > 1 && (
+                    <>
+                      <button
+                        onClick={(e) => { e.stopPropagation(); goToPrev(); }}
+                        className="absolute left-3 top-1/2 -translate-y-1/2 w-11 h-11 bg-black/50 hover:bg-amber-500 text-white hover:text-black rounded-full flex items-center justify-center transition-all opacity-0 group-hover/gallery:opacity-100 backdrop-blur-sm"
+                      >
+                        <ChevronLeft className="w-6 h-6" />
+                      </button>
+                      <button
+                        onClick={(e) => { e.stopPropagation(); goToNext(); }}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 w-11 h-11 bg-black/50 hover:bg-amber-500 text-white hover:text-black rounded-full flex items-center justify-center transition-all opacity-0 group-hover/gallery:opacity-100 backdrop-blur-sm"
+                      >
+                        <ChevronRight className="w-6 h-6" />
+                      </button>
+                    </>
+                  )}
+
+                  {/* Image counter */}
+                  {allImages.length > 1 && (
+                    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 px-4 py-1.5 bg-black/70 backdrop-blur-sm rounded-full text-white text-sm font-medium tracking-wide">
+                      {currentImageIndex + 1} / {allImages.length}
+                    </div>
+                  )}
                 </div>
+
+                {/* Thumbnail strip */}
+                {allImages.length > 1 && (
+                  <div className="flex gap-1.5 p-3 overflow-x-auto">
+                    {allImages.map((img, i) => (
+                      <button
+                        key={i}
+                        onClick={() => setCurrentImageIndex(i)}
+                        className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all duration-200 ${
+                          i === currentImageIndex 
+                            ? 'border-amber-500 opacity-100 scale-105' 
+                            : 'border-transparent opacity-40 hover:opacity-75'
+                        }`}
+                      >
+                        <img 
+                          src={img} 
+                          alt={`${selectedProject.title} thumbnail ${i + 1}`}
+                          className="w-full h-full object-cover"
+                          referrerPolicy="no-referrer"
+                          draggable={false}
+                        />
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
 
               {/* Content Section */}
