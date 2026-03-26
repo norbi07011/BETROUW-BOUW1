@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 import { 
   Square as WindowIcon, 
   DoorOpen, 
@@ -13,7 +12,6 @@ import {
   Shield,
   Star,
   Quote,
-  ChevronDown,
   Sparkles,
   Clock,
   Users,
@@ -37,7 +35,6 @@ const serviceIcons = [
 const Services = () => {
   const { t } = useLanguage();
   useDocumentTitle(t.nav.services);
-  const [expandedCard, setExpandedCard] = useState<number | null>(null);
   const navigate = useNavigate();
 
   return (
@@ -142,7 +139,6 @@ const Services = () => {
           {/* Service cards — large alternating rows */}
           <div className="space-y-8">
             {t.services.items.map((service: { title: string; desc: string; image: string; features: string[] }, index: number) => {
-              const isExpanded = expandedCard === index;
               const isEven = index % 2 === 0;
 
               return (
@@ -173,14 +169,17 @@ const Services = () => {
 
                     {/* Content */}
                     <div className={`p-8 lg:p-12 flex flex-col justify-center ${isEven ? '' : 'lg:order-1'}`}>
-                      <div className="flex items-center gap-4 mb-6">
-                        <div className="w-14 h-14 rounded-2xl bg-zinc-800/80 border border-zinc-700/50 flex items-center justify-center text-amber-500 group-hover:bg-amber-500 group-hover:text-black transition-colors duration-300">
+                      {/* Big category button at top — goes to projects */}
+                      <button
+                        onClick={() => navigate('/projects', { state: { openProject: service.title } })}
+                        className="w-full flex items-center justify-center gap-4 bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-xl lg:text-2xl px-8 py-5 rounded-2xl transition-all hover:shadow-lg hover:shadow-amber-500/25 cursor-pointer mb-6 group/title"
+                      >
+                        <div className="w-10 h-10 rounded-xl bg-black/10 flex items-center justify-center shrink-0">
                           {serviceIcons[index % serviceIcons.length]}
                         </div>
-                        <h3 className="text-2xl lg:text-3xl font-bold text-white group-hover:text-amber-400 transition-colors">
-                          {service.title}
-                        </h3>
-                      </div>
+                        {service.title}
+                        <ArrowRight className="w-5 h-5 group-hover/title:translate-x-1 transition-transform" />
+                      </button>
 
                       <p className="text-zinc-400 text-base lg:text-lg leading-relaxed mb-6">
                         {service.desc}
@@ -196,58 +195,14 @@ const Services = () => {
                         ))}
                       </div>
 
-                      {/* Expand toggle on mobile */}
-                      <button
-                        onClick={() => setExpandedCard(isExpanded ? null : index)}
-                        className="lg:hidden flex items-center gap-2 text-amber-500 text-sm font-semibold mt-2"
-                      >
-                        {t.services.learnMore}
-                        <ChevronDown className={`w-4 h-4 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
-                      </button>
-
-                      <AnimatePresence>
-                        {isExpanded && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: 'auto', opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            className="lg:hidden overflow-hidden"
-                          >
-                            <div className="flex flex-wrap gap-3 mt-4">
-                              <button
-                                onClick={() => navigate('/contact', { state: { serviceMessage: `${t.contact.serviceMessageTemplate?.replace('{service}', service.title) || service.title}` } })}
-                                className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-black font-bold px-6 py-3 rounded-xl transition-colors text-sm"
-                              >
-                                {t.cta.button}
-                                <ArrowRight className="w-4 h-4" />
-                              </button>
-                              <button
-                                onClick={() => navigate('/projects', { state: { openProject: service.title } })}
-                                className="inline-flex items-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-white font-bold px-6 py-3 rounded-xl transition-colors text-sm border border-zinc-700"
-                              >
-                                {t.services.learnMore}
-                                <ArrowRight className="w-4 h-4" />
-                              </button>
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-
-                      {/* Desktop CTA */}
-                      <div className="hidden lg:flex items-center gap-6 mt-2">
+                      {/* Small 'Vraag een offerte aan' link at bottom — goes to contact */}
+                      <div className="mt-2">
                         <button
                           onClick={() => navigate('/contact', { state: { serviceMessage: `${t.contact.serviceMessageTemplate?.replace('{service}', service.title) || service.title}` } })}
-                          className="inline-flex items-center gap-2 text-amber-500 font-semibold hover:gap-3 transition-all group/link cursor-pointer"
+                          className="inline-flex items-center gap-2 text-zinc-500 hover:text-amber-400 text-sm font-medium transition-all group/info cursor-pointer"
                         >
                           {t.cta.button}
-                          <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
-                        </button>
-                        <button
-                          onClick={() => navigate('/projects', { state: { openProject: service.title } })}
-                          className="inline-flex items-center gap-2 text-zinc-400 hover:text-white font-semibold hover:gap-3 transition-all group/link2 cursor-pointer"
-                        >
-                          {t.services.learnMore}
-                          <ArrowRight className="w-4 h-4 group-hover/link2:translate-x-1 transition-transform" />
+                          <ArrowRight className="w-3.5 h-3.5 group-hover/info:translate-x-1 transition-transform" />
                         </button>
                       </div>
                     </div>

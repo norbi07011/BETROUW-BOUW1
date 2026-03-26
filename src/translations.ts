@@ -229,6 +229,7 @@ export const translations = {
       subtitle: 'Wij bieden een breed scala aan professionele montageservices voor kozijnen en deuren. Van nieuwbouw tot renovatie — altijd met vakmanschap en oog voor detail.',
       heroBadge: 'Premium Montageservice',
       learnMore: 'Meer informatie',
+      clickHere: 'klik hier',
       items: [
         { title: 'Kunststof Kozijnen', desc: 'Duurzame en onderhoudsvriendelijke PVC kozijnen met uitstekende thermische isolatie. Onze kunststof kozijnen bieden jarenlange betrouwbare prestaties en een strakke uitstraling.', image: '/foto/foto-02.jpeg', features: ['Energiezuinig', 'Onderhoudsvriendelijk', 'Geluidswerend', 'Inbraakbestendig'] },
         { title: 'Aluminium Kozijnen', desc: 'Moderne en sterke aluminium profielen voor een slanke, eigentijdse uitstraling. Ideaal voor grote raampartijen waar sterkte en esthetiek samenkomen.', image: '/foto/foto-03.jpeg', features: ['Slanke profielen', 'Extreem sterk', 'Corrosiebestendig', 'Moderne uitstraling'] },
@@ -640,6 +641,7 @@ export const translations = {
       subtitle: 'We offer a wide range of professional installation services for windows, doors, and frames. From new construction to renovation — always with craftsmanship and attention to detail.',
       heroBadge: 'Premium Installation Service',
       learnMore: 'Learn more',
+      clickHere: 'click here',
       items: [
         { title: 'PVC Windows', desc: 'Durable and low-maintenance PVC frames with excellent thermal insulation. Our PVC windows provide years of reliable performance and a sleek appearance.', image: '/foto/foto-02.jpeg', features: ['Energy efficient', 'Low maintenance', 'Sound insulating', 'Burglar resistant'] },
         { title: 'Aluminum Windows', desc: 'Modern and strong aluminum profiles for a slim, contemporary look. Ideal for large window surfaces where strength and aesthetics come together.', image: '/foto/foto-03.jpeg', features: ['Slim profiles', 'Extremely strong', 'Corrosion resistant', 'Modern appearance'] },
@@ -1051,6 +1053,7 @@ export const translations = {
       subtitle: 'Oferujemy szeroki zakres profesjonalnych usług montażowych okien, drzwi i ościeżnic. Od nowobudowy po renowację — zawsze z rzemiosłem i dbałością o każdy detal.',
       heroBadge: 'Premium Serwis Montażowy',
       learnMore: 'Więcej informacji',
+      clickHere: 'kliknij tutaj',
       items: [
         { title: 'Okna PCV', desc: 'Trwałe i łatwe w utrzymaniu ramy PCV z doskonałą izolacją termiczną. Nasze okna PCV zapewniają wieloletnią niezawodność i elegancki wygląd.', image: '/foto/foto-02.jpeg', features: ['Energooszczędne', 'Łatwe w utrzymaniu', 'Dźwiękoszczelne', 'Antywłamaniowe'] },
         { title: 'Okna Aluminiowe', desc: 'Nowoczesne i wytrzymałe profile aluminiowe o smukłym, współczesnym wyglądzie. Idealne do dużych przeszklenić, gdzie siła i estetyka idą w parze.', image: '/foto/foto-03.jpeg', features: ['Smukłe profile', 'Ekstremalnie wytrzymałe', 'Odporne na korozję', 'Nowoczesny wygląd'] },
@@ -1462,6 +1465,7 @@ export const translations = {
       subtitle: 'Wir bieten ein breites Spektrum an professionellen Montageleistungen für Fenster, Türen und Rahmen. Vom Neubau bis zur Renovierung — immer mit Handwerkskunst und Liebe zum Detail.',
       heroBadge: 'Premium Montageservice',
       learnMore: 'Mehr erfahren',
+      clickHere: 'hier klicken',
       items: [
         { title: 'Kunststofffenster', desc: 'Langlebige und pflegeleichte PVC-Rahmen mit hervorragender Wärmedämmung. Unsere Kunststofffenster bieten jahrelange zuverlässige Leistung und elegante Optik.', image: '/foto/foto-02.jpeg', features: ['Energiesparend', 'Pflegeleicht', 'Schallschutz', 'Einbruchsicher'] },
         { title: 'Aluminiumfenster', desc: 'Moderne und starke Aluminiumprofile für einen schlanken, zeitgemäßen Look. Ideal für große Fensterflächen, wo Stärke und Ästhetik zusammentreffen.', image: '/foto/foto-03.jpeg', features: ['Schlanke Profile', 'Extrem stark', 'Korrosionsbeständig', 'Moderne Optik'] },
@@ -1873,6 +1877,7 @@ export const translations = {
       subtitle: 'Pencere, kapı ve çerçeve için geniş bir profesyonel montaj hizmeti yelpazesi sunuyoruz. Yeni inşaattan renovasyona — her zaman ustalık ve detaylara özenle.',
       heroBadge: 'Premium Montaj Hizmeti',
       learnMore: 'Daha fazla bilgi',
+      clickHere: 'buraya tıklayın',
       items: [
         { title: 'PVC Pencereler', desc: 'Mükemmel ısı yalıtımına sahip dayanıklı ve az bakım gerektiren PVC çerçeveler. PVC pencerelerimiz yıllarca güvenilir performans ve şık bir görünüm sunar.', image: '/foto/foto-02.jpeg', features: ['Enerji tasarruflu', 'Az bakım', 'Ses yalıtımlı', 'Hırsıza dayanıklı'] },
         { title: 'Alüminyum Pencereler', desc: 'İnce ve çağdaş bir görünüm için modern ve güçlü alüminyum profiller. Güç ve estetiğin bir araya geldiği büyük pencere yüzeyleri için idealdir.', image: '/foto/foto-03.jpeg', features: ['İnce profiller', 'Son derece güçlü', 'Korozyona dayanıklı', 'Modern görünüm'] },
