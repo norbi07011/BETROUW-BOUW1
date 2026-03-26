@@ -15,6 +15,7 @@ const Privacy = lazy(() => import('./pages/Privacy'));
 const Terms = lazy(() => import('./pages/Terms'));
 const Cookies = lazy(() => import('./pages/Cookies'));
 const NotFound = lazy(() => import('./pages/NotFound'));
+const Register = lazy(() => import('./pages/Register'));
 
 const PageFallback = () => (
   <div className="min-h-screen flex items-center justify-center bg-black">
@@ -34,6 +35,7 @@ export default function App() {
               <Route path="/services" element={<Services />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/register" element={<Register />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/terms" element={<Terms />} />
               <Route path="/cookies" element={<Cookies />} />

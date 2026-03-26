@@ -22,7 +22,7 @@ import {
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const serviceIcons = [
   <WindowIcon className="w-7 h-7" />,
@@ -38,6 +38,7 @@ const Services = () => {
   const { t } = useLanguage();
   useDocumentTitle(t.nav.services);
   const [expandedCard, setExpandedCard] = useState<number | null>(null);
+  const navigate = useNavigate();
 
   return (
     <div className="bg-zinc-950">
@@ -95,7 +96,7 @@ const Services = () => {
           className="absolute right-8 lg:right-16 top-1/2 -translate-y-1/2 z-10 hidden lg:flex flex-col gap-4"
         >
           {[
-            { icon: <Clock className="w-5 h-5" />, value: '15+', label: t.aboutStats.yearsLabel },
+            { icon: <Clock className="w-5 h-5" />, value: '18+', label: t.aboutStats.yearsLabel },
             { icon: <Users className="w-5 h-5" />, value: '500+', label: 'Projects' },
             { icon: <Award className="w-5 h-5" />, value: '100%', label: t.aboutStats.quality },
           ].map((stat, i) => (
@@ -212,26 +213,42 @@ const Services = () => {
                             exit={{ height: 0, opacity: 0 }}
                             className="lg:hidden overflow-hidden"
                           >
-                            <Link
-                              to="/contact"
-                              className="inline-flex items-center gap-2 mt-4 bg-amber-500 hover:bg-amber-400 text-black font-bold px-6 py-3 rounded-xl transition-colors text-sm"
-                            >
-                              {t.cta.button}
-                              <ArrowRight className="w-4 h-4" />
-                            </Link>
+                            <div className="flex flex-wrap gap-3 mt-4">
+                              <button
+                                onClick={() => navigate('/contact', { state: { serviceMessage: `${t.contact.serviceMessageTemplate?.replace('{service}', service.title) || service.title}` } })}
+                                className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-black font-bold px-6 py-3 rounded-xl transition-colors text-sm"
+                              >
+                                {t.cta.button}
+                                <ArrowRight className="w-4 h-4" />
+                              </button>
+                              <button
+                                onClick={() => navigate('/projects', { state: { openProject: service.title } })}
+                                className="inline-flex items-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-white font-bold px-6 py-3 rounded-xl transition-colors text-sm border border-zinc-700"
+                              >
+                                {t.services.learnMore}
+                                <ArrowRight className="w-4 h-4" />
+                              </button>
+                            </div>
                           </motion.div>
                         )}
                       </AnimatePresence>
 
                       {/* Desktop CTA */}
-                      <div className="hidden lg:block mt-2">
-                        <Link
-                          to="/contact"
-                          className="inline-flex items-center gap-2 text-amber-500 font-semibold hover:gap-3 transition-all group/link"
+                      <div className="hidden lg:flex items-center gap-6 mt-2">
+                        <button
+                          onClick={() => navigate('/contact', { state: { serviceMessage: `${t.contact.serviceMessageTemplate?.replace('{service}', service.title) || service.title}` } })}
+                          className="inline-flex items-center gap-2 text-amber-500 font-semibold hover:gap-3 transition-all group/link cursor-pointer"
                         >
                           {t.cta.button}
                           <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
-                        </Link>
+                        </button>
+                        <button
+                          onClick={() => navigate('/projects', { state: { openProject: service.title } })}
+                          className="inline-flex items-center gap-2 text-zinc-400 hover:text-white font-semibold hover:gap-3 transition-all group/link2 cursor-pointer"
+                        >
+                          {t.services.learnMore}
+                          <ArrowRight className="w-4 h-4 group-hover/link2:translate-x-1 transition-transform" />
+                        </button>
                       </div>
                     </div>
                   </div>

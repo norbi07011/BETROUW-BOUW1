@@ -9,8 +9,8 @@ import {
   AlertCircle
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
-import CandidateForm from '../components/CandidateForm';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
+import { useLocation } from 'react-router-dom';
 
 interface FormData {
   name: string;
@@ -29,11 +29,16 @@ interface FormErrors {
 const Contact = () => {
   const { t } = useLanguage();
   useDocumentTitle(t.nav.contact);
+  const location = useLocation();
+
+  // Pre-fill message from Services page navigation state
+  const initialMessage = (location.state as { serviceMessage?: string } | null)?.serviceMessage || '';
+
   const [formData, setFormData] = useState<FormData>({
     name: '',
     phone: '',
     email: '',
-    message: '',
+    message: initialMessage,
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
@@ -355,9 +360,6 @@ const Contact = () => {
             />
           </div>
         </div>
-
-        {/* New Candidate Registration Section */}
-        <CandidateForm />
       </div>
     </div>
   );

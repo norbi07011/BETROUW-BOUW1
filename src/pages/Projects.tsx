@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { X, CheckCircle2, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
+import { useLocation } from 'react-router-dom';
 
 interface ProjectItem {
   title: string;
@@ -14,8 +15,29 @@ interface ProjectItem {
 const Projects = () => {
   const { t } = useLanguage();
   useDocumentTitle(t.nav.projects);
+  const location = useLocation();
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Auto-open project from navigation state (e.g. from Services page)
+  useEffect(() => {
+    const state = location.state as { openProject?: string } | null;
+    if (state?.openProject) {
+      const serviceTitle = state.openProject.toLowerCase();
+      const items = t.projectDetails.items as ProjectItem[];
+      const match = items.find((p) => {
+        const pt = p.title.toLowerCase();
+        // Match if project title contains key words from service title or vice versa
+        return pt.includes(serviceTitle) || serviceTitle.includes(pt) ||
+          serviceTitle.split(/\s+/).some((w: string) => w.length > 3 && pt.includes(w));
+      });
+      if (match) {
+        setSelectedProject(match);
+      }
+      // Clear state so it doesn't re-trigger on re-render
+      window.history.replaceState({}, '');
+    }
+  }, [location.state, t.projectDetails.items]);
 
   // All images: mainImage + gallery
   const allImages = selectedProject

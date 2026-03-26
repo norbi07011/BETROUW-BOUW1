@@ -8,6 +8,7 @@ export const translations = {
       services: 'Diensten',
       projects: 'Projecten',
       contact: 'Contact',
+      register: 'Inschrijven',
     },
     candidate: {
       title: 'Inschrijven als kandidaat',
@@ -231,9 +232,9 @@ export const translations = {
       items: [
         { title: 'Kunststof Kozijnen', desc: 'Duurzame en onderhoudsvriendelijke PVC kozijnen met uitstekende thermische isolatie. Onze kunststof kozijnen bieden jarenlange betrouwbare prestaties en een strakke uitstraling.', image: '/foto/foto-02.jpeg', features: ['Energiezuinig', 'Onderhoudsvriendelijk', 'Geluidswerend', 'Inbraakbestendig'] },
         { title: 'Aluminium Kozijnen', desc: 'Moderne en sterke aluminium profielen voor een slanke, eigentijdse uitstraling. Ideaal voor grote raampartijen waar sterkte en esthetiek samenkomen.', image: '/foto/foto-03.jpeg', features: ['Slanke profielen', 'Extreem sterk', 'Corrosiebestendig', 'Moderne uitstraling'] },
-        { title: 'Houten Kozijnen', desc: 'Klassieke en natuurlijke houten kozijnen met uitstekende isolatie-eigenschappen. Houten kozijnen bieden warmte en karakter aan elke woning.', image: '/foto/foto-04.jpeg', features: ['Natuurlijk materiaal', 'Uitstekende isolatie', 'Tijdloos design', 'Duurzaam hout'] },
+        { title: 'Houten Kozijnen', desc: 'Klassieke en natuurlijke houten kozijnen met uitstekende isolatie-eigenschappen. Houten kozijnen bieden warmte en karakter aan elke woning.', image: '/foto/Houten%20kozijnen%20met%20gevel%20bekleding6.jpeg', features: ['Natuurlijk materiaal', 'Uitstekende isolatie', 'Tijdloos design', 'Duurzaam hout'] },
         { title: 'Deuren Montage', desc: 'Professionele installatie van voordeuren, achterdeuren, schuifdeuren en binnendeuren. Elke deur wordt met precisie gemonteerd voor een perfecte werking.', image: '/foto/foto-05.jpeg', features: ['Voordeuren', 'Achterdeuren', 'Schuifdeuren', 'Binnendeuren'] },
-        { title: 'Schuifpuien', desc: 'Hoogwaardige schuifpuien voor een naadloze overgang tussen binnen en buiten. Onze schuifpuien combineren design, comfort en functionaliteit.', image: '/foto/foto-07.jpeg', features: ['Grote glaspartijen', 'Soepele werking', 'Thermisch geïsoleerd', 'Ruimtebesparend'] },
+        { title: 'Schuifpuien', desc: 'Hoogwaardige schuifpuien voor een naadloze overgang tussen binnen en buiten. Onze schuifpuien combineren design, comfort en functionaliteit.', image: '/foto/Schuifpuien1.jpeg', features: ['Grote glaspartijen', 'Soepele werking', 'Thermisch geïsoleerd', 'Ruimtebesparend'] },
         { title: 'Nieuwbouw Projecten', desc: 'Complete raam- en deuroplossingen voor grootschalige nieuwbouwprojecten. Wij werken nauw samen met aannemers en architecten voor een vlekkeloos resultaat.', image: '/foto/foto-08.jpeg', features: ['Projectbegeleiding', 'Maatwerk oplossingen', 'Tijdige levering', 'Volledige service'] },
         { title: 'Renovatie Projecten', desc: 'Vakkundige vervanging van oude kozijnen in bestaande woningen en bedrijfspanden. Wij zorgen voor minimale overlast en een perfect eindresultaat.', image: '/foto/foto-09.jpeg', features: ['Nauwkeurig inmeten', 'Minimale overlast', 'Nette afwerking', 'Afvoer oud materiaal'] },
       ],
@@ -285,6 +286,7 @@ export const translations = {
       submit: 'Offerte aanvragen',
       sendEmail: 'Verstuur via E-mail',
       sendWhatsApp: 'Verstuur via WhatsApp',
+      serviceMessageTemplate: 'Ik ben geïnteresseerd in {service}. Ik wil graag een offerte aanvragen. Kunt u mij meer informatie geven over de mogelijkheden, prijzen en levertijden?',
       whatsapp: 'Chat via WhatsApp',
       errors: {
         name: 'Naam is verplicht',
@@ -382,7 +384,7 @@ export const translations = {
       ],
     },
     aboutStats: {
-      years: '15+',
+      years: '18+',
       yearsLabel: 'Jaar Ervaring',
       quality: 'Kwaliteit',
       qualityDesc: 'Hoogwaardige materialen',
@@ -423,6 +425,7 @@ export const translations = {
       services: 'Services',
       projects: 'Projects',
       contact: 'Contact',
+      register: 'Register',
     },
     candidate: {
       title: 'Register as a Candidate',
@@ -640,9 +643,9 @@ export const translations = {
       items: [
         { title: 'PVC Windows', desc: 'Durable and low-maintenance PVC frames with excellent thermal insulation. Our PVC windows provide years of reliable performance and a sleek appearance.', image: '/foto/foto-02.jpeg', features: ['Energy efficient', 'Low maintenance', 'Sound insulating', 'Burglar resistant'] },
         { title: 'Aluminum Windows', desc: 'Modern and strong aluminum profiles for a slim, contemporary look. Ideal for large window surfaces where strength and aesthetics come together.', image: '/foto/foto-03.jpeg', features: ['Slim profiles', 'Extremely strong', 'Corrosion resistant', 'Modern appearance'] },
-        { title: 'Wooden Windows', desc: 'Classic and natural wooden frames with excellent insulation properties. Wooden windows bring warmth and character to any home.', image: '/foto/foto-04.jpeg', features: ['Natural material', 'Excellent insulation', 'Timeless design', 'Sustainable wood'] },
+        { title: 'Wooden Windows', desc: 'Classic and natural wooden frames with excellent insulation properties. Wooden windows bring warmth and character to any home.', image: '/foto/Houten%20kozijnen%20met%20gevel%20bekleding6.jpeg', features: ['Natural material', 'Excellent insulation', 'Timeless design', 'Sustainable wood'] },
         { title: 'Door Installation', desc: 'Professional installation of front doors, back doors, sliding doors, and interior doors. Every door is precision-mounted for perfect operation.', image: '/foto/foto-05.jpeg', features: ['Front doors', 'Back doors', 'Sliding doors', 'Interior doors'] },
-        { title: 'Sliding Systems', desc: 'High-quality sliding doors for a seamless transition between indoor and outdoor living. Our sliding systems combine design, comfort, and functionality.', image: '/foto/foto-07.jpeg', features: ['Large glass panels', 'Smooth operation', 'Thermally insulated', 'Space saving'] },
+        { title: 'Sliding Systems', desc: 'High-quality sliding doors for a seamless transition between indoor and outdoor living. Our sliding systems combine design, comfort, and functionality.', image: '/foto/Schuifpuien1.jpeg', features: ['Large glass panels', 'Smooth operation', 'Thermally insulated', 'Space saving'] },
         { title: 'New Construction', desc: 'Complete window and door solutions for large-scale new construction projects. We work closely with contractors and architects for a flawless result.', image: '/foto/foto-08.jpeg', features: ['Project guidance', 'Custom solutions', 'Timely delivery', 'Full service'] },
         { title: 'Renovation Projects', desc: 'Expert replacement of old frames in existing homes and commercial buildings. We ensure minimal disruption and a perfect end result.', image: '/foto/foto-09.jpeg', features: ['Precise measurement', 'Minimal disruption', 'Clean finishing', 'Old material removal'] },
       ],
@@ -694,6 +697,7 @@ export const translations = {
       submit: 'Request a quote',
       sendEmail: 'Send via Email',
       sendWhatsApp: 'Send via WhatsApp',
+      serviceMessageTemplate: 'I am interested in {service}. I would like to request a quote. Could you provide me with more information about the options, pricing, and delivery times?',
       whatsapp: 'Chat via WhatsApp',
       errors: {
         name: 'Name is required',
@@ -791,7 +795,7 @@ export const translations = {
       ],
     },
     aboutStats: {
-      years: '15+',
+      years: '18+',
       yearsLabel: 'Years Experience',
       quality: 'Quality',
       qualityDesc: 'High-quality materials',
@@ -832,6 +836,7 @@ export const translations = {
       services: 'Usługi',
       projects: 'Realizacje',
       contact: 'Kontakt',
+      register: 'Rejestracja',
     },
     candidate: {
       title: 'Zarejestruj się jako kandydat',
@@ -1049,9 +1054,9 @@ export const translations = {
       items: [
         { title: 'Okna PCV', desc: 'Trwałe i łatwe w utrzymaniu ramy PCV z doskonałą izolacją termiczną. Nasze okna PCV zapewniają wieloletnią niezawodność i elegancki wygląd.', image: '/foto/foto-02.jpeg', features: ['Energooszczędne', 'Łatwe w utrzymaniu', 'Dźwiękoszczelne', 'Antywłamaniowe'] },
         { title: 'Okna Aluminiowe', desc: 'Nowoczesne i wytrzymałe profile aluminiowe o smukłym, współczesnym wyglądzie. Idealne do dużych przeszklenić, gdzie siła i estetyka idą w parze.', image: '/foto/foto-03.jpeg', features: ['Smukłe profile', 'Ekstremalnie wytrzymałe', 'Odporne na korozję', 'Nowoczesny wygląd'] },
-        { title: 'Okna Drewniane', desc: 'Klasyczne i naturalne drewniane ramy z doskonałymi właściwościami izolacyjnymi. Okna drewniane dodają ciepła i charakteru każdemu domowi.', image: '/foto/foto-04.jpeg', features: ['Naturalny materiał', 'Doskonała izolacja', 'Ponadczasowy design', 'Trwałe drewno'] },
+        { title: 'Okna Drewniane', desc: 'Klasyczne i naturalne drewniane ramy z doskonałymi właściwościami izolacyjnymi. Okna drewniane dodają ciepła i charakteru każdemu domowi.', image: '/foto/Houten%20kozijnen%20met%20gevel%20bekleding6.jpeg', features: ['Naturalny materiał', 'Doskonała izolacja', 'Ponadczasowy design', 'Trwałe drewno'] },
         { title: 'Montaż Drzwi', desc: 'Profesjonalny montaż drzwi wejściowych, tylnych, przesuwnych i wewnętrznych. Każde drzwi są montowane z precyzją zapewniającą perfekcyjne działanie.', image: '/foto/foto-05.jpeg', features: ['Drzwi wejściowe', 'Drzwi tylne', 'Drzwi przesuwne', 'Drzwi wewnętrzne'] },
-        { title: 'Systemy Przesuwne', desc: 'Wysokiej jakości drzwi przesuwne zapewniające płynne przejście między wnętrzem a zewnętrzem. Nasze systemy łączą design, komfort i funkcjonalność.', image: '/foto/foto-07.jpeg', features: ['Duże przeszklenia', 'Płynne działanie', 'Izolacja termiczna', 'Oszczędność miejsca'] },
+        { title: 'Systemy Przesuwne', desc: 'Wysokiej jakości drzwi przesuwne zapewniające płynne przejście między wnętrzem a zewnętrzem. Nasze systemy łączą design, komfort i funkcjonalność.', image: '/foto/Schuifpuien1.jpeg', features: ['Duże przeszklenia', 'Płynne działanie', 'Izolacja termiczna', 'Oszczędność miejsca'] },
         { title: 'Projekty Nowobudowlane', desc: 'Kompleksowe rozwiązania okienno-drzwiowe dla dużych projektów budowlanych. Ściśle współpracujemy z wykonawcami i architektami dla nieskazitelnego rezultatu.', image: '/foto/foto-08.jpeg', features: ['Prowadzenie projektu', 'Rozwiązania na miarę', 'Terminowa dostawa', 'Pełen serwis'] },
         { title: 'Projekty Renowacyjne', desc: 'Fachowa wymiana starych ram w istniejących domach i budynkach użytkowych. Zapewniamy minimalną uciążliwość i perfekcyjny efekt końcowy.', image: '/foto/foto-09.jpeg', features: ['Dokładne pomiary', 'Minimalna uciążliwość', 'Staranne wykończenie', 'Utylizacja starych materiałów'] },
       ],
@@ -1103,6 +1108,7 @@ export const translations = {
       submit: 'Poproś o wycenę',
       sendEmail: 'Wyślij e-mailem',
       sendWhatsApp: 'Wyślij WhatsApp',
+      serviceMessageTemplate: 'Jestem zainteresowany/a usługą {service}. Chciałbym/chciałabym poprosić o wycenę. Czy mogą Państwo podać więcej informacji o możliwościach, cenach i terminach realizacji?',
       whatsapp: 'Czat przez WhatsApp',
       errors: {
         name: 'Imię jest wymagane',
@@ -1200,7 +1206,7 @@ export const translations = {
       ],
     },
     aboutStats: {
-      years: '15+',
+      years: '18+',
       yearsLabel: 'Lat Doświadczenia',
       quality: 'Jakość',
       qualityDesc: 'Materiały wysokiej jakości',
@@ -1241,6 +1247,7 @@ export const translations = {
       services: 'Dienstleistungen',
       projects: 'Projekte',
       contact: 'Kontakt',
+      register: 'Registrieren',
     },
     candidate: {
       title: 'Als Kandidat registrieren',
@@ -1458,9 +1465,9 @@ export const translations = {
       items: [
         { title: 'Kunststofffenster', desc: 'Langlebige und pflegeleichte PVC-Rahmen mit hervorragender Wärmedämmung. Unsere Kunststofffenster bieten jahrelange zuverlässige Leistung und elegante Optik.', image: '/foto/foto-02.jpeg', features: ['Energiesparend', 'Pflegeleicht', 'Schallschutz', 'Einbruchsicher'] },
         { title: 'Aluminiumfenster', desc: 'Moderne und starke Aluminiumprofile für einen schlanken, zeitgemäßen Look. Ideal für große Fensterflächen, wo Stärke und Ästhetik zusammentreffen.', image: '/foto/foto-03.jpeg', features: ['Schlanke Profile', 'Extrem stark', 'Korrosionsbeständig', 'Moderne Optik'] },
-        { title: 'Holzfenster', desc: 'Klassische und natürliche Holzrahmen mit hervorragenden Dämmeigenschaften. Holzfenster verleihen jedem Zuhause Wärme und Charakter.', image: '/foto/foto-04.jpeg', features: ['Natürliches Material', 'Hervorragende Dämmung', 'Zeitloses Design', 'Nachhaltiges Holz'] },
+        { title: 'Holzfenster', desc: 'Klassische und natürliche Holzrahmen mit hervorragenden Dämmeigenschaften. Holzfenster verleihen jedem Zuhause Wärme und Charakter.', image: '/foto/Houten%20kozijnen%20met%20gevel%20bekleding6.jpeg', features: ['Natürliches Material', 'Hervorragende Dämmung', 'Zeitloses Design', 'Nachhaltiges Holz'] },
         { title: 'Türenmontage', desc: 'Professionelle Installation von Haustüren, Nebeneingangstüren, Schiebetüren und Innentüren. Jede Tür wird präzise montiert für perfekte Funktion.', image: '/foto/foto-05.jpeg', features: ['Haustüren', 'Nebeneingangstüren', 'Schiebetüren', 'Innentüren'] },
-        { title: 'Schiebesysteme', desc: 'Hochwertige Schiebetüren für einen nahtlosen Übergang zwischen Innen- und Außenbereich. Unsere Schiebesysteme vereinen Design, Komfort und Funktionalität.', image: '/foto/foto-07.jpeg', features: ['Große Glasflächen', 'Sanfter Lauf', 'Thermisch isoliert', 'Platzsparend'] },
+        { title: 'Schiebesysteme', desc: 'Hochwertige Schiebetüren für einen nahtlosen Übergang zwischen Innen- und Außenbereich. Unsere Schiebesysteme vereinen Design, Komfort und Funktionalität.', image: '/foto/Schuifpuien1.jpeg', features: ['Große Glasflächen', 'Sanfter Lauf', 'Thermisch isoliert', 'Platzsparend'] },
         { title: 'Neubauprojekte', desc: 'Komplette Fenster- und Türlösungen für großflächige Neubauprojekte. Wir arbeiten eng mit Bauunternehmern und Architekten für ein makelloses Ergebnis.', image: '/foto/foto-08.jpeg', features: ['Projektbegleitung', 'Maßgeschneiderte Lösungen', 'Pünktliche Lieferung', 'Komplettservice'] },
         { title: 'Renovierungsprojekte', desc: 'Fachgerechter Austausch alter Rahmen in bestehenden Wohn- und Gewerbeimmobilien. Wir sorgen für minimale Beeinträchtigung und ein perfektes Endergebnis.', image: '/foto/foto-09.jpeg', features: ['Präzises Aufmaß', 'Minimale Störung', 'Saubere Verarbeitung', 'Altmaterialentsorgung'] },
       ],
@@ -1512,6 +1519,7 @@ export const translations = {
       submit: 'Angebot anfordern',
       sendEmail: 'Per E-Mail senden',
       sendWhatsApp: 'Per WhatsApp senden',
+      serviceMessageTemplate: 'Ich bin an {service} interessiert. Ich möchte ein Angebot anfordern. Können Sie mir weitere Informationen zu den Möglichkeiten, Preisen und Lieferzeiten geben?',
       whatsapp: 'Chat über WhatsApp',
       errors: {
         name: 'Name ist erforderlich',
@@ -1609,7 +1617,7 @@ export const translations = {
       ],
     },
     aboutStats: {
-      years: '15+',
+      years: '18+',
       yearsLabel: 'Jahre Erfahrung',
       quality: 'Qualität',
       qualityDesc: 'Hochwertige Materialien',
@@ -1650,6 +1658,7 @@ export const translations = {
       services: 'Hizmetler',
       projects: 'Projeler',
       contact: 'İletişim',
+      register: 'Kayıt',
     },
     candidate: {
       title: 'Aday Olarak Kaydolun',
@@ -1867,9 +1876,9 @@ export const translations = {
       items: [
         { title: 'PVC Pencereler', desc: 'Mükemmel ısı yalıtımına sahip dayanıklı ve az bakım gerektiren PVC çerçeveler. PVC pencerelerimiz yıllarca güvenilir performans ve şık bir görünüm sunar.', image: '/foto/foto-02.jpeg', features: ['Enerji tasarruflu', 'Az bakım', 'Ses yalıtımlı', 'Hırsıza dayanıklı'] },
         { title: 'Alüminyum Pencereler', desc: 'İnce ve çağdaş bir görünüm için modern ve güçlü alüminyum profiller. Güç ve estetiğin bir araya geldiği büyük pencere yüzeyleri için idealdir.', image: '/foto/foto-03.jpeg', features: ['İnce profiller', 'Son derece güçlü', 'Korozyona dayanıklı', 'Modern görünüm'] },
-        { title: 'Ahşap Pencereler', desc: 'Mükemmel yalıtım özelliklerine sahip klasik ve doğal ahşap çerçeveler. Ahşap pencereler her eve sıcaklık ve karakter katar.', image: '/foto/foto-04.jpeg', features: ['Doğal malzeme', 'Mükemmel yalıtım', 'Zamansız tasarım', 'Sürdürülebilir ahşap'] },
+        { title: 'Ahşap Pencereler', desc: 'Mükemmel yalıtım özelliklerine sahip klasik ve doğal ahşap çerçeveler. Ahşap pencereler her eve sıcaklık ve karakter katar.', image: '/foto/Houten%20kozijnen%20met%20gevel%20bekleding6.jpeg', features: ['Doğal malzeme', 'Mükemmel yalıtım', 'Zamansız tasarım', 'Sürdürülebilir ahşap'] },
         { title: 'Kapı Montajı', desc: 'Giriş kapıları, arka kapılar, sürme kapılar ve iç kapıların profesyonel montajı. Her kapı mükemmel çalışma için hassas bir şekilde monte edilir.', image: '/foto/foto-05.jpeg', features: ['Giriş kapıları', 'Arka kapılar', 'Sürme kapılar', 'İç kapılar'] },
-        { title: 'Sürme Sistemler', desc: 'İç ve dış mekan arasında kesintisiz geçiş için yüksek kaliteli sürme kapılar. Sürme sistemlerimiz tasarım, konfor ve işlevselliği bir araya getirir.', image: '/foto/foto-07.jpeg', features: ['Büyük cam paneller', 'Akıcı çalışma', 'Termal yalıtımlı', 'Alan tasarrufu'] },
+        { title: 'Sürme Sistemler', desc: 'İç ve dış mekan arasında kesintisiz geçiş için yüksek kaliteli sürme kapılar. Sürme sistemlerimiz tasarım, konfor ve işlevselliği bir araya getirir.', image: '/foto/Schuifpuien1.jpeg', features: ['Büyük cam paneller', 'Akıcı çalışma', 'Termal yalıtımlı', 'Alan tasarrufu'] },
         { title: 'Yeni İnşaat Projeleri', desc: 'Büyük ölçekli yeni inşaat projeleri için eksiksiz pencere ve kapı çözümleri. Kusursuz bir sonuç için müteahhitler ve mimarlarla yakın işbirliği yapıyoruz.', image: '/foto/foto-08.jpeg', features: ['Proje yönetimi', 'Özel çözümler', 'Zamanında teslimat', 'Tam hizmet'] },
         { title: 'Renovasyon Projeleri', desc: 'Mevcut konut ve ticari binalarda eski çerçevelerin uzmanlıkla değiştirilmesi. Minimum rahatsızlık ve mükemmel bir sonuç sağlıyoruz.', image: '/foto/foto-09.jpeg', features: ['Hassas ölçüm', 'Minimum rahatsızlık', 'Temiz bitirme', 'Eski malzeme kaldırma'] },
       ],
@@ -1921,6 +1930,7 @@ export const translations = {
       submit: 'Teklif isteyin',
       sendEmail: 'E-posta ile Gönder',
       sendWhatsApp: 'WhatsApp ile Gönder',
+      serviceMessageTemplate: '{service} ile ilgileniyorum. Bir teklif almak istiyorum. Seçenekler, fiyatlar ve teslimat süreleri hakkında daha fazla bilgi verebilir misiniz?',
       whatsapp: 'WhatsApp ile sohbet et',
       errors: {
         name: 'İsim gerekli',
@@ -2018,7 +2028,7 @@ export const translations = {
       ],
     },
     aboutStats: {
-      years: '15+',
+      years: '18+',
       yearsLabel: 'Yıl Deneyim',
       quality: 'Kalite',
       qualityDesc: 'Yüksek kaliteli malzemeler',

@@ -97,6 +97,7 @@ const Navbar = () => {
     { name: t.nav.services, href: '/services' },
     { name: t.nav.projects, href: '/projects' },
     { name: t.nav.contact, href: '/contact' },
+    { name: t.nav.register, href: '/register' },
   ];
 
   return (
