@@ -294,36 +294,7 @@ const CandidateForm = () => {
     doc.setDrawColor(220, 220, 220);
     doc.line(75, 0, 75, 297);
 
-    // Logo in top-right corner
-    try {
-      const logoImg = new Image();
-      logoImg.src = '/foto/logo.jpeg';
-      await new Promise<void>((resolve) => {
-        logoImg.onload = () => resolve();
-        logoImg.onerror = () => resolve();
-      });
-      if (logoImg.complete && logoImg.naturalWidth > 0) {
-        const canvas = document.createElement('canvas');
-        canvas.width = logoImg.naturalWidth;
-        canvas.height = logoImg.naturalHeight;
-        const ctx = canvas.getContext('2d');
-        if (ctx) {
-          ctx.drawImage(logoImg, 0, 0);
-          const logoDataUrl = canvas.toDataURL('image/jpeg');
-          const logoW = 18;
-          const logoH = (logoImg.naturalHeight / logoImg.naturalWidth) * logoW;
-          const logoX = 197 - logoW;
-          const logoY = 4;
-          // Decorative frame
-          doc.setDrawColor(accentColor[0], accentColor[1], accentColor[2]);
-          doc.setLineWidth(0.5);
-          doc.roundedRect(logoX - 1.5, logoY - 1.5, logoW + 3, logoH + 3, 1.5, 1.5);
-          doc.addImage(logoDataUrl, 'JPEG', logoX, logoY, logoW, logoH);
-        }
-      }
-    } catch (e) {
-      console.error('Error adding logo to PDF:', e);
-    }
+    // Logo removed — clean CV layout
     
     let leftY = 20;
     const leftX = 10;
@@ -509,8 +480,10 @@ const CandidateForm = () => {
     doc.setTextColor(accentColor[0], accentColor[1], accentColor[2]);
     doc.setFontSize(16);
     doc.setFont('helvetica', 'normal');
-    doc.text(formData.professional.jobTitle || (t.candidate.pdfCandidateLabel || 'CANDIDATE'), mainX, rightY);
-    rightY += 12;
+    const jobTitleText = formData.professional.jobTitle || (t.candidate.pdfCandidateLabel || 'CANDIDATE');
+    const jobTitleLines = doc.splitTextToSize(jobTitleText, mainWidth);
+    doc.text(jobTitleLines, mainX, rightY);
+    rightY += jobTitleLines.length * 7 + 5;
 
     // Professional quick info
     const profInfo: string[] = [];
@@ -526,10 +499,11 @@ const CandidateForm = () => {
       doc.setTextColor(lightTextColor[0], lightTextColor[1], lightTextColor[2]);
       doc.setFont('helvetica', 'normal');
       profInfo.forEach(info => {
-        doc.text(info, mainX, rightY);
-        rightY += 4;
+        const infoLines = doc.splitTextToSize(info, mainWidth);
+        doc.text(infoLines, mainX, rightY);
+        rightY += infoLines.length * 4 + 1;
       });
-      rightY += 6;
+      rightY += 5;
     }
     
     // Summary
@@ -564,14 +538,18 @@ const CandidateForm = () => {
         doc.setTextColor(textColor[0], textColor[1], textColor[2]);
         doc.setFontSize(11);
         doc.setFont('helvetica', 'bold');
-        doc.text(exp.job || '-', mainX, rightY);
+        const jobLines = doc.splitTextToSize(exp.job || '-', mainWidth);
+        doc.text(jobLines, mainX, rightY);
+        rightY += jobLines.length * 5;
         
         doc.setFontSize(9);
         doc.setTextColor(lightTextColor[0], lightTextColor[1], lightTextColor[2]);
         const expMeta = [exp.start, exp.end].filter(Boolean).join(' - ');
         const expLocation = [exp.company, exp.country].filter(Boolean).join(', ');
-        doc.text(`${expMeta}  |  ${expLocation}`, mainX, rightY + 5);
-        rightY += 10;
+        const metaText = `${expMeta}  |  ${expLocation}`;
+        const metaLines = doc.splitTextToSize(metaText, mainWidth);
+        doc.text(metaLines, mainX, rightY);
+        rightY += metaLines.length * 4 + 3;
         
         if (exp.tasks) {
           doc.setTextColor(textColor[0], textColor[1], textColor[2]);
