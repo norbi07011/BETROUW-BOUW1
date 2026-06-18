@@ -18,7 +18,7 @@ const About = () => {
           >
             <div className="aspect-square rounded-3xl overflow-hidden border border-zinc-800 shadow-2xl">
               <img 
-                src="/foto/logo.jpeg" 
+                src="/foto/logo.png" 
                 alt="Betrouw Bouw B.V. Logo" 
                 className="w-full h-full object-cover"
                 loading="lazy"
