@@ -5,12 +5,20 @@ import { useLanguage } from '../context/LanguageContext';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { useLocation } from 'react-router-dom';
 
+interface GalleryImage {
+  src: string;
+  label?: string;
+}
+
 interface ProjectItem {
   title: string;
   desc: string;
   mainImage: string;
-  gallery: string[];
+  gallery: (string | GalleryImage)[];
 }
+
+const normalizeImage = (img: string | GalleryImage): GalleryImage =>
+  typeof img === 'string' ? { src: img } : img;
 
 const Projects = () => {
   const { t } = useLanguage();
@@ -39,9 +47,9 @@ const Projects = () => {
     }
   }, [location.state, t.projectDetails.items]);
 
-  // All images: mainImage + gallery
-  const allImages = selectedProject
-    ? [selectedProject.mainImage, ...selectedProject.gallery]
+  // All images: mainImage + gallery (normalized to {src, label})
+  const allImages: GalleryImage[] = selectedProject
+    ? [normalizeImage(selectedProject.mainImage), ...selectedProject.gallery.map(normalizeImage)]
     : [];
 
   const goToNext = useCallback(() => {
@@ -138,7 +146,7 @@ const Projects = () => {
                   <AnimatePresence mode="wait">
                     <motion.img 
                       key={currentImageIndex}
-                      src={allImages[currentImageIndex]} 
+                      src={allImages[currentImageIndex]?.src} 
                       alt={`${selectedProject.title} ${currentImageIndex + 1}`} 
                       className="w-full h-full object-cover absolute inset-0"
                       initial={{ opacity: 0 }}
@@ -149,6 +157,13 @@ const Projects = () => {
                       draggable={false}
                     />
                   </AnimatePresence>
+
+                  {/* Before/After label badge */}
+                  {allImages[currentImageIndex]?.label && (
+                    <div className="absolute top-3 left-3 px-3 py-1.5 bg-amber-500 text-black text-xs font-bold uppercase tracking-widest rounded-full shadow-lg">
+                      {allImages[currentImageIndex].label}
+                    </div>
+                  )}
 
                   {/* Navigation arrows */}
                   {allImages.length > 1 && (
@@ -183,19 +198,25 @@ const Projects = () => {
                       <button
                         key={i}
                         onClick={() => setCurrentImageIndex(i)}
-                        className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all duration-200 ${
+                        title={img.label}
+                        className={`relative flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all duration-200 ${
                           i === currentImageIndex 
                             ? 'border-amber-500 opacity-100 scale-105' 
                             : 'border-transparent opacity-40 hover:opacity-75'
                         }`}
                       >
                         <img 
-                          src={img} 
+                          src={img.src} 
                           alt={`${selectedProject.title} thumbnail ${i + 1}`}
                           className="w-full h-full object-cover"
                           referrerPolicy="no-referrer"
                           draggable={false}
                         />
+                        {img.label && (
+                          <span className="absolute bottom-0 inset-x-0 bg-amber-500 text-black text-[8px] font-bold uppercase text-center leading-tight py-0.5">
+                            {img.label}
+                          </span>
+                        )}
                       </button>
                     ))}
                   </div>

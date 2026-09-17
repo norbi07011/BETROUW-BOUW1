@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { 
   Square as WindowIcon, 
   DoorOpen, 
@@ -16,8 +16,12 @@ import {
   Clock,
   Users,
   Award,
-  Phone
+  Phone,
+  Play,
+  X,
+  Layers
 } from 'lucide-react';
+import { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { Link, useNavigate } from 'react-router-dom';
@@ -30,10 +34,12 @@ const serviceIcons = [
   <ArrowRight className="w-7 h-7" />,
   <Building2 className="w-7 h-7" />,
   <RefreshCw className="w-7 h-7" />,
+  <Layers className="w-7 h-7" />,
 ];
 
 const Services = () => {
   const { t } = useLanguage();
+  const [activeVideo, setActiveVideo] = useState<string | null>(null);
   useDocumentTitle(t.nav.services);
   const navigate = useNavigate();
 
@@ -138,7 +144,7 @@ const Services = () => {
 
           {/* Service cards — large alternating rows */}
           <div className="space-y-8">
-            {t.services.items.map((service: { title: string; desc: string; image: string; features: string[] }, index: number) => {
+            {t.services.items.map((service: { title: string; desc: string; image: string; video?: string; features: string[] }, index: number) => {
               const isEven = index % 2 === 0;
 
               return (
@@ -165,6 +171,20 @@ const Services = () => {
                       <div className="absolute top-6 left-6 w-12 h-12 rounded-xl bg-amber-500 flex items-center justify-center text-black font-bold text-lg shadow-lg">
                         {String(index + 1).padStart(2, '0')}
                       </div>
+
+                      {/* Video play button */}
+                      {service.video && (
+                        <button
+                          onClick={() => setActiveVideo(service.video!)}
+                          aria-label="Play video"
+                          className="absolute inset-0 flex items-center justify-center group/play cursor-pointer"
+                        >
+                          <span className="absolute inset-0 bg-black/20 group-hover/play:bg-black/35 transition-colors" />
+                          <span className="relative w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-amber-500 group-hover/play:bg-amber-400 flex items-center justify-center shadow-xl group-hover/play:scale-110 transition-all duration-300">
+                            <Play className="w-7 h-7 lg:w-8 lg:h-8 text-black fill-black ml-1" />
+                          </span>
+                        </button>
+                      )}
                     </div>
 
                     {/* Content */}
@@ -213,6 +233,42 @@ const Services = () => {
           </div>
         </div>
       </section>
+
+      {/* Video Modal */}
+      <AnimatePresence>
+        {activeVideo && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8 bg-black/95 backdrop-blur-sm"
+            onClick={() => setActiveVideo(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="relative w-full max-w-4xl max-h-[85vh] rounded-2xl overflow-hidden bg-black shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setActiveVideo(null)}
+                aria-label="Close video"
+                className="absolute top-4 right-4 z-10 p-2 rounded-full bg-black/60 hover:bg-amber-500 text-white hover:text-black transition-colors"
+              >
+                <X className="w-6 h-6" />
+              </button>
+              <video
+                src={activeVideo}
+                className="w-full max-h-[85vh] object-contain"
+                controls
+                autoPlay
+                playsInline
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* ═══════════════════════════════════════════ */}
       {/*  WHY CHOOSE US                             */}
