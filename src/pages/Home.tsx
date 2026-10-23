@@ -1,4 +1,6 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { lazy, Suspense, useEffect, useLayoutEffect, useRef, useState } from 'react';
+
+const MontageStudio = lazy(() => import('../fx/MontageStudio').then((m) => ({ default: m.MontageStudio })));
 import { ArrowRight, Construction, CheckCircle2, Star, Quote, ChevronLeft, ChevronRight, ArrowUpRight, MousePointer2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
@@ -8,6 +10,7 @@ import { gsap, scrollState, reducedMotion, isTouch, isMobile, flyTo, follow } fr
 import { useTransitionNavigate } from '../fx/Engine';
 import { Spotlights, Dust } from '../fx/Backdrop';
 import { Window3D } from '../fx/Window3D';
+import { studioText } from '../fx/studioText';
 import {
   SplitText, Reveal, Magnetic, TiltCard, CountUp, VelocityMarquee, Parallax, Float, useIntroReady, WindowGlyph,
 } from '../fx/components';
@@ -243,6 +246,34 @@ const Stats = () => {
           </TiltCard>
         ))}
       </Reveal>
+    </section>
+  );
+};
+
+/* ═════════════════════════════  3D MONTAGE STUDIO (Three.js)  ═════════════════════════════ */
+
+const Studio = () => {
+  const { lang } = useLanguage();
+  const tx = studioText[lang];
+  return (
+    <section className="relative py-24">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-3xl mb-12">
+          <Reveal>
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold uppercase tracking-widest mb-6">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+              {tx.kicker}
+            </span>
+          </Reveal>
+          <SplitText key={`${lang}-studio`} as="h2" mode="words" text={tx.title} className="font-display text-4xl md:text-6xl font-bold text-white mb-6" />
+          <Reveal><p className="text-zinc-400 text-lg leading-relaxed">{tx.intro}</p></Reveal>
+        </div>
+        <Reveal variant="zoom">
+          <Suspense fallback={<div className="aspect-[4/5] md:aspect-video rounded-[28px] border border-zinc-800 bg-zinc-900 overflow-hidden"><img src="/foto/Deuren%20Montage.jpeg" alt="" className="w-full h-full object-cover opacity-60" /></div>}>
+            <MontageStudio />
+          </Suspense>
+        </Reveal>
+      </div>
     </section>
   );
 };
@@ -696,6 +727,7 @@ const Home = () => {
       <Hero />
       <ServicesMarquee />
       <Stats />
+      <Studio />
       <ZoomThrough />
       <ProcessStory />
       <ServiceCarousel />
