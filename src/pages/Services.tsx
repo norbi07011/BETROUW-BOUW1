@@ -1,30 +1,18 @@
 import { motion, AnimatePresence } from 'motion/react';
-import { 
-  Square as WindowIcon, 
-  DoorOpen, 
-  Hammer, 
-  Construction, 
-  RefreshCw,
-  Layout as LayoutIcon,
-  Building2,
-  CheckCircle2,
-  ArrowRight,
-  Shield,
-  Star,
-  Quote,
-  Sparkles,
-  Clock,
-  Users,
-  Award,
-  Phone,
-  Play,
-  X,
-  Layers
+import {
+  Square as WindowIcon, DoorOpen, Hammer, Construction, RefreshCw, Layout as LayoutIcon, Building2,
+  CheckCircle2, ArrowRight, Shield, Star, Quote, Clock, Users, Award, Phone, Play, X, Layers,
 } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
-import { Link, useNavigate } from 'react-router-dom';
+import { gsap, reducedMotion, lockScroll, flyTo } from '../fx/core';
+import { useTransitionNavigate } from '../fx/Engine';
+import { PageHero, Badge } from '../fx/PageHero';
+import { SplitText, Reveal, Magnetic, TiltCard, CountUp, Float, VelocityMarquee, Parallax } from '../fx/components';
+
+type Service = { title: string; desc: string; image: string; video?: string; features: string[] };
 
 const serviceIcons = [
   <WindowIcon className="w-7 h-7" />,
@@ -37,200 +25,221 @@ const serviceIcons = [
   <Layers className="w-7 h-7" />,
 ];
 
-const Services = () => {
-  const { t } = useLanguage();
-  const [activeVideo, setActiveVideo] = useState<string | null>(null);
-  useDocumentTitle(t.nav.services);
-  const navigate = useNavigate();
+/* Process timeline whose connecting line is drawn by scrolling (scrubbing). */
+const ProcessTimeline = () => {
+  const { t, lang } = useLanguage();
+  const sec = useRef<HTMLElement>(null);
+  useLayoutEffect(() => {
+    if (reducedMotion()) return;
+    const ctx = gsap.context(() => {
+      gsap.fromTo('.proc-line', { scaleX: 0 }, {
+        scaleX: 1, ease: 'none',
+        scrollTrigger: { trigger: '.proc-grid', start: 'top 75%', end: 'bottom 45%', scrub: 0.8 },
+      });
+      gsap.fromTo('.proc-line-v', { scaleY: 0 }, {
+        scaleY: 1, ease: 'none',
+        scrollTrigger: { trigger: '.proc-list', start: 'top 75%', end: 'bottom 60%', scrub: 0.8 },
+      });
+      gsap.utils.toArray<HTMLElement>('.proc-dot').forEach((d) => {
+        gsap.fromTo(d, { scale: 0.6, borderColor: '#3f3f46' }, {
+          scale: 1, borderColor: '#f59e0b', boxShadow: '0 0 30px rgba(245,158,11,.45)', ease: 'back.out(3)', duration: 0.6,
+          scrollTrigger: { trigger: d, start: 'top 70%', toggleActions: 'play none none reverse' },
+        });
+      });
+    }, sec);
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <div className="bg-zinc-950">
-      {/* ═══════════════════════════════════════════ */}
-      {/*  HERO                                      */}
-      {/* ═══════════════════════════════════════════ */}
-      <section className="relative min-h-[70vh] flex items-center pt-20 overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img
-            src="/foto/foto-10.jpeg"
-            alt="Betrouw Bouw B.V. - Professional services"
-            className="w-full h-full object-cover"
-            loading="eager"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/85 to-black/40" />
-          <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent" />
+    <section ref={sec} className="py-28 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center mb-20">
+          <SplitText key={`${lang}-proc`} as="h2" mode="words" text={t.process.title} className="font-display text-4xl md:text-6xl font-bold text-white mb-6" />
+          <Reveal><p className="text-zinc-400 text-lg max-w-2xl mx-auto">{t.processSubtitle}</p></Reveal>
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 w-full py-20">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="max-w-3xl"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-500 text-xs font-bold uppercase tracking-widest mb-8">
-              <Construction className="w-3.5 h-3.5" />
-              <span>{t.services.heroBadge}</span>
-            </div>
-
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-8">
-              {t.services.title}
-            </h1>
-
-            <p className="text-lg md:text-xl text-zinc-300 leading-relaxed max-w-2xl mb-10">
-              {t.services.subtitle}
-            </p>
-
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-3 bg-amber-500 hover:bg-amber-400 text-black font-bold px-8 py-4 rounded-xl transition-all hover:shadow-lg hover:shadow-amber-500/25 group"
-            >
-              <Phone className="w-5 h-5" />
-              {t.cta.button}
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </motion.div>
+        <div className="proc-grid hidden lg:block relative">
+          <div className="absolute top-8 left-[12.5%] right-[12.5%] h-0.5 bg-zinc-800" />
+          <div className="proc-line absolute top-8 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-amber-700 via-amber-400 to-amber-200 origin-left shadow-[0_0_12px_rgba(245,158,11,.8)]" />
+          <Reveal stagger={0.15} className="grid grid-cols-4 gap-8">
+            {t.process.steps.map((step: { title: string; desc: string }, index: number) => (
+              <div key={index} className="relative group">
+                <div className="flex justify-center mb-10">
+                  <div className="proc-dot w-16 h-16 rounded-2xl bg-zinc-900 border-2 border-zinc-700 flex items-center justify-center text-amber-500 text-2xl font-bold relative z-10 font-display">
+                    {index + 1}
+                  </div>
+                </div>
+                <TiltCard className="text-center bb-glass-card rounded-2xl p-8">
+                  <h3 className="text-xl font-bold text-white mb-3" style={{ transform: 'translateZ(30px)' }}>{step.title}</h3>
+                  <p className="text-zinc-400 leading-relaxed" style={{ transform: 'translateZ(20px)' }}>{step.desc}</p>
+                </TiltCard>
+              </div>
+            ))}
+          </Reveal>
         </div>
 
-        {/* Floating stats */}
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.5, duration: 0.7 }}
-          className="absolute right-8 lg:right-16 top-1/2 -translate-y-1/2 z-10 hidden lg:flex flex-col gap-4"
-        >
-          {[
-            { icon: <Clock className="w-5 h-5" />, value: '18+', label: t.aboutStats.yearsLabel },
-            { icon: <Users className="w-5 h-5" />, value: '500+', label: 'Projects' },
-            { icon: <Award className="w-5 h-5" />, value: '100%', label: t.aboutStats.quality },
-          ].map((stat, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.7 + i * 0.15 }}
-              className="bg-zinc-900/80 backdrop-blur-md border border-zinc-700/50 rounded-2xl px-6 py-4 text-center min-w-[160px]"
-            >
-              <div className="text-amber-500 flex justify-center mb-2">{stat.icon}</div>
-              <div className="text-2xl font-bold text-white">{stat.value}</div>
-              <div className="text-xs text-zinc-400 font-medium">{stat.label}</div>
-            </motion.div>
+        <div className="proc-list lg:hidden relative space-y-8 pl-16">
+          <div className="absolute left-6 top-2 bottom-2 w-0.5 bg-zinc-800" />
+          <div className="proc-line-v absolute left-6 top-2 bottom-2 w-0.5 bg-amber-500 origin-top" />
+          {t.process.steps.map((step: { title: string; desc: string }, index: number) => (
+            <Reveal key={index} variant="left" className="relative">
+              <div className="proc-dot absolute -left-16 top-0 w-12 h-12 rounded-xl bg-zinc-900 border-2 border-zinc-700 flex items-center justify-center text-amber-500 text-lg font-bold">
+                {index + 1}
+              </div>
+              <h3 className="text-lg font-bold text-white mb-2">{step.title}</h3>
+              <p className="text-zinc-400 leading-relaxed">{step.desc}</p>
+            </Reveal>
           ))}
-        </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const Services = () => {
+  const { t, lang } = useLanguage();
+  const [activeVideo, setActiveVideo] = useState<string | null>(null);
+  useDocumentTitle(t.nav.services);
+  const go = useTransitionNavigate();
+  const imgRefs = useRef<(HTMLImageElement | null)[]>([]);
+  const items = t.services.items as Service[];
+
+  useEffect(() => {
+    lockScroll(!!activeVideo);
+    return () => lockScroll(false);
+  }, [activeVideo]);
+
+  const requestQuote = async (index: number, service: Service) => {
+    const img = imgRefs.current[index];
+    if (img) await flyTo(img);
+    go('/contact', { state: { serviceMessage: t.contact.serviceMessageTemplate?.replace('{service}', service.title) || service.title } });
+  };
+
+  return (
+    <div>
+      <PageHero
+        image="/foto/foto-10.jpeg"
+        badge={<Badge icon={<Construction className="w-3.5 h-3.5" />}>{t.services.heroBadge}</Badge>}
+        title={t.services.title}
+        subtitle={t.services.subtitle}
+        aside={
+          <div className="flex flex-col gap-4" style={{ perspective: 900 }}>
+            {[
+              { icon: <Clock className="w-5 h-5" />, to: 18, suffix: '+', label: t.aboutStats.yearsLabel },
+              { icon: <Users className="w-5 h-5" />, to: 500, suffix: '+', label: t.nav.projects },
+              { icon: <Award className="w-5 h-5" />, to: 100, suffix: '%', label: t.aboutStats.quality },
+            ].map((stat, i) => (
+              <Float key={i} amp={10} duration={3 + i * 0.6} delay={i * 0.4}>
+                <div className="bb-glass-card rounded-2xl px-6 py-4 text-center min-w-[170px]">
+                  <div className="text-amber-500 flex justify-center mb-2">{stat.icon}</div>
+                  <div className="text-3xl font-bold text-white font-display"><CountUp to={stat.to} suffix={stat.suffix} /></div>
+                  <div className="text-xs text-zinc-400 font-medium">{stat.label}</div>
+                </div>
+              </Float>
+            ))}
+          </div>
+        }
+      >
+        <Magnetic>
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-3 bg-amber-500 hover:bg-amber-400 text-black font-bold px-8 py-4 rounded-full transition-colors shadow-xl shadow-amber-500/25 group"
+          >
+            <Phone className="w-5 h-5" />
+            {t.cta.button}
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </Magnetic>
+      </PageHero>
+
+      <section className="py-8 border-y border-zinc-900 bg-black/50 backdrop-blur-sm">
+        <VelocityMarquee items={items.map((s) => s.title)} itemClassName="font-display text-4xl md:text-6xl font-bold uppercase tracking-tight bb-text-outline" />
       </section>
 
-      {/* ═══════════════════════════════════════════ */}
-      {/*  SERVICES GRID — alternating layout        */}
-      {/* ═══════════════════════════════════════════ */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-amber-500/5 blur-[200px] rounded-full pointer-events-none" />
-
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          {/* Section header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-20"
-          >
-            <div className="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/20 rounded-full px-5 py-2 mb-6">
-              <Sparkles className="w-4 h-4 text-amber-500" />
-              <span className="text-amber-500 text-sm font-semibold tracking-wide uppercase">
-                {t.services.heroBadge}
-              </span>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">{t.services.title}</h2>
-            <p className="text-zinc-400 text-lg max-w-2xl mx-auto">{t.services.subtitle}</p>
-          </motion.div>
-
-          {/* Service cards — large alternating rows */}
-          <div className="space-y-8">
-            {t.services.items.map((service: { title: string; desc: string; image: string; video?: string; features: string[] }, index: number) => {
-              const isEven = index % 2 === 0;
-
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-50px' }}
-                  transition={{ delay: 0.1 }}
-                  className="group"
-                >
-                  <div className={`grid grid-cols-1 lg:grid-cols-2 gap-0 rounded-3xl overflow-hidden border border-zinc-800 hover:border-amber-500/30 bg-zinc-900/40 backdrop-blur-sm transition-all duration-500 hover:shadow-xl hover:shadow-amber-500/5 ${isEven ? '' : 'lg:direction-rtl'}`}>
-                    {/* Image */}
-                    <div className={`relative aspect-[16/10] lg:aspect-auto overflow-hidden ${isEven ? '' : 'lg:order-2'}`}>
-                      <img
-                        src={service.image}
-                        alt={service.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                        loading="lazy"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/60 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-transparent lg:to-zinc-900/20" />
-                      
-                      {/* Number badge */}
-                      <div className="absolute top-6 left-6 w-12 h-12 rounded-xl bg-amber-500 flex items-center justify-center text-black font-bold text-lg shadow-lg">
-                        {String(index + 1).padStart(2, '0')}
-                      </div>
-
-                      {/* Video play button */}
-                      {service.video && (
-                        <button
-                          onClick={() => setActiveVideo(service.video!)}
-                          aria-label="Play video"
-                          className="absolute inset-0 flex items-center justify-center group/play cursor-pointer"
-                        >
-                          <span className="absolute inset-0 bg-black/20 group-hover/play:bg-black/35 transition-colors" />
-                          <span className="relative w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-amber-500 group-hover/play:bg-amber-400 flex items-center justify-center shadow-xl group-hover/play:scale-110 transition-all duration-300">
-                            <Play className="w-7 h-7 lg:w-8 lg:h-8 text-black fill-black ml-1" />
-                          </span>
-                        </button>
-                      )}
+      {/* SERVICES – alternating rows */}
+      <section className="py-24 relative">
+        <div className="max-w-7xl mx-auto px-6 relative z-10 space-y-16 md:space-y-24">
+          {items.map((service, index) => {
+            const isEven = index % 2 === 0;
+            return (
+              <div key={index} className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+                <Reveal variant={isEven ? 'left' : 'right'} className={isEven ? '' : 'lg:order-2'}>
+                  <TiltCard max={7} className="relative aspect-[4/3] rounded-[2rem] overflow-hidden border border-zinc-800 shadow-2xl shadow-black/60">
+                    <div className="absolute -inset-[12%]">
+                      <Parallax speed={0.08} className="w-full h-full">
+                        <img
+                          ref={(el) => { imgRefs.current[index] = el; }}
+                          src={service.image}
+                          alt={service.title}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                        />
+                      </Parallax>
                     </div>
-
-                    {/* Content */}
-                    <div className={`p-8 lg:p-12 flex flex-col justify-center ${isEven ? '' : 'lg:order-1'}`}>
-                      {/* Big category button at top — goes to projects */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                    <div className="absolute top-6 left-6 w-14 h-14 rounded-2xl bg-amber-500 flex items-center justify-center text-black font-bold text-lg shadow-lg font-display" style={{ transform: 'translateZ(50px)' }}>
+                      {String(index + 1).padStart(2, '0')}
+                    </div>
+                    {service.video && (
                       <button
-                        onClick={() => navigate('/projects', { state: { openProject: service.title } })}
-                        className="w-full flex items-center justify-center gap-4 bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-xl lg:text-2xl px-8 py-5 rounded-2xl transition-all hover:shadow-lg hover:shadow-amber-500/25 cursor-pointer mb-6 group/title"
+                        onClick={() => setActiveVideo(service.video!)}
+                        aria-label="Play video"
+                        className="absolute inset-0 flex items-center justify-center group/play cursor-pointer"
                       >
-                        <div className="w-10 h-10 rounded-xl bg-black/10 flex items-center justify-center shrink-0">
-                          {serviceIcons[index % serviceIcons.length]}
-                        </div>
-                        {service.title}
-                        <ArrowRight className="w-5 h-5 group-hover/title:translate-x-1 transition-transform" />
+                        <span className="absolute w-24 h-24 rounded-full bg-amber-500/30 animate-ping" />
+                        <span className="relative w-20 h-20 rounded-full bg-amber-500 group-hover/play:bg-amber-400 flex items-center justify-center shadow-xl group-hover/play:scale-110 transition-all duration-300" style={{ transform: 'translateZ(60px)' }}>
+                          <Play className="w-8 h-8 text-black fill-black ml-1" />
+                        </span>
                       </button>
+                    )}
+                  </TiltCard>
+                </Reveal>
 
-                      <p className="text-zinc-400 text-base lg:text-lg leading-relaxed mb-6">
-                        {service.desc}
-                      </p>
-
-                      {/* Features */}
-                      <div className="grid grid-cols-2 gap-3 mb-6">
-                        {service.features.map((feature: string, fi: number) => (
-                          <div key={fi} className="flex items-center gap-2">
-                            <CheckCircle2 className="w-4 h-4 text-amber-500 shrink-0" />
-                            <span className="text-zinc-300 text-sm">{feature}</span>
-                          </div>
-                        ))}
-                      </div>
-
-                      {/* Small 'Vraag een offerte aan' link at bottom — goes to contact */}
-                      <div className="mt-2">
-                        <button
-                          onClick={() => navigate('/contact', { state: { serviceMessage: `${t.contact.serviceMessageTemplate?.replace('{service}', service.title) || service.title}` } })}
-                          className="inline-flex items-center gap-2 text-zinc-500 hover:text-amber-400 text-sm font-medium transition-all group/info cursor-pointer"
-                        >
-                          {t.cta.button}
-                          <ArrowRight className="w-3.5 h-3.5 group-hover/info:translate-x-1 transition-transform" />
-                        </button>
-                      </div>
+                <Reveal stagger={0.08} className={isEven ? '' : 'lg:order-1'}>
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-500">
+                      {serviceIcons[index % serviceIcons.length]}
                     </div>
+                    <span className="font-display text-6xl font-bold bb-text-outline leading-none">{String(index + 1).padStart(2, '0')}</span>
                   </div>
-                </motion.div>
-              );
-            })}
-          </div>
+                  <button
+                    onClick={() => go('/projects', { state: { openProject: service.title } })}
+                    className="group/title text-left font-display text-3xl md:text-5xl font-bold text-white hover:text-amber-400 transition-colors mb-6 leading-tight flex items-start gap-3"
+                  >
+                    {service.title}
+                    <ArrowRight className="w-7 h-7 mt-2 shrink-0 text-amber-500 -rotate-45 group-hover/title:rotate-0 transition-transform duration-500" />
+                  </button>
+                  <p className="text-zinc-400 text-lg leading-relaxed mb-8">{service.desc}</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+                    {service.features.map((feature, fi) => (
+                      <div key={fi} className="flex items-center gap-3 bb-glass-card rounded-xl px-4 py-3">
+                        <CheckCircle2 className="w-4 h-4 text-amber-500 shrink-0" />
+                        <span className="text-zinc-200 text-sm">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="flex flex-wrap gap-4">
+                    <Magnetic>
+                      <button
+                        onClick={() => requestQuote(index, service)}
+                        className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-amber-500 hover:bg-amber-400 text-black font-bold shadow-lg shadow-amber-500/25 transition-colors"
+                      >
+                        {t.cta.button} <ArrowRight className="w-4 h-4" />
+                      </button>
+                    </Magnetic>
+                    <Magnetic strength={0.3}>
+                      <button
+                        onClick={() => go('/projects', { state: { openProject: service.title } })}
+                        className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-zinc-700 hover:border-amber-500 text-white font-bold transition-colors"
+                      >
+                        {t.projectDetails.view}
+                      </button>
+                    </Magnetic>
+                  </div>
+                </Reveal>
+              </div>
+            );
+          })}
         </div>
       </section>
 
@@ -243,12 +252,14 @@ const Services = () => {
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8 bg-black/95 backdrop-blur-sm"
             onClick={() => setActiveVideo(null)}
+            data-lenis-prevent
           >
             <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="relative w-full max-w-4xl max-h-[85vh] rounded-2xl overflow-hidden bg-black shadow-2xl"
+              initial={{ scale: 0.6, opacity: 0, rotateX: 30 }}
+              animate={{ scale: 1, opacity: 1, rotateX: 0 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ type: 'spring', damping: 20, stiffness: 160 }}
+              className="relative w-full max-w-4xl max-h-[85vh] rounded-2xl overflow-hidden bg-black shadow-2xl shadow-amber-500/10 border border-zinc-800"
               onClick={(e) => e.stopPropagation()}
             >
               <button
@@ -258,214 +269,78 @@ const Services = () => {
               >
                 <X className="w-6 h-6" />
               </button>
-              <video
-                src={activeVideo}
-                className="w-full max-h-[85vh] object-contain"
-                controls
-                autoPlay
-                playsInline
-              />
+              <video src={activeVideo} className="w-full max-h-[85vh] object-contain" controls autoPlay playsInline />
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* ═══════════════════════════════════════════ */}
-      {/*  WHY CHOOSE US                             */}
-      {/* ═══════════════════════════════════════════ */}
-      <section className="py-24 bg-black relative overflow-hidden">
-        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-amber-500/5 blur-[180px] rounded-full pointer-events-none" />
-
+      {/* WHY + GUARANTEE */}
+      <section className="py-24 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Left: content */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">
-                {t.whyUs.title}
-              </h2>
-
-              <div className="space-y-5">
+            <div>
+              <SplitText key={`${lang}-why`} as="h2" mode="words" text={t.whyUs.title} className="font-display text-4xl md:text-5xl font-bold text-white mb-10" />
+              <Reveal stagger={0.08} className="space-y-5">
                 {t.whyUs.items.map((item: string, index: number) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    className="flex items-center gap-4 group"
-                  >
-                    <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-500 group-hover:bg-amber-500 group-hover:text-black transition-all shrink-0">
+                  <div key={index} className="flex items-center gap-4 group">
+                    <div className="w-11 h-11 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-500 group-hover:bg-amber-500 group-hover:text-black group-hover:rotate-12 transition-all duration-500 shrink-0">
                       <CheckCircle2 className="w-5 h-5" />
                     </div>
-                    <span className="text-zinc-300 text-lg font-medium group-hover:text-white transition-colors">{item}</span>
-                  </motion.div>
+                    <span className="text-zinc-300 text-lg font-medium group-hover:text-white group-hover:translate-x-1 transition-all">{item}</span>
+                  </div>
                 ))}
-              </div>
-            </motion.div>
+              </Reveal>
+            </div>
 
-            {/* Right: guarantee card */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="relative"
-            >
-              <div className="bg-gradient-to-br from-zinc-900 to-zinc-900/60 border border-zinc-800 rounded-3xl p-10 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-40 h-40 bg-amber-500/10 blur-[80px] rounded-full" />
-                
-                <div className="relative z-10">
-                  <div className="w-16 h-16 rounded-2xl bg-amber-500 flex items-center justify-center mb-8">
-                    <Shield className="w-8 h-8 text-black" />
-                  </div>
-
-                  <h3 className="text-3xl font-bold text-white mb-4">{t.services.guarantee.title}</h3>
-                  <p className="text-zinc-400 text-lg leading-relaxed mb-8">{t.services.guarantee.desc}</p>
-
-                  <div className="space-y-4">
-                    {t.services.guarantee.items.map((item: string, i: number) => (
-                      <div key={i} className="flex items-center gap-3">
-                        <div className="w-6 h-6 rounded-full bg-amber-500/20 flex items-center justify-center">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-amber-500" />
+            <Reveal variant="zoom">
+              <Float amp={12} duration={4.5}>
+                <TiltCard max={10} className="bb-glass-card rounded-[2rem] p-10 overflow-hidden">
+                  <div className="absolute top-0 right-0 w-48 h-48 bg-amber-500/15 blur-[80px] rounded-full" />
+                  <div className="relative z-10">
+                    <div className="w-16 h-16 rounded-2xl bg-amber-500 flex items-center justify-center mb-8 shadow-lg shadow-amber-500/40" style={{ transform: 'translateZ(60px)' }}>
+                      <Shield className="w-8 h-8 text-black" />
+                    </div>
+                    <h3 className="font-display text-3xl font-bold text-white mb-4" style={{ transform: 'translateZ(40px)' }}>{t.services.guarantee.title}</h3>
+                    <p className="text-zinc-400 text-lg leading-relaxed mb-8">{t.services.guarantee.desc}</p>
+                    <div className="space-y-4">
+                      {t.services.guarantee.items.map((item: string, i: number) => (
+                        <div key={i} className="flex items-center gap-3">
+                          <div className="w-6 h-6 rounded-full bg-amber-500/20 flex items-center justify-center">
+                            <CheckCircle2 className="w-3.5 h-3.5 text-amber-500" />
+                          </div>
+                          <span className="text-zinc-200 font-medium">{item}</span>
                         </div>
-                        <span className="text-zinc-300 font-medium">{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════ */}
-      {/*  PROCESS TIMELINE                          */}
-      {/* ═══════════════════════════════════════════ */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-20"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">{t.process.title}</h2>
-            <p className="text-zinc-400 text-lg max-w-2xl mx-auto">{t.processSubtitle}</p>
-          </motion.div>
-
-          {/* Desktop timeline */}
-          <div className="hidden lg:block relative">
-            {/* Connection line */}
-            <div className="absolute top-20 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-zinc-700 to-transparent" />
-
-            <div className="grid grid-cols-4 gap-8">
-              {t.process.steps.map((step: { title: string; desc: string }, index: number) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.2 }}
-                  className="relative group"
-                >
-                  {/* Timeline dot */}
-                  <div className="flex justify-center mb-10">
-                    <div className="relative">
-                      <div className="w-16 h-16 rounded-2xl bg-zinc-900 border-2 border-zinc-700 group-hover:border-amber-500 flex items-center justify-center text-amber-500 text-2xl font-bold transition-all duration-300 relative z-10 group-hover:shadow-lg group-hover:shadow-amber-500/20">
-                        {index + 1}
-                      </div>
-                      <div className="absolute inset-0 bg-amber-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                      ))}
                     </div>
                   </div>
-
-                  <div className="text-center bg-zinc-900/40 border border-zinc-800 rounded-2xl p-8 group-hover:border-amber-500/30 transition-all">
-                    <h3 className="text-xl font-bold text-white mb-3 group-hover:text-amber-400 transition-colors">{step.title}</h3>
-                    <p className="text-zinc-500 leading-relaxed">{step.desc}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          {/* Mobile timeline */}
-          <div className="lg:hidden space-y-6">
-            {t.process.steps.map((step: { title: string; desc: string }, index: number) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="flex gap-6 group"
-              >
-                <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 rounded-xl bg-zinc-900 border-2 border-zinc-700 group-hover:border-amber-500 flex items-center justify-center text-amber-500 text-lg font-bold transition-all shrink-0">
-                    {index + 1}
-                  </div>
-                  {index < t.process.steps.length - 1 && (
-                    <div className="w-0.5 flex-1 bg-zinc-800 mt-3" />
-                  )}
-                </div>
-                <div className="pb-8">
-                  <h3 className="text-lg font-bold text-white mb-2 group-hover:text-amber-400 transition-colors">{step.title}</h3>
-                  <p className="text-zinc-500 leading-relaxed">{step.desc}</p>
-                </div>
-              </motion.div>
-            ))}
+                </TiltCard>
+              </Float>
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════ */}
-      {/*  TESTIMONIALS                              */}
-      {/* ═══════════════════════════════════════════ */}
-      <section className="py-24 bg-black relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-amber-500/3 blur-[200px] rounded-full pointer-events-none" />
+      <ProcessTimeline />
 
+      {/* TESTIMONIALS */}
+      <section className="py-24 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">{t.testimonials.title}</h2>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="text-center mb-16">
+            <SplitText key={`${lang}-rev`} as="h2" mode="words" text={t.testimonials.title} className="font-display text-4xl md:text-5xl font-bold text-white" />
+          </div>
+          <Reveal stagger={0.15} variant="flip" className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {t.testimonials.items.map((review: { name: string; text: string }, index: number) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.15 }}
-                className="relative bg-zinc-900/60 backdrop-blur-sm border border-zinc-800 rounded-2xl p-8 hover:border-amber-500/30 transition-all group"
-              >
-                {/* Quote icon */}
-                <div className="absolute -top-4 left-8">
-                  <div className="w-8 h-8 rounded-lg bg-amber-500 flex items-center justify-center">
-                    <Quote className="w-4 h-4 text-black" />
-                  </div>
+              <TiltCard key={index} className="bb-glass-card rounded-2xl p-8">
+                <div className="absolute -top-4 left-8 w-9 h-9 rounded-lg bg-amber-500 flex items-center justify-center" style={{ transform: 'translateZ(40px)' }}>
+                  <Quote className="w-4 h-4 text-black" />
                 </div>
-
-                {/* Stars */}
                 <div className="flex gap-1 mb-6 mt-2">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-amber-500 text-amber-500" />
-                  ))}
+                  {Array.from({ length: 5 }).map((_, i) => <Star key={i} className="w-4 h-4 fill-amber-500 text-amber-500" />)}
                 </div>
-
-                <p className="text-zinc-300 leading-relaxed mb-8 italic">
-                  &ldquo;{review.text}&rdquo;
-                </p>
-
-                <div className="flex items-center gap-4 mt-auto">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center text-black font-bold text-lg">
+                <p className="text-zinc-200 leading-relaxed mb-8 italic" style={{ transform: 'translateZ(30px)' }}>&ldquo;{review.text}&rdquo;</p>
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-amber-400 to-amber-700 flex items-center justify-center text-black font-bold text-lg">
                     {review.name.charAt(0)}
                   </div>
                   <div>
@@ -473,53 +348,40 @@ const Services = () => {
                     <div className="text-zinc-500 text-sm">{t.verifiedClient}</div>
                   </div>
                 </div>
-              </motion.div>
+              </TiltCard>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════ */}
-      {/*  CTA                                       */}
-      {/* ═══════════════════════════════════════════ */}
+      {/* CTA */}
       <section className="py-24 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="relative rounded-3xl overflow-hidden"
-          >
-            {/* Background image */}
-            <div className="absolute inset-0">
-              <img
-                src="/foto/foto-01.jpeg"
-                alt=""
-                className="w-full h-full object-cover"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-black via-black/90 to-black/70" />
-            </div>
-
-            <div className="relative z-10 py-20 px-8 md:px-16 flex flex-col md:flex-row items-center gap-10">
-              <div className="flex-1">
-                <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                  {t.cta.title}
-                </h2>
-                <p className="text-zinc-300 text-lg">
-                  {t.cta.subtitle}
-                </p>
+          <Reveal variant="zoom">
+            <div className="relative rounded-[2.5rem] overflow-hidden border border-zinc-800">
+              <div className="absolute inset-0 -inset-y-[20%]">
+                <Parallax speed={0.12} className="w-full h-full">
+                  <img src="/foto/foto-01.jpeg" alt="" className="w-full h-full object-cover" loading="lazy" />
+                </Parallax>
               </div>
-
-              <Link
-                to="/contact"
-                className="inline-flex items-center gap-3 bg-amber-500 hover:bg-amber-400 text-black font-bold px-10 py-5 rounded-2xl transition-all hover:shadow-xl hover:shadow-amber-500/25 text-lg whitespace-nowrap group shrink-0"
-              >
-                {t.cta.button}
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
+              <div className="absolute inset-0 bg-gradient-to-r from-black via-black/90 to-black/60" />
+              <div className="relative z-10 py-20 px-8 md:px-16 flex flex-col md:flex-row items-center gap-10">
+                <div className="flex-1">
+                  <SplitText key={`${lang}-cta`} as="h2" mode="words" text={t.cta.title} className="font-display text-4xl md:text-5xl font-bold text-white mb-4" />
+                  <p className="text-zinc-300 text-lg">{t.cta.subtitle}</p>
+                </div>
+                <Magnetic strength={0.5}>
+                  <Link
+                    to="/contact"
+                    className="inline-flex items-center gap-3 bg-amber-500 hover:bg-amber-400 text-black font-bold px-10 py-5 rounded-full shadow-xl shadow-amber-500/25 text-lg whitespace-nowrap group transition-colors"
+                  >
+                    {t.cta.button}
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </Magnetic>
+              </div>
             </div>
-          </motion.div>
+          </Reveal>
         </div>
       </section>
     </div>

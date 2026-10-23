@@ -5,7 +5,7 @@ const Privacy = () => {
   const { t } = useLanguage();
   const p = t.privacyPage;
   return (
-    <div className="pt-32 pb-20 bg-zinc-950">
+    <div className="pt-32 pb-20 bg-black/70 backdrop-blur-sm">
       <div className="max-w-4xl mx-auto px-6">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-8">{t.footer.privacy}</h1>

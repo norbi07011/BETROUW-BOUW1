@@ -6,7 +6,7 @@ import { useLanguage } from '../context/LanguageContext';
 const NotFound = () => {
   const { t } = useLanguage();
   return (
-    <div className="pt-32 pb-20 bg-zinc-950 min-h-screen flex items-center justify-center">
+    <div className="pt-32 pb-20 min-h-screen flex items-center justify-center">
       <motion.div 
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}

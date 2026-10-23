@@ -3,22 +3,22 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { LanguageProvider } from './context/LanguageContext';
 import { Layout } from './components/Layout';
 
-// Eagerly loaded (critical path)
+// Eagerly loaded – main pages render instantly inside page transitions
 import Home from './pages/Home';
 import Contact from './pages/Contact';
+import About from './pages/About';
+import Services from './pages/Services';
+import Projects from './pages/Projects';
+import NotFound from './pages/NotFound';
 
-// Lazily loaded (non-critical)
-const About = lazy(() => import('./pages/About'));
-const Services = lazy(() => import('./pages/Services'));
-const Projects = lazy(() => import('./pages/Projects'));
+// Lazily loaded (non-critical / heavy: Register pulls in jsPDF)
 const Privacy = lazy(() => import('./pages/Privacy'));
 const Terms = lazy(() => import('./pages/Terms'));
 const Cookies = lazy(() => import('./pages/Cookies'));
-const NotFound = lazy(() => import('./pages/NotFound'));
 const Register = lazy(() => import('./pages/Register'));
 
 const PageFallback = () => (
-  <div className="min-h-screen flex items-center justify-center bg-black">
+  <div className="min-h-screen flex items-center justify-center">
     <div className="w-8 h-8 border-2 border-amber-500 border-t-transparent rounded-full animate-spin" />
   </div>
 );

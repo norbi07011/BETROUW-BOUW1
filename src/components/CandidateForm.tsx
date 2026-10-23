@@ -21,6 +21,7 @@ import {
   MessageCircle
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { celebrate } from '../fx/core';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 
@@ -742,6 +743,8 @@ const CandidateForm = () => {
     const subject = encodeURIComponent(`Inschrijving - ${formData.personal.firstName} ${formData.personal.lastName}`);
     const body = encodeURIComponent(buildSummaryText());
     window.open(`mailto:tomasz_jaskiewicz@hotmail.com?subject=${subject}&body=${body}`, '_blank');
+    setIsSuccess(true);
+    celebrate();
   };
 
   const sendViaWhatsApp = async () => {
@@ -756,6 +759,8 @@ const CandidateForm = () => {
     
     const text = encodeURIComponent(buildSummaryText());
     window.open(`https://wa.me/31684111366?text=${text}`, '_blank');
+    setIsSuccess(true);
+    celebrate();
   };
 
   const steps = [
@@ -797,15 +802,8 @@ const CandidateForm = () => {
   const prevStep = () => { setStepErrors({}); setCurrentStep(prev => Math.max(prev - 1, 0)); };
 
   return (
-    <div className="mt-20 border-t border-zinc-800 pt-20">
-      <div className="text-center mb-16">
-        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">{t.candidate.title}</h2>
-        <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
-          {t.candidate.subtitle}
-        </p>
-      </div>
-
-      <div className="bg-zinc-900 rounded-[3rem] border border-zinc-800 shadow-2xl overflow-hidden">
+    <div>
+      <div className="bg-zinc-950/85 backdrop-blur-xl rounded-[3rem] border border-zinc-800 shadow-2xl shadow-amber-500/5 overflow-hidden">
         {/* Progress Bar */}
         <div className="bg-zinc-950 p-6 border-b border-zinc-800">
           <div className="flex justify-between items-center max-w-4xl mx-auto relative">
