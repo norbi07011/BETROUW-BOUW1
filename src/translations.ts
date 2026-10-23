@@ -168,28 +168,10 @@ export const translations = {
           gallery: ['/foto/foto-02.jpeg', '/foto/foto-03.jpeg']
         },
         { 
-          title: 'Aluminium schuifpui - Rotterdam', 
-          desc: 'Montage van een brede aluminium schuifpui in een nieuwbouw woning. Slank profiel voor maximale lichtinval en een naadloze overgang naar de tuin.',
-          mainImage: '/foto/foto-04.jpeg',
-          gallery: ['/foto/foto-05.jpeg', '/foto/foto-06.jpeg']
-        },
-        { 
-          title: 'Renovatie kozijnen - Amsterdam', 
-          desc: 'Vervanging van verouderde kozijnen in een jaren-30 woning. Kunststof profielen met houtnerf-look die het originele karakter van het pand behouden.',
-          mainImage: '/foto/foto-07.jpeg',
-          gallery: ['/foto/foto-08.jpeg', '/foto/foto-09.jpeg']
-        },
-        { 
-          title: 'Voordeur montage - Utrecht', 
-          desc: 'Installatie van een hoogwaardige aluminium voordeur met zijlichten. Veiligheidssloten en triple glas voor optimale isolatie en inbraakwerendheid.',
+          title: 'Renovatie kozijnen - Lisse', 
+          desc: 'Vervanging van de kozijnen van een bedrijfspand in Lisse. De oude kozijnen zijn gedemonteerd en vervangen door nieuwe kozijnen met isolatieglas, inclusief de grote glaspartijen op de verdieping.',
           mainImage: '/foto/foto-10.jpeg',
-          gallery: ['/foto/foto-01.jpeg', '/foto/foto-05.jpeg']
-        },
-        { 
-          title: 'Nieuwbouwproject - Leiden', 
-          desc: 'Complete raam- en deurmontage voor een nieuwbouwwoning. Kunststof kozijnen met drievoudig glas en geïntegreerde ventilatie roosters.',
-          mainImage: '/foto/foto-02.jpeg',
-          gallery: ['/foto/foto-08.jpeg', '/foto/foto-10.jpeg']
+          gallery: ['/foto/foto-09.jpeg', '/foto/foto-07.jpeg', '/foto/foto-08.jpeg']
         },
         { 
           title: 'Vliesgevel montage - Aalsmeer', 
@@ -647,28 +629,10 @@ export const translations = {
           gallery: ['/foto/foto-02.jpeg', '/foto/foto-03.jpeg']
         },
         { 
-          title: 'Aluminum Sliding Door - Rotterdam', 
-          desc: 'Installation of a wide aluminum sliding door in a new-build residence. Slim profile for maximum natural light and a seamless transition to the garden.',
-          mainImage: '/foto/foto-04.jpeg',
-          gallery: ['/foto/foto-05.jpeg', '/foto/foto-06.jpeg']
-        },
-        { 
-          title: 'Frame Renovation - Amsterdam', 
-          desc: 'Replacement of outdated frames in a 1930s home. PVC profiles with a wood-grain finish that preserve the original character of the property.',
-          mainImage: '/foto/foto-07.jpeg',
-          gallery: ['/foto/foto-08.jpeg', '/foto/foto-09.jpeg']
-        },
-        { 
-          title: 'Front Door Installation - Utrecht', 
-          desc: 'Installation of a high-quality aluminum front door with sidelights. Security locks and triple glazing for optimal insulation and burglary resistance.',
+          title: 'Frame Renovation - Lisse', 
+          desc: 'Replacement of the window frames of a commercial building in Lisse. The old frames were removed and replaced with new frames with insulating glass, including the large glazed sections on the upper floor.',
           mainImage: '/foto/foto-10.jpeg',
-          gallery: ['/foto/foto-01.jpeg', '/foto/foto-05.jpeg']
-        },
-        { 
-          title: 'New Build Project - Leiden', 
-          desc: 'Complete window and door installation for a new-build home. PVC frames with triple glazing and integrated ventilation grilles.',
-          mainImage: '/foto/foto-02.jpeg',
-          gallery: ['/foto/foto-08.jpeg', '/foto/foto-10.jpeg']
+          gallery: ['/foto/foto-09.jpeg', '/foto/foto-07.jpeg', '/foto/foto-08.jpeg']
         },
         { 
           title: 'Wooden Frames with Facade Cladding', 
@@ -1120,28 +1084,10 @@ export const translations = {
           gallery: ['/foto/foto-02.jpeg', '/foto/foto-03.jpeg']
         },
         { 
-          title: 'Aluminiowe drzwi przesuwne - Rotterdam', 
-          desc: 'Montaż szerokich aluminiowych drzwi przesuwnych w nowym domu. Smukły profil zapewniający maksymalne doświetlenie i płynne przejście do ogrodu.',
-          mainImage: '/foto/foto-04.jpeg',
-          gallery: ['/foto/foto-05.jpeg', '/foto/foto-06.jpeg']
-        },
-        { 
-          title: 'Renowacja okien - Amsterdam', 
-          desc: 'Wymiana przestarzałych ram w domu z lat 30. Profile PCV z wykończeniem imitującym drewno, zachowujące oryginalny charakter budynku.',
-          mainImage: '/foto/foto-07.jpeg',
-          gallery: ['/foto/foto-08.jpeg', '/foto/foto-09.jpeg']
-        },
-        { 
-          title: 'Montaż drzwi wejściowych - Utrecht', 
-          desc: 'Instalacja wysokiej jakości aluminiowych drzwi wejściowych z doświetlami bocznymi. Zamki antywłamaniowe i potrójne szyby dla optymalnej izolacji.',
+          title: 'Renowacja okien - Lisse', 
+          desc: 'Wymiana okien w budynku firmowym w Lisse. Stare ramy zostały zdemontowane i zastąpione nowymi z szybami izolacyjnymi, łącznie z dużymi przeszkleniami na piętrze.',
           mainImage: '/foto/foto-10.jpeg',
-          gallery: ['/foto/foto-01.jpeg', '/foto/foto-05.jpeg']
-        },
-        { 
-          title: 'Projekt nowobudowlany - Leiden', 
-          desc: 'Kompletny montaż okien i drzwi w nowym domu. Ramy PCV z potrójnymi szybami i zintegrowanymi kratkami wentylacyjnymi.',
-          mainImage: '/foto/foto-02.jpeg',
-          gallery: ['/foto/foto-08.jpeg', '/foto/foto-10.jpeg']
+          gallery: ['/foto/foto-09.jpeg', '/foto/foto-07.jpeg', '/foto/foto-08.jpeg']
         },
         { 
           title: 'Drewniane ościeżnice z okładziną elewacyjną', 
@@ -1593,28 +1539,10 @@ export const translations = {
           gallery: ['/foto/foto-02.jpeg', '/foto/foto-03.jpeg']
         },
         { 
-          title: 'Aluminium-Schiebetür - Rotterdam', 
-          desc: 'Montage einer breiten Aluminium-Schiebetür in einem Neubau. Schlankes Profil für maximalen Lichteinfall und einen nahtlosen Übergang zum Garten.',
-          mainImage: '/foto/foto-04.jpeg',
-          gallery: ['/foto/foto-05.jpeg', '/foto/foto-06.jpeg']
-        },
-        { 
-          title: 'Fensterrenovierung - Amsterdam', 
-          desc: 'Austausch veralteter Rahmen in einem Haus aus den 1930er Jahren. Kunststoffprofile in Holzoptik, die den ursprünglichen Charakter des Gebäudes bewahren.',
-          mainImage: '/foto/foto-07.jpeg',
-          gallery: ['/foto/foto-08.jpeg', '/foto/foto-09.jpeg']
-        },
-        { 
-          title: 'Haustürmontage - Utrecht', 
-          desc: 'Installation einer hochwertigen Aluminium-Haustür mit Seitenlichtern. Sicherheitsschlösser und Dreifachverglasung für optimale Isolierung und Einbruchschutz.',
+          title: 'Fensterrenovierung - Lisse', 
+          desc: 'Austausch der Fensterrahmen eines Gewerbegebäudes in Lisse. Die alten Rahmen wurden ausgebaut und durch neue Rahmen mit Isolierglas ersetzt, einschließlich der großen Glasflächen im Obergeschoss.',
           mainImage: '/foto/foto-10.jpeg',
-          gallery: ['/foto/foto-01.jpeg', '/foto/foto-05.jpeg']
-        },
-        { 
-          title: 'Neubauprojekt - Leiden', 
-          desc: 'Komplette Fenster- und Türmontage für ein Neubauhaus. Kunststoffrahmen mit Dreifachverglasung und integrierten Lüftungsgittern.',
-          mainImage: '/foto/foto-02.jpeg',
-          gallery: ['/foto/foto-08.jpeg', '/foto/foto-10.jpeg']
+          gallery: ['/foto/foto-09.jpeg', '/foto/foto-07.jpeg', '/foto/foto-08.jpeg']
         },
         { 
           title: 'Holzrahmen mit Fassadenverkleidung', 
@@ -2066,28 +1994,10 @@ export const translations = {
           gallery: ['/foto/foto-02.jpeg', '/foto/foto-03.jpeg']
         },
         { 
-          title: 'Alüminyum Sürgülü Kapı - Rotterdam', 
-          desc: 'Yeni bir konut için geniş alüminyum sürgülü kapı montajı. Maksimum doğal ışık ve bahçeye kesintisiz geçiş için ince profil.',
-          mainImage: '/foto/foto-04.jpeg',
-          gallery: ['/foto/foto-05.jpeg', '/foto/foto-06.jpeg']
-        },
-        { 
-          title: 'Pencere Renovasyonu - Amsterdam', 
-          desc: '1930\'lar evinde eski çerçevelerin değiştirilmesi. Binanın orijinal karakterini koruyan ahşap görünümlü PVC profiller.',
-          mainImage: '/foto/foto-07.jpeg',
-          gallery: ['/foto/foto-08.jpeg', '/foto/foto-09.jpeg']
-        },
-        { 
-          title: 'Giriş Kapısı Montajı - Utrecht', 
-          desc: 'Yan aydınlatmalı yüksek kaliteli alüminyum giriş kapısı montajı. Optimum yalıtım ve hırsızlık önleme için güvenlik kilitleri ve üçlü cam.',
+          title: 'Pencere Renovasyonu - Lisse', 
+          desc: 'Lisse\'deki bir ticari binanın pencerelerinin değiştirilmesi. Eski çerçeveler sökülerek, üst kattaki büyük cam yüzeyler dahil yalıtım camlı yeni çerçevelerle değiştirildi.',
           mainImage: '/foto/foto-10.jpeg',
-          gallery: ['/foto/foto-01.jpeg', '/foto/foto-05.jpeg']
-        },
-        { 
-          title: 'Yeni İnşaat Projesi - Leiden', 
-          desc: 'Yeni bir ev için eksiksiz pencere ve kapı montajı. Üçlü camlı ve entegre havalandırma ızgaralı PVC çerçeveler.',
-          mainImage: '/foto/foto-02.jpeg',
-          gallery: ['/foto/foto-08.jpeg', '/foto/foto-10.jpeg']
+          gallery: ['/foto/foto-09.jpeg', '/foto/foto-07.jpeg', '/foto/foto-08.jpeg']
         },
         { 
           title: 'Ahşap Çerçeveler ve Cephe Kaplaması', 
