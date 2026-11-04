@@ -42,7 +42,7 @@ const ProcessTimeline = () => {
       });
       gsap.utils.toArray<HTMLElement>('.proc-dot').forEach((d) => {
         gsap.fromTo(d, { scale: 0.6, borderColor: '#3f3f46' }, {
-          scale: 1, borderColor: '#f59e0b', boxShadow: '0 0 30px rgba(245,158,11,.45)', ease: 'back.out(3)', duration: 0.6,
+          scale: 1, borderColor: '#bf9f6e', boxShadow: '0 0 30px rgba(191, 159, 110,.45)', ease: 'back.out(3)', duration: 0.6,
           scrollTrigger: { trigger: d, start: 'top 70%', toggleActions: 'play none none reverse' },
         });
       });
@@ -60,7 +60,7 @@ const ProcessTimeline = () => {
 
         <div className="proc-grid hidden lg:block relative">
           <div className="absolute top-8 left-[12.5%] right-[12.5%] h-0.5 bg-zinc-800" />
-          <div className="proc-line absolute top-8 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-amber-700 via-amber-400 to-amber-200 origin-left shadow-[0_0_12px_rgba(245,158,11,.8)]" />
+          <div className="proc-line absolute top-8 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-amber-700 via-amber-400 to-amber-200 origin-left shadow-[0_0_12px_rgba(191, 159, 110,.8)]" />
           <Reveal stagger={0.15} className="grid grid-cols-4 gap-8">
             {t.process.steps.map((step: { title: string; desc: string }, index: number) => (
               <div key={index} className="relative group">
@@ -203,7 +203,7 @@ const Services = () => {
                     <span className="font-display text-6xl font-bold bb-text-outline leading-none">{String(index + 1).padStart(2, '0')}</span>
                   </div>
                   <button
-                    onClick={() => go('/projects', { state: { openProject: service.title } })}
+                    onClick={() => go('/projects', { state: { openProject: service.title, serviceIndex: index } })}
                     className="group/title text-left font-display text-3xl md:text-5xl font-bold text-white hover:text-amber-400 transition-colors mb-6 leading-tight flex items-start gap-3"
                   >
                     {service.title}
@@ -229,7 +229,7 @@ const Services = () => {
                     </Magnetic>
                     <Magnetic strength={0.3}>
                       <button
-                        onClick={() => go('/projects', { state: { openProject: service.title } })}
+                        onClick={() => go('/projects', { state: { openProject: service.title, serviceIndex: index } })}
                         className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-zinc-700 hover:border-amber-500 text-white font-bold transition-colors"
                       >
                         {t.projectDetails.view}

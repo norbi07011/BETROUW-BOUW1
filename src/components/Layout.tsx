@@ -5,8 +5,6 @@ import { ChevronDown, Menu, X, Phone, Mail, MapPin, ArrowUpRight } from 'lucide-
 import { useLanguage } from '../context/LanguageContext';
 import { Language } from '../translations';
 import { SmoothScroll, ScrollProgress, PageTransitions } from '../fx/Engine';
-import { SmokeBackground } from '../fx/Backdrop';
-import { ParticleIntro } from '../fx/ParticleIntro';
 import { VictoryLayer } from '../fx/VictoryLayer';
 import { Magnetic, TextFill, Reveal } from '../fx/components';
 import { scrollState, lockScroll } from '../fx/core';
@@ -125,10 +123,10 @@ const Navbar = () => {
             <img
               src="/foto/logo-sm.png"
               alt="Betrouw Bouw B.V. Logo"
-              className="w-10 h-10 rounded-lg object-cover shadow-lg shadow-amber-500/20 transition-transform duration-500 group-hover:rotate-[8deg] group-hover:scale-110"
+              className="w-10 h-10 rounded-lg object-cover transition-transform duration-500 group-hover:scale-105"
             />
-            <span className="text-base sm:text-xl font-bold tracking-tighter text-white font-display whitespace-nowrap">
-              BETROUW <span className="text-amber-500">BOUW</span>
+            <span className="text-lg sm:text-2xl text-white font-display whitespace-nowrap">
+              Betrouw <span className="italic text-amber-200">Bouw</span>
             </span>
           </Link>
 
@@ -152,7 +150,7 @@ const Navbar = () => {
             <Magnetic strength={0.35}>
               <a
                 href="tel:+31684111366"
-                className="flex items-center gap-2 pl-4 pr-5 py-2.5 rounded-full bg-amber-500 text-black text-sm font-bold shadow-lg shadow-amber-500/25 hover:bg-amber-400 transition-colors"
+                className="flex items-center gap-2 pl-4 pr-5 py-2.5 rounded-full border border-amber-200/40 text-amber-100 text-sm font-medium tracking-wide hover:bg-amber-200 hover:text-black hover:border-amber-200 transition-colors"
               >
                 <Phone className="w-4 h-4" />
                 <span>06-84111366</span>
@@ -293,9 +291,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
     <div className="relative text-white font-sans selection:bg-amber-500 selection:text-black min-h-screen flex flex-col">
       <SmoothScroll />
       <PageTransitions />
-      <SmokeBackground />
       <ScrollProgress />
-      <ParticleIntro />
       <VictoryLayer />
       <a
         href="#main-content"

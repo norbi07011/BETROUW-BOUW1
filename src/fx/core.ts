@@ -76,7 +76,7 @@ type Piece = {
   shape: 0 | 1 | 2; life: number; tilt: number; vt: number;
 };
 
-const CONFETTI_COLORS = ['#f59e0b', '#fbbf24', '#fde68a', '#d97706', '#ffffff', '#a1a1aa'];
+const CONFETTI_COLORS = ['#bf9f6e', '#cbb084', '#e6d9bd', '#a2845a', '#ffffff', '#a1a1aa'];
 
 export const confettiBurst = (
   x = window.innerWidth / 2,
@@ -182,7 +182,7 @@ export const flyTo = (source: Element, targetSelector = '[data-fly-target]'): Pr
       position: 'fixed', left: `${s.left}px`, top: `${s.top}px`,
       width: `${s.width}px`, height: `${s.height}px`, margin: '0',
       zIndex: '500', pointerEvents: 'none', borderRadius: '24px', overflow: 'hidden',
-      boxShadow: '0 30px 80px rgba(245,158,11,.45)', objectFit: 'cover',
+      boxShadow: '0 30px 80px rgba(191, 159, 110,.45)', objectFit: 'cover',
     });
     document.body.appendChild(clone);
     const dx = t.left + t.width / 2 - (s.left + s.width / 2);

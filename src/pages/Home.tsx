@@ -1,213 +1,20 @@
-import { lazy, Suspense, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { lazy, Suspense, useLayoutEffect, useRef, useState } from 'react';
 
 const MontageStudio = lazy(() => import('../fx/MontageStudio').then((m) => ({ default: m.MontageStudio })));
-import { ArrowRight, Construction, CheckCircle2, Star, Quote, ChevronLeft, ChevronRight, ArrowUpRight, MousePointer2 } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Star, Quote, ChevronLeft, ChevronRight, ArrowUpRight, MousePointer2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { fxText } from '../fx/fxText';
-import { gsap, scrollState, reducedMotion, isTouch, isMobile, flyTo, follow } from '../fx/core';
+import { gsap, reducedMotion, isMobile, flyTo } from '../fx/core';
 import { useTransitionNavigate } from '../fx/Engine';
-import { Spotlights, Dust } from '../fx/Backdrop';
-import { Window3D } from '../fx/Window3D';
+import { ScrollSequence } from '../fx/ScrollSequence';
 import { studioText } from '../fx/studioText';
 import {
-  SplitText, Reveal, Magnetic, TiltCard, CountUp, VelocityMarquee, Parallax, Float, useIntroReady, WindowGlyph,
+  SplitText, Reveal, Magnetic, CountUp, VelocityMarquee, Parallax,
 } from '../fx/components';
 
 type Service = { title: string; desc: string; image: string; video?: string; features: string[] };
-
-/* ═════════════════════════════  HERO  ═════════════════════════════
- * Smoke + volumetric spotlights + dust, kinetic headline, magnetic CTAs,
- * and a CSS-3D kozijn levitating at the centre of an orbit of services
- * (3D orbit carousel). The scene tilts after the cursor (mouse parallax). */
-
-const OrbitScene = ({ images }: { images: string[] }) => {
-  const ring = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    let a = 0;
-    let raf = 0;
-    const loop = () => {
-      a += 0.18 + Math.min(3, Math.abs(scrollState.velocity) * 0.08);
-      if (ring.current) ring.current.style.transform = `rotateX(-10deg) rotateY(${a}deg)`;
-      raf = requestAnimationFrame(loop);
-    };
-    if (!reducedMotion()) raf = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(raf);
-  }, []);
-  const R = 330;
-  return (
-    <div className="relative" style={{ transformStyle: 'preserve-3d' }}>
-      <Float amp={16} duration={3.6}>
-        <div style={{ transformStyle: 'preserve-3d' }}>
-          <Window3D
-            width={280}
-            height={380}
-            profile={22}
-            depth={74}
-            className="[--bb-measure:0]"
-            view={<img src="/foto/Schuifpuien4.jpeg" alt="" className="w-full h-full object-cover opacity-80 scale-110" />}
-          />
-        </div>
-      </Float>
-      {/* floor shadow */}
-      <div className="absolute left-1/2 -bottom-24 -translate-x-1/2 w-72 h-10 rounded-[50%] bg-amber-500/25 blur-2xl" style={{ transform: 'rotateX(80deg)' }} />
-      <div
-        ref={ring}
-        className="absolute left-1/2 top-1/2 w-0 h-0"
-        style={{ transformStyle: 'preserve-3d', transform: 'rotateX(-10deg)' }}
-      >
-        {images.map((src, i) => (
-          <div
-            key={i}
-            className="absolute -left-[62px] -top-[44px] w-[124px] h-[88px] rounded-xl overflow-hidden border border-amber-500/50 shadow-[0_10px_40px_rgba(245,158,11,.25)]"
-            style={{ transform: `rotateY(${(i * 360) / images.length}deg) translateZ(${R}px) translateY(${(i % 2 ? 1 : -1) * 70}px)` }}
-          >
-            <img src={src} alt="" className="w-full h-full object-cover" loading="lazy" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-const Hero = () => {
-  const { t, lang } = useLanguage();
-  const fx = fxText[lang];
-  const ready = useIntroReady();
-  const section = useRef<HTMLElement>(null);
-  const scene = useRef<HTMLDivElement>(null);
-  const sceneWrap = useRef<HTMLDivElement>(null);
-  const copy = useRef<HTMLDivElement>(null);
-  const services = t.services.items as Service[];
-
-  // mouse parallax – the whole scene leans toward the cursor
-  useEffect(() => {
-    const el = scene.current;
-    const sec = section.current;
-    if (!el || !sec || isTouch() || reducedMotion()) return;
-    const rx = follow(el, 'rotateX', { duration: 1.2, ease: 'power3.out' });
-    const ry = follow(el, 'rotateY', { duration: 1.2, ease: 'power3.out' });
-    const onMove = (e: PointerEvent) => {
-      const px = e.clientX / window.innerWidth - 0.5;
-      const py = e.clientY / window.innerHeight - 0.5;
-      ry(px * 34);
-      rx(-py * 20);
-    };
-    sec.addEventListener('pointermove', onMove);
-    return () => sec.removeEventListener('pointermove', onMove);
-  }, []);
-
-  // scroll-linked exit: scene sinks & spins away, copy drifts up
-  useLayoutEffect(() => {
-    if (reducedMotion()) return;
-    const ctx = gsap.context(() => {
-      const st = { trigger: section.current, start: 'top top', end: 'bottom top', scrub: true };
-      gsap.to(sceneWrap.current, { yPercent: 35, scale: 0.75, rotateZ: -6, opacity: 0.2, ease: 'none', scrollTrigger: st });
-      gsap.to(copy.current, { yPercent: -30, opacity: 0, ease: 'none', scrollTrigger: st });
-    });
-    return () => ctx.revert();
-  }, []);
-
-  // entrance for non-split elements
-  useLayoutEffect(() => {
-    if (!ready || reducedMotion()) return;
-    const ctx = gsap.context(() => {
-      gsap.from('.hero-fade', { y: 40, opacity: 0, filter: 'blur(10px)', duration: 1.2, ease: 'expo.out', stagger: 0.12, delay: 0.5, clearProps: 'filter' });
-      gsap.from(sceneWrap.current, { scale: 0.4, rotateY: -120, opacity: 0, duration: 2, ease: 'expo.out', delay: 0.2 });
-    }, section);
-    return () => ctx.revert();
-  }, [ready]);
-
-  return (
-    <section ref={section} className="relative min-h-[100svh] flex items-center pt-28 pb-16 overflow-hidden">
-      <div className="absolute inset-0 z-0">
-        <img
-          src="/foto/foto-01.jpeg"
-          alt=""
-          className="w-full h-full object-cover opacity-[0.12] mix-blend-luminosity scale-110"
-          fetchPriority="high"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent" />
-      </div>
-      <Spotlights className="z-[1]" />
-      <Dust className="z-[2]" count={110} />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-10 items-center">
-        <div ref={copy} className="relative">
-          <div className="hero-fade inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold uppercase tracking-widest mb-8 backdrop-blur">
-            <Construction className="w-3 h-3" />
-            <span>{t.heroBadge}</span>
-          </div>
-
-          {ready ? (
-            <SplitText
-              key={`${lang}-title`}
-              as="h1"
-              text={t.hero.title}
-              trigger="load"
-              className="font-display text-[13vw] sm:text-7xl xl:text-8xl font-bold text-white leading-[0.9] tracking-tight mb-6"
-            />
-          ) : (
-            <h1 className="font-display text-[13vw] sm:text-7xl xl:text-8xl font-bold leading-[0.9] tracking-tight mb-6 opacity-0">{t.hero.title}</h1>
-          )}
-          {ready && (
-            <SplitText
-              key={`${lang}-sub`}
-              as="p"
-              mode="words"
-              text={t.hero.subtitle}
-              trigger="load"
-              delay={0.45}
-              className="text-2xl md:text-4xl font-semibold leading-tight mb-6"
-              charClassName="bb-text-gold"
-            />
-          )}
-
-          <p className="hero-fade text-lg md:text-xl text-zinc-400 mb-10 leading-relaxed max-w-xl">{t.hero.description}</p>
-
-          <div className="hero-fade flex flex-col sm:flex-row gap-4 sm:gap-6">
-            <Magnetic>
-              <Link
-                to="/contact"
-                className="group relative overflow-hidden px-8 py-4 bg-amber-500 text-black font-bold rounded-full flex items-center justify-center space-x-2 shadow-xl shadow-amber-500/30"
-              >
-                <span className="absolute inset-0 bg-amber-300 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
-                <span className="relative">{t.hero.cta1}</span>
-                <ArrowRight className="relative w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </Magnetic>
-            <Magnetic strength={0.3}>
-              <Link
-                to="/about"
-                className="px-8 py-4 bg-zinc-900/60 backdrop-blur hover:bg-zinc-800 text-white font-bold rounded-full border border-zinc-700 hover:border-amber-500/60 transition-all flex items-center justify-center"
-              >
-                {t.hero.cta2}
-              </Link>
-            </Magnetic>
-          </div>
-        </div>
-
-        <div ref={sceneWrap} className="relative h-[420px] sm:h-[520px] lg:h-[620px] flex items-center justify-center" style={{ perspective: 1400 }}>
-          <div className="scale-[0.62] sm:scale-[0.8] lg:scale-100">
-            <div ref={scene} style={{ transformStyle: 'preserve-3d' }}>
-              <OrbitScene images={services.map((s) => s.image)} />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-3 text-zinc-500">
-        <span className="text-[10px] uppercase tracking-[0.4em]">{fx.scroll}</span>
-        <div className="relative w-px h-14 bg-zinc-800 overflow-hidden">
-          <div className="absolute inset-x-0 top-0 h-1/2 bg-amber-500 animate-[bb-scrollcue_1.8s_ease-in-out_infinite]" />
-        </div>
-      </div>
-      <style>{`@keyframes bb-scrollcue{0%{transform:translateY(-100%)}100%{transform:translateY(220%)}}`}</style>
-    </section>
-  );
-};
 
 /* ═════════════════════════════  MARQUEE  ═════════════════════════════ */
 
@@ -215,9 +22,8 @@ const ServicesMarquee = () => {
   const { t } = useLanguage();
   const titles = (t.services.items as Service[]).map((s) => s.title.split(' en ')[0]);
   return (
-    <section className="relative py-10 md:py-14 border-y border-zinc-900 bg-black/60 backdrop-blur-sm -rotate-[1.5deg] scale-[1.03] my-6">
-      <VelocityMarquee items={titles} itemClassName="font-display text-5xl md:text-7xl font-bold text-white uppercase tracking-tight" />
-      <VelocityMarquee items={titles} reverse baseSpeed={0.9} className="mt-4" itemClassName="font-display text-5xl md:text-7xl font-bold uppercase tracking-tight bb-text-outline" />
+    <section className="relative py-10 md:py-12 border-y border-white/10">
+      <VelocityMarquee items={titles} baseSpeed={0.5} itemClassName="font-display italic text-4xl md:text-6xl text-white/80" />
     </section>
   );
 };
@@ -234,16 +40,15 @@ const Stats = () => {
     { to: 10, suffix: '', label: fx.statGuarantee },
   ];
   return (
-    <section className="relative py-24">
-      <Reveal stagger={0.1} className="max-w-7xl mx-auto px-6 grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+    <section className="relative py-20 md:py-28">
+      <Reveal stagger={0.1} className="max-w-7xl mx-auto px-6 grid grid-cols-2 lg:grid-cols-4 border-y border-white/10">
         {stats.map((s, i) => (
-          <TiltCard key={i} className="bb-glass-card rounded-3xl p-6 md:p-8 overflow-hidden">
-            <div className="absolute -top-10 -right-10 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl" />
-            <div className="font-display text-4xl sm:text-5xl md:text-7xl font-bold bb-text-gold leading-none" style={{ transform: 'translateZ(40px)' }}>
+          <div key={i} className={`py-10 md:py-14 px-4 md:px-8 ${i % 2 ? 'border-l border-white/10' : ''} ${i === 2 ? 'lg:border-l border-t lg:border-t-0 border-white/10' : ''} ${i === 3 ? 'border-t lg:border-t-0' : ''}`}>
+            <div className="font-display text-6xl md:text-8xl bb-text-gold leading-none">
               <CountUp to={s.to} suffix={s.suffix} />
             </div>
-            <div className="mt-4 text-zinc-400 text-sm md:text-base font-medium" style={{ transform: 'translateZ(20px)' }}>{s.label}</div>
-          </TiltCard>
+            <div className="mt-5 text-white/55 text-[11px] md:text-xs uppercase tracking-[0.3em]">{s.label}</div>
+          </div>
         ))}
       </Reveal>
     </section>
@@ -315,7 +120,7 @@ const ZoomThrough = () => {
           ref={hole}
           className="relative w-[70vw] h-[46vh] md:w-[30vw] md:h-[52vh] will-change-transform"
           style={{
-            boxShadow: '0 0 0 220vmax rgba(5,5,5,0.97), inset 0 0 0 14px #27272a, inset 0 0 0 16px rgba(245,158,11,.55), inset 0 0 60px rgba(0,0,0,.6)',
+            boxShadow: '0 0 0 220vmax rgba(5,5,5,0.97), inset 0 0 0 14px #27272a, inset 0 0 0 16px rgba(191, 159, 110,.55), inset 0 0 60px rgba(0,0,0,.6)',
           }}
         >
           <div className="zoom-mullion absolute left-1/2 top-0 bottom-0 w-[10px] -translate-x-1/2 bg-zinc-800 border-x border-amber-500/40" />
@@ -346,20 +151,34 @@ const ProcessStory = () => {
   const fx = fxText[lang];
   const steps = t.process.steps as { title: string; desc: string }[];
   const section = useRef<HTMLElement>(null);
-  const win = useRef<HTMLDivElement>(null);
+  const host = useRef<HTMLDivElement>(null);
+  const sceneRef = useRef<{ setProgress: (p: number) => void; jump: (p: number) => void; dispose: () => void } | null>(null);
+  const progressRef = useRef(0);
   const [active, setActive] = useState(0);
+  const [ready3d, setReady3d] = useState(false);
+
+  // Load the Three.js scene lazily (keeps three out of the main bundle).
+  useLayoutEffect(() => {
+    let cancelled = false;
+    import('../fx/processKozijn').then(({ createProcessScene }) => {
+      if (cancelled || !host.current) return;
+      const sc = createProcessScene(host.current);
+      if (!sc) return;
+      sceneRef.current = sc;
+      sc.jump(reducedMotion() ? 1 : progressRef.current);
+      setReady3d(true);
+    });
+    return () => {
+      cancelled = true;
+      sceneRef.current?.dispose();
+      sceneRef.current = null;
+    };
+  }, []);
 
   useLayoutEffect(() => {
-    const el = win.current;
-    if (!el) return;
-    if (reducedMotion()) {
-      el.style.setProperty('--bb-solid', '1');
-      el.style.setProperty('--bb-glass', '1');
-      return;
-    }
+    if (reducedMotion()) return;
     const ctx = gsap.context(() => {
-      gsap.set(el, { '--bb-solid': 0, '--bb-glass': 0, '--bb-measure': 0, rotateY: -40, rotateX: 8 });
-      const tl = gsap.timeline({
+      gsap.timeline({
         defaults: { ease: 'none' },
         scrollTrigger: {
           trigger: section.current,
@@ -368,29 +187,30 @@ const ProcessStory = () => {
           scrub: 1,
           pin: true,
           anticipatePin: 1,
-          onUpdate: (self) => setActive(Math.min(steps.length - 1, Math.floor(self.progress * steps.length * 0.999))),
+          onUpdate: (self) => {
+            progressRef.current = self.progress;
+            sceneRef.current?.setProgress(self.progress);
+            setActive(Math.min(steps.length - 1, Math.floor(self.progress * steps.length * 0.999)));
+          },
         },
-      });
-      tl.to(el, { rotateY: 395, duration: 4 }, 0)
-        .to(el, { '--bb-measure': 1, duration: 0.5 }, 0.8)
-        .to(el, { '--bb-measure': 0, duration: 0.4 }, 1.9)
-        .to(el, { '--bb-solid': 1, duration: 0.7 }, 2)
-        .to(el, { '--bb-glass': 1, duration: 0.6 }, 2.3)
-        .to('.story-glow', { opacity: 1, scale: 1.2, duration: 0.8 }, 3)
-        .to('.story-bar', { scaleY: 1, duration: 4 }, 0);
+      }).to('.story-bar', { scaleY: 1, duration: 1 }, 0);
     }, section);
     return () => ctx.revert();
   }, [steps.length]);
 
   return (
     <section ref={section} className="relative h-[100svh] overflow-hidden flex items-center">
-      <div className="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-16 items-center">
-        <div className="relative h-[46svh] lg:h-[70vh] flex items-center justify-center" style={{ perspective: 1200 }}>
-          <div className="story-glow absolute w-80 h-80 rounded-full bg-amber-500/25 blur-[90px] opacity-0" />
-          <div className="scale-[0.55] sm:scale-75 lg:scale-100">
-            <div ref={win} style={{ transformStyle: 'preserve-3d' }}>
-              <Window3D width={300} height={400} profile={24} depth={80} />
-            </div>
+      <div className="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-16 items-center">
+        <div className="relative h-[46svh] lg:h-[78vh]">
+          <div className="absolute inset-[15%] rounded-full bg-amber-300/10 blur-[90px]" aria-hidden="true" />
+          <div
+            ref={host}
+            className={`absolute inset-0 transition-opacity duration-1000 ${ready3d ? 'opacity-100' : 'opacity-0'}`}
+            style={{ maskImage: 'radial-gradient(ellipse 56% 54% at 50% 50%, #000 50%, transparent 100%)', WebkitMaskImage: 'radial-gradient(ellipse 56% 54% at 50% 50%, #000 50%, transparent 100%)' }}
+            aria-hidden="true"
+          />
+          <div className={`absolute left-1/2 -translate-x-1/2 bottom-[4%] font-mono text-[10px] tracking-[0.35em] text-amber-200/70 transition-opacity duration-700 ${active === 0 ? 'opacity-100' : 'opacity-0'}`} aria-hidden="true">
+            1200 × 1500 MM
           </div>
         </div>
 
@@ -494,8 +314,8 @@ const ServiceCarousel = () => {
                     zIndex: 20 - abs,
                     opacity: abs > 2 ? 0 : 1 - abs * 0.18,
                     pointerEvents: abs > 2 ? 'none' : 'auto',
-                    boxShadow: off === 0 ? '0 40px 120px -20px rgba(245,158,11,.45)' : 'none',
-                    borderColor: off === 0 ? 'rgba(245,158,11,.6)' : undefined,
+                    boxShadow: off === 0 ? '0 40px 120px -20px rgba(191, 159, 110,.45)' : 'none',
+                    borderColor: off === 0 ? 'rgba(191, 159, 110,.6)' : undefined,
                   }}
                 >
                   <img ref={(el) => { imgRefs.current[i] = el; }} src={it.image} alt="" className="w-full h-full object-cover" draggable={false} loading="lazy" />
@@ -551,7 +371,7 @@ const ServiceCarousel = () => {
             </Magnetic>
             <Magnetic strength={0.3}>
               <button
-                onClick={() => go('/projects', { state: { openProject: s.title } })}
+                onClick={() => go('/projects', { state: { openProject: s.title, serviceIndex: active } })}
                 className="px-8 py-4 rounded-full border border-zinc-700 hover:border-amber-500 text-white font-bold inline-flex items-center gap-2 transition-colors"
               >
                 {t.projectDetails.view} <ArrowUpRight className="w-5 h-5" />
@@ -615,40 +435,42 @@ const ParallaxGallery = () => {
 const WhyUs = () => {
   const { t, lang } = useLanguage();
   return (
-    <section className="py-28">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="bb-glass-card rounded-[3rem] p-8 md:p-16 relative overflow-hidden">
-          <div className="absolute -top-20 -right-20 opacity-10">
-            <WindowGlyph className="w-80 h-80 text-amber-500" />
-          </div>
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
-            <div>
-              <SplitText key={`${lang}-why`} as="h2" mode="words" text={t.whyUs.title} className="font-display text-4xl md:text-5xl font-bold text-white mb-10" />
-              <Reveal stagger={0.08} className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                {t.whyUs.items.map((item: string, index: number) => (
-                  <div key={index} className="flex items-center space-x-3 group">
-                    <div className="flex-shrink-0 w-9 h-9 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center group-hover:bg-amber-500 group-hover:rotate-12 transition-all duration-500">
-                      <CheckCircle2 className="w-4 h-4 text-amber-500 group-hover:text-black transition-colors" />
-                    </div>
-                    <span className="text-zinc-300 font-medium">{item}</span>
-                  </div>
-                ))}
-              </Reveal>
-            </div>
-            <Reveal variant="right">
-              <TiltCard max={8} className="rounded-2xl overflow-hidden border border-zinc-800 shadow-2xl shadow-amber-500/10">
-                <video
-                  src="/wideo/WhatsApp%20Video%202026-03-15%20at%209.17.54%20PM.mp4"
-                  className="w-full h-full object-cover"
-                  controls
-                  loop
-                  playsInline
-                  preload="metadata"
-                />
-              </TiltCard>
-            </Reveal>
-          </div>
+    <section className="py-28 md:py-36">
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-16 lg:gap-24 items-center">
+        <div>
+          <p className="flex items-center gap-4 text-amber-300/90 text-[11px] font-medium uppercase tracking-[0.45em] mb-6">
+            <span className="h-px w-10 bg-amber-400/60" />
+            Betrouw Bouw
+          </p>
+          <SplitText key={`${lang}-why`} as="h2" mode="words" text={t.whyUs.title} className="font-display text-5xl md:text-7xl text-white leading-[1] mb-12" />
+          <Reveal stagger={0.07} className="border-t border-white/10">
+            {t.whyUs.items.map((item: string, index: number) => (
+              <div key={index} className="group flex items-baseline gap-6 py-5 border-b border-white/10">
+                <span className="font-display italic text-amber-300/80 text-xl w-8 shrink-0">{String(index + 1).padStart(2, '0')}</span>
+                <span className="text-white/85 text-lg font-light group-hover:text-white group-hover:translate-x-1 transition-all duration-500">{item}</span>
+              </div>
+            ))}
+          </Reveal>
         </div>
+        <Reveal variant="right" className="justify-self-center lg:justify-self-end w-full max-w-[400px]">
+          <figure className="relative">
+            <div className="absolute -inset-6 rounded-[2.5rem] bg-amber-300/5 blur-2xl" aria-hidden="true" />
+            <div className="relative rounded-[2rem] overflow-hidden ring-1 ring-white/10 aspect-[9/16] bg-black">
+              <video
+                src="/wideo/team-aan-het-werk.mp4"
+                poster="/wideo/team-aan-het-werk.jpg"
+                className="w-full h-full object-cover"
+                controls
+                playsInline
+                preload="none"
+              />
+            </div>
+            <figcaption className="mt-5 flex items-center justify-between text-[11px] uppercase tracking-[0.35em] text-white/50">
+              <span>Ons team</span>
+              <span className="font-display italic normal-case tracking-normal text-base text-amber-200/80">op locatie</span>
+            </figcaption>
+          </figure>
+        </Reveal>
       </div>
     </section>
   );
@@ -658,33 +480,40 @@ const WhyUs = () => {
 
 const Testimonials = () => {
   const { t, lang } = useLanguage();
+  const partners = (t.partners?.items ?? []) as { name: string; url: string }[];
   return (
-    <section className="py-28">
+    <section className="py-28 md:py-36 border-t border-white/10">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <SplitText key={`${lang}-test`} as="h2" mode="words" text={t.testimonials.title} className="font-display text-4xl md:text-6xl font-bold text-white mb-6" />
-          <div className="flex justify-center space-x-1">
-            {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 text-amber-500 fill-amber-500" />)}
-          </div>
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
+          <SplitText key={`${lang}-test`} as="h2" mode="words" text={t.testimonials.title} className="font-display text-5xl md:text-7xl text-white leading-[1]" />
+          <span className="flex gap-1">{[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-amber-300 fill-amber-300" />)}</span>
         </div>
-        <Reveal stagger={0.15} variant="flip" className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <Reveal stagger={0.12} className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10 rounded-[2rem] overflow-hidden">
           {t.testimonials.items.map((item: { text: string; name: string }, index: number) => (
-            <TiltCard key={index} className="p-10 rounded-[2rem] bb-glass-card">
-              <Quote className="absolute top-8 right-8 w-12 h-12 text-amber-500/15" />
-              <div className="flex gap-1 mb-6" style={{ transform: 'translateZ(30px)' }}>
-                {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-amber-500 fill-amber-500" />)}
-              </div>
-              <p className="text-zinc-200 text-lg italic leading-relaxed mb-8" style={{ transform: 'translateZ(40px)' }}>&ldquo;{item.text}&rdquo;</p>
-              <div className="flex items-center space-x-4" style={{ transform: 'translateZ(25px)' }}>
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-amber-400 to-amber-700 flex items-center justify-center text-black font-bold">{item.name.charAt(0)}</div>
-                <div>
-                  <h4 className="text-white font-bold">{item.name}</h4>
-                  <p className="text-amber-500 text-xs font-bold uppercase tracking-widest">{t.verifiedClient}</p>
-                </div>
-              </div>
-            </TiltCard>
+            <figure key={index} className="relative bg-black p-10 md:p-12 flex flex-col">
+              <Quote className="w-8 h-8 text-amber-300/40 mb-8" />
+              <blockquote className="font-display text-2xl md:text-[1.7rem] leading-snug text-white/90 flex-1">{item.text}</blockquote>
+              <figcaption className="mt-10 pt-6 border-t border-white/10 flex items-center gap-4">
+                <span className="w-10 h-10 rounded-full ring-1 ring-amber-300/40 flex items-center justify-center font-display italic text-amber-200">{item.name.charAt(0)}</span>
+                <span>
+                  <span className="block text-white text-sm font-medium">{item.name}</span>
+                  <span className="block text-white/45 text-[11px] uppercase tracking-[0.3em] mt-1">{t.verifiedClient}</span>
+                </span>
+              </figcaption>
+            </figure>
           ))}
         </Reveal>
+        {partners.length > 0 && (
+          <div className="mt-20 flex flex-col md:flex-row md:items-center gap-6 md:gap-12">
+            <span className="text-[11px] uppercase tracking-[0.4em] text-white/45 shrink-0">{t.partners.title}</span>
+            <span className="hidden md:block h-px flex-1 bg-white/10" />
+            <div className="flex flex-wrap items-center gap-x-12 gap-y-4">
+              {partners.map((p) => (
+                <a key={p.name} href={p.url} target="_blank" rel="noopener noreferrer" className="font-display text-3xl text-white/60 hover:text-amber-200 transition-colors">{p.name}</a>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
@@ -695,21 +524,25 @@ const Testimonials = () => {
 const CTA = () => {
   const { t, lang } = useLanguage();
   return (
-    <section className="relative py-32 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-amber-500 via-amber-500 to-amber-700" />
-      <div className="absolute inset-0 opacity-20">
-        <VelocityMarquee items={[t.cta.title]} baseSpeed={0.6} className="absolute top-6" itemClassName="font-display text-8xl font-bold text-black/40 uppercase" />
-      </div>
+    <section className="relative py-36 md:py-48 overflow-hidden">
+      <img src="/sequence/villa/f180.webp" alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+      <div className="absolute inset-0 bg-black/70" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
       <div className="relative max-w-5xl mx-auto px-6 text-center">
-        <SplitText key={`${lang}-cta`} as="h2" mode="words" text={t.cta.title} className="font-display text-4xl md:text-7xl font-bold text-black mb-6 leading-[1.02]" />
-        <p className="text-black/75 text-xl mb-12 font-medium">{t.cta.subtitle}</p>
-        <Magnetic strength={0.5}>
+        <p className="flex items-center justify-center gap-4 text-amber-300/90 text-[11px] font-medium uppercase tracking-[0.45em] mb-8">
+          <span className="h-px w-10 bg-amber-400/60" />
+          Betrouw Bouw
+          <span className="h-px w-10 bg-amber-400/60" />
+        </p>
+        <SplitText key={`${lang}-cta`} as="h2" mode="words" text={t.cta.title} className="font-display text-5xl md:text-8xl text-white mb-8 leading-[0.98]" />
+        <p className="text-white/70 font-light text-lg md:text-xl mb-12">{t.cta.subtitle}</p>
+        <Magnetic strength={0.4}>
           <Link
             to="/contact"
-            className="group inline-flex items-center gap-3 px-12 py-6 bg-black text-white text-lg font-bold rounded-full shadow-2xl hover:shadow-black/50 transition-shadow"
+            className="group inline-flex items-center gap-4 pl-10 pr-3 py-3 bg-amber-200 text-black text-base font-semibold tracking-wide rounded-full hover:bg-white transition-colors"
           >
             {t.cta.button}
-            <span className="w-9 h-9 rounded-full bg-amber-500 text-black flex items-center justify-center group-hover:rotate-[-45deg] transition-transform duration-500">
+            <span className="w-11 h-11 rounded-full bg-black text-amber-200 flex items-center justify-center group-hover:rotate-[-45deg] transition-transform duration-500">
               <ArrowRight className="w-5 h-5" />
             </span>
           </Link>
@@ -724,7 +557,7 @@ const Home = () => {
   useDocumentTitle(t.nav.home);
   return (
     <>
-      <Hero />
+      <ScrollSequence />
       <ServicesMarquee />
       <Stats />
       <Studio />

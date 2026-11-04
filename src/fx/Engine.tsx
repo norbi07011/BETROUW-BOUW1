@@ -86,7 +86,7 @@ export function ScrollProgress() {
     <div className="fixed top-0 left-0 right-0 h-[3px] z-[70] pointer-events-none" aria-hidden="true">
       <div
         ref={bar}
-        className="h-full origin-left bg-gradient-to-r from-amber-700 via-amber-400 to-amber-200 shadow-[0_0_12px_rgba(245,158,11,0.9)]"
+        className="h-full origin-left bg-gradient-to-r from-amber-700 via-amber-400 to-amber-200 shadow-[0_0_12px_rgba(191, 159, 110,0.9)]"
         style={{ transform: 'scaleX(0)' }}
       />
     </div>

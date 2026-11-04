@@ -63,6 +63,9 @@
     <script>
       try { var l = localStorage.getItem('app-lang'); if (l) document.documentElement.lang = l.toLowerCase(); } catch(e) {}
     </script>
+    <!-- First frame of the home-page scroll film, so the hero paints immediately -->
+    <link rel="preload" as="image" href="/sequence/villa/f001.webp" media="(min-width: 768px)" fetchpriority="high" />
+    <link rel="preload" as="image" href="/sequence/villa-m/f001.webp" media="(max-width: 767px)" fetchpriority="high" />
   </head>
   <body>
     <div id="root"></div>

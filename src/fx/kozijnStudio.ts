@@ -34,7 +34,7 @@ export function createKozijnStudio(host: any, opts: any): any {
   (function(){
     var pm = new T.PMREMGenerator(renderer), es = new T.Scene();
     var sg = new T.SphereGeometry(20, 48, 24), pa = sg.attributes.position, cols = [];
-    var zen = new T.Color(0x4a6b8f), hor = new T.Color(0xe9e2d6), gnd = new T.Color(0x2a2420);
+    var zen = new T.Color(0x2b2824), hor = new T.Color(0xd9cbb2), gnd = new T.Color(0x1a1714);
     for(var i=0;i<pa.count;i++){ var y = pa.getY(i)/20, c = y >= 0 ? hor.clone().lerp(zen, Math.pow(y,0.55)) : hor.clone().lerp(gnd, Math.min(1,-y*4)); cols.push(c.r,c.g,c.b); }
     sg.setAttribute('color', new T.Float32BufferAttribute(cols,3));
     es.add(new T.Mesh(sg, new T.MeshBasicMaterial({side:T.BackSide, vertexColors:true})));
@@ -47,11 +47,11 @@ export function createKozijnStudio(host: any, opts: any): any {
   function canvas(w,h){ var c = document.createElement('canvas'); c.width = w; c.height = h; return c; }
   var brickC = (function(){
     var S = 1024, cols = 8, rows = 16, bw = S/cols, bh = S/rows, m = 6, c = canvas(S,S), g = c.getContext('2d'), b = canvas(S,S), gb = b.getContext('2d');
-    g.fillStyle = '#8b857a'; g.fillRect(0,0,S,S); gb.fillStyle = '#2a2a2a'; gb.fillRect(0,0,S,S);
+    g.fillStyle = '#4a4540'; g.fillRect(0,0,S,S); gb.fillStyle = '#2a2a2a'; gb.fillRect(0,0,S,S);
     for(var i=0;i<14000;i++){ g.fillStyle = Math.random()>.5 ? 'rgba(255,255,255,.07)' : 'rgba(0,0,0,.09)'; g.fillRect(Math.random()*S, Math.random()*S, 2, 2); }
     for(var r=0;r<rows;r++){ var off = (r%2) ? bw/2 : 0;
       for(var k=-1;k<=cols;k++){
-        var x = k*bw + off + m/2, y = r*bh + m/2, w = bw - m, h = bh - m, hue = rand(6,20), sat = rand(34,52), li = rand(21,33);
+        var x = k*bw + off + m/2, y = r*bh + m/2, w = bw - m, h = bh - m, hue = rand(18,30), sat = rand(6,14), li = rand(15,23);
         g.fillStyle = 'hsl('+hue+','+sat+'%,'+li+'%)'; g.fillRect(x,y,w,h);
         for(var s=0;s<90;s++){ g.fillStyle = 'hsla('+(hue+rand(-4,4))+','+sat+'%,'+(li+rand(-9,9))+'%,.55)'; g.fillRect(x+Math.random()*w, y+Math.random()*h, rand(1,4), rand(1,2.5)); }
         var gr = g.createLinearGradient(0,y,0,y+h); gr.addColorStop(0,'rgba(255,240,220,.08)'); gr.addColorStop(1,'rgba(0,0,0,.22)'); g.fillStyle = gr; g.fillRect(x,y,w,h);
@@ -112,8 +112,8 @@ export function createKozijnStudio(host: any, opts: any): any {
   });
   // rollaag boven de sparing
   var roll = (function(){
-    var c = canvas(1440,216), g = c.getContext('2d'); g.fillStyle = '#857f74'; g.fillRect(0,0,1440,216);
-    for(var i=0;i<19;i++){ var bw = 1440/19, hue = rand(5,16), sat = rand(30,45), li = rand(18,27); g.fillStyle = 'hsl('+hue+','+sat+'%,'+li+'%)'; g.fillRect(i*bw+5,5,bw-10,206); for(var s=0;s<120;s++){ g.fillStyle = 'hsla('+hue+','+sat+'%,'+(li+rand(-8,8))+'%,.5)'; g.fillRect(i*bw+5+Math.random()*(bw-10), 5+Math.random()*206, rand(1,3), rand(1,3)); } }
+    var c = canvas(1440,216), g = c.getContext('2d'); g.fillStyle = '#4a4540'; g.fillRect(0,0,1440,216);
+    for(var i=0;i<19;i++){ var bw = 1440/19, hue = rand(18,30), sat = rand(6,14), li = rand(13,20); g.fillStyle = 'hsl('+hue+','+sat+'%,'+li+'%)'; g.fillRect(i*bw+5,5,bw-10,206); for(var s=0;s<120;s++){ g.fillStyle = 'hsla('+hue+','+sat+'%,'+(li+rand(-8,8))+'%,.5)'; g.fillRect(i*bw+5+Math.random()*(bw-10), 5+Math.random()*206, rand(1,3), rand(1,3)); } }
     var t = new T.CanvasTexture(c); t.encoding = T.sRGBEncoding; t.anisotropy = maxAniso;
     var m = new T.Mesh(new T.PlaneGeometry(1.44, 0.216), new T.MeshStandardMaterial({map:t, roughness:.92, envMapIntensity:.45}));
     m.position.set(0, OH/2 + 0.108, 0.002); m.receiveShadow = true; wall.add(m); return m;
@@ -277,11 +277,11 @@ export function createKozijnStudio(host: any, opts: any): any {
   scene.add(level);
 
   /* ---------- licht ---------- */
-  scene.add(new T.HemisphereLight(0xd6e0ea, 0x2b221c, 0.55));
+  scene.add(new T.HemisphereLight(0xe8ddcc, 0x2b221c, 0.55));
   var sun = new T.DirectionalLight(0xffe3c2, 2.3); sun.position.set(-2.6, 3.4, 3.4); sun.castShadow = true;
   sun.shadow.mapSize.set(2048, 2048); var sc = sun.shadow.camera; sc.left = -2.4; sc.right = 2.4; sc.top = 2.4; sc.bottom = -2.4; sc.near = .5; sc.far = 12; sun.shadow.bias = -.0004; sun.shadow.normalBias = .015; scene.add(sun);
-  var back = new T.DirectionalLight(0xcfe0ff, 0.9); back.position.set(2.2, 2.4, -3.5); scene.add(back);
-  var fill = new T.DirectionalLight(0xbcd2ff, 0.3); fill.position.set(3, 1, 2); scene.add(fill);
+  var back = new T.DirectionalLight(0xe6e0d6, 0.9); back.position.set(2.2, 2.4, -3.5); scene.add(back);
+  var fill = new T.DirectionalLight(0xddd6ca, 0.3); fill.position.set(3, 1, 2); scene.add(fill);
 
   /* ==================================================================
      TIJDLIJN: 10 hoofdstukken, t loopt van 0 tot 10

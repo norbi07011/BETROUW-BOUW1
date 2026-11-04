@@ -129,7 +129,7 @@ const Contact = () => {
   };
 
   const field = (name: keyof FormData) =>
-    `peer w-full px-6 py-4 bg-black/60 border ${errors[name] && touched[name] ? 'border-red-500' : 'border-zinc-800'} rounded-xl text-white focus:outline-none focus:border-amber-500 focus:shadow-[0_0_0_4px_rgba(245,158,11,.12),0_0_30px_rgba(245,158,11,.15)] transition-all duration-300`;
+    `peer w-full px-6 py-4 bg-black/60 border ${errors[name] && touched[name] ? 'border-red-500' : 'border-zinc-800'} rounded-xl text-white focus:outline-none focus:border-amber-500 focus:shadow-[0_0_0_4px_rgba(191, 159, 110,.12),0_0_30px_rgba(191, 159, 110,.15)] transition-all duration-300`;
 
   const contactCards = [
     { icon: <Phone className="w-6 h-6" />, label: t.contactLabels.callUs, value: '+31 (0)6-84111366', href: 'tel:+31684111366' },

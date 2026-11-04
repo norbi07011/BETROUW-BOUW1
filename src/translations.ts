@@ -165,7 +165,7 @@ export const translations = {
           title: 'Kunststof kozijnen - Den Haag', 
           desc: 'Volledige vervanging van oude houten kozijnen door moderne kunststof kozijnen met dubbel glas. Verbeterde isolatie en een frisse uitstraling voor de hele woning.',
           mainImage: '/foto/foto-01.jpeg',
-          gallery: ['/foto/foto-02.jpeg', '/foto/foto-03.jpeg']
+          gallery: ['/foto/foto-02.jpeg']
         },
         { 
           title: 'Renovatie kozijnen - Lisse', 
@@ -174,10 +174,16 @@ export const translations = {
           gallery: ['/foto/foto-09.jpeg', '/foto/foto-07.jpeg', '/foto/foto-08.jpeg']
         },
         { 
-          title: 'Vliesgevel montage - Aalsmeer', 
-          desc: 'Professionele montage van een moderne vliesgevel op een bedrijfspand in Aalsmeer. Strakke aluminium profielen met grote glaspartijen zorgen voor een imposante, eigentijdse uitstraling. De vliesgevel biedt uitstekende thermische isolatie, maximale lichtinval en een naadloze, architectonische afwerking van de gehele gevel.',
+          title: 'Glazen gevel villa - Aalsmeer', 
+          desc: 'Montage van een grote glazen gevel en aluminium kozijnen in een vrijstaande nieuwbouwvilla in Aalsmeer. Slanke profielen en kamerhoge glaspartijen over twee verdiepingen, tot in de nok van het zadeldak, zorgen voor maximale lichtinval en een vrij uitzicht over het landschap.',
           mainImage: '/foto/aalsmeer-01.jpeg',
           gallery: ['/foto/aalsmeer-02.jpeg', '/foto/aalsmeer-03.jpeg', '/foto/aalsmeer-04.jpeg', '/foto/aalsmeer-05.jpeg', '/foto/aalsmeer-06.jpeg', '/foto/aalsmeer-07.jpeg', '/foto/aalsmeer-08.jpeg']
+        },
+        { 
+          title: 'Dakkapellen - montage', 
+          desc: 'Plaatsing en afwerking van een dakkapel met kunststof kozijnen. De dakkapel wordt waterdicht aangesloten op de pannen en strak afgewerkt, voor meer licht en ruimte op de bovenverdieping.',
+          mainImage: '/foto/foto-03.jpeg',
+          gallery: ['/foto/foto-05.jpeg']
         },
         { 
           title: 'Houten kozijnen met gevel bekleding', 
@@ -186,7 +192,7 @@ export const translations = {
           gallery: ['/foto/Houten%20kozijnen%20met%20gevel%20bekleding1.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding2.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding3.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding4.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding5.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding6.jpeg']
         },
         { 
-          title: 'Schuifpuien', 
+          title: 'Schuifpuien en vouwwanden', 
           desc: 'Montage van elegante schuifpuien die zorgen voor een naadloze verbinding tussen de woonruimte en de tuin. De grote glaspartijen bieden maximale lichtinval en een ruimtelijk gevoel, terwijl de thermisch geïsoleerde aluminium profielen zorgen voor energiezuinigheid en wooncomfort het hele jaar door. Soepele bediening en een strak, modern design.',
           mainImage: '/foto/Schuifpuien.jpeg',
           gallery: ['/foto/Schuifpuien1.jpeg', '/foto/Schuifpuien2.jpeg', '/foto/Schuifpuien3.jpeg', '/foto/Schuifpuien4.jpeg', '/foto/Schuifpuien5.jpeg', '/foto/Schuifpuien6.jpeg', '/foto/Schuifpuien7.jpeg', '/foto/Schuifpuien8.jpeg']
@@ -243,6 +249,7 @@ export const translations = {
             { src: '/foto/Schilderwerkzaamheden%20amsterdam%20po%2019.jpeg', label: 'Na' },
             { src: '/foto/Schilderwerkzaamheden%20amsterdam%20po%2020.jpeg', label: 'Na' },
             { src: '/foto/Schilderwerkzaamheden%20amsterdam%20po%2021.jpeg', label: 'Na' },
+            { src: '/foto/Schilderwerkzaamheden%20amsterdam%20po.jpeg', label: 'Na' },
           ]
         },
         { 
@@ -277,9 +284,9 @@ export const translations = {
         { title: 'Dakkapellen', desc: 'Dakkapellen zijn de perfecte oplossing voor meer licht en ruimte op de bovenverdieping. Wij ontwerpen en monteren dakkapellen op maat voor een stijlvol en functioneel resultaat.', image: '/foto/foto-03.jpeg', features: ['Meer daglicht', 'Extra ruimte', 'Op maat gemaakt', 'Strakke afwerking'] },
         { title: 'Houten kozijnen en keralit gevels afwerking', desc: 'Klassieke houten kozijnen gecombineerd met hoogwaardige keralit gevelbekleding voor een warme en duurzame uitstraling. Wij verzorgen de volledige montage van houten kozijnen én de afwerking van uw gevel met keralit panelen.', image: '/foto/Houten%20kozijnen%20met%20gevel%20bekleding6.jpeg', features: ['Houten kozijnen', 'Keralit gevelbekleding', 'Duurzaam materiaal', 'Complete afwerking'] },
         { title: 'Deuren Montage', desc: 'Professionele installatie van voordeuren, achterdeuren, schuifdeuren en binnendeuren. Elke deur wordt met precisie gemonteerd voor een perfecte werking.', image: '/foto/Deuren%20Montage.jpeg', features: ['Voordeuren', 'Achterdeuren', 'Schuifdeuren', 'Binnendeuren'] },
-        { title: 'Schuifpuien', desc: 'Hoogwaardige schuifpuien voor een naadloze overgang tussen binnen en buiten. Onze schuifpuien combineren design, comfort en functionaliteit.', image: '/foto/Schuifpuien1.jpeg', features: ['Grote glaspartijen', 'Soepele werking', 'Thermisch geïsoleerd', 'Ruimtebesparend'] },
+        { title: 'Schuifpuien', desc: 'Hoogwaardige schuifpuien voor een naadloze overgang tussen binnen en buiten. Onze schuifpuien combineren design, comfort en functionaliteit.', image: '/foto/Schuifpuien6.jpeg', features: ['Grote glaspartijen', 'Soepele werking', 'Thermisch geïsoleerd', 'Ruimtebesparend'] },
         { title: 'Nieuwbouw Projecten', desc: 'Complete raam- en deuroplossingen voor grootschalige nieuwbouwprojecten. Wij werken nauw samen met aannemers en architecten voor een vlekkeloos resultaat.', image: '/foto/Nieuwbouw%20Projecten.jpeg', video: '/wideo/Nieuwbouw%20Projecten.mp4', features: ['Projectbegeleiding', 'Maatwerk oplossingen', 'Tijdige levering', 'Volledige service'] },
-        { title: 'Schilderwerkzaamheden', desc: 'Vakkundig schilderwerk voor binnen en buiten — van kozijnen en deuren tot gevels en wanden. Wij zorgen voor een strakke, duurzame afwerking met hoogwaardige verfsystemen die jarenlang bestand zijn tegen weer en wind.', image: '/foto/Schilderwerken.jpeg', features: ['Binnen- en buitenschilderwerk', 'Schilderen van kozijnen', 'Gevel- en wandafwerking', 'Duurzame verfsystemen'] },
+        { title: 'Schilderwerkzaamheden', desc: 'Vakkundig schilderwerk voor binnen en buiten — van kozijnen en deuren tot gevels en wanden. Wij zorgen voor een strakke, duurzame afwerking met hoogwaardige verfsystemen die jarenlang bestand zijn tegen weer en wind.', image: '/foto/schilderwerk-interieur.jpeg', features: ['Binnen- en buitenschilderwerk', 'Schilderen van kozijnen', 'Gevel- en wandafwerking', 'Duurzame verfsystemen'] },
         { title: 'Glaswerkzaamheden', desc: 'Van heldere isolatieglaspanelen tot indrukwekkende glazen gevels: wij zijn uw specialist voor al het glaswerk. Of het nu gaat om het vervangen van enkel glas naar energiezuinig HR++ of triple glas, het herstellen van een gebarsten ruit, of de montage van een complete glazen pui of gevel — wij leveren vakwerk met oog voor veiligheid, isolatie en esthetiek.', image: '/foto/Glaswerkzaamheden.jpeg', features: ['HR++ en triple glas', 'Veiligheidsglas', 'Glazen gevels en puien', 'Snelle glasreparatie'] },
       ],
       guarantee: {
@@ -626,7 +633,7 @@ export const translations = {
           title: 'PVC Window Frames - The Hague', 
           desc: 'Complete replacement of old wooden frames with modern PVC windows featuring double glazing. Improved insulation and a fresh look for the entire home.',
           mainImage: '/foto/foto-01.jpeg',
-          gallery: ['/foto/foto-02.jpeg', '/foto/foto-03.jpeg']
+          gallery: ['/foto/foto-02.jpeg']
         },
         { 
           title: 'Frame Renovation - Lisse', 
@@ -635,13 +642,25 @@ export const translations = {
           gallery: ['/foto/foto-09.jpeg', '/foto/foto-07.jpeg', '/foto/foto-08.jpeg']
         },
         { 
+          title: 'Glass Facade Villa - Aalsmeer', 
+          desc: 'Installation of a large glass facade and aluminium frames in a detached new-build villa in Aalsmeer. Slim profiles and floor-to-ceiling glazing across two storeys, right up into the gable of the pitched roof, bring in maximum daylight and an open view of the landscape.',
+          mainImage: '/foto/aalsmeer-01.jpeg',
+          gallery: ['/foto/aalsmeer-02.jpeg', '/foto/aalsmeer-03.jpeg', '/foto/aalsmeer-04.jpeg', '/foto/aalsmeer-05.jpeg', '/foto/aalsmeer-06.jpeg', '/foto/aalsmeer-07.jpeg', '/foto/aalsmeer-08.jpeg']
+        },
+        { 
+          title: 'Dormers - installation', 
+          desc: 'Installation and finishing of a dormer with PVC frames. The dormer is sealed watertight to the roof tiles and neatly finished, adding light and space to the upper floor.',
+          mainImage: '/foto/foto-03.jpeg',
+          gallery: ['/foto/foto-05.jpeg']
+        },
+        { 
           title: 'Wooden Frames with Facade Cladding', 
           desc: 'Expert installation of solid wooden window frames combined with stylish facade cladding. This project covers the complete replacement and renovation of the facade, where sustainable wood and high-quality facade panels create a warm, natural appearance with excellent thermal insulation and a timeless character.',
           mainImage: '/foto/Houten%20kozijnen%20met%20gevel%20bekleding.jpeg',
           gallery: ['/foto/Houten%20kozijnen%20met%20gevel%20bekleding1.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding2.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding3.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding4.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding5.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding6.jpeg']
         },
         { 
-          title: 'Sliding Doors', 
+          title: 'Sliding & Folding Doors', 
           desc: 'Installation of elegant sliding doors providing a seamless connection between the living space and the garden. The large glass panels offer maximum natural light and a spacious feel, while the thermally insulated aluminum profiles ensure energy efficiency and year-round comfort. Smooth operation and a sleek, modern design.',
           mainImage: '/foto/Schuifpuien.jpeg',
           gallery: ['/foto/Schuifpuien1.jpeg', '/foto/Schuifpuien2.jpeg', '/foto/Schuifpuien3.jpeg', '/foto/Schuifpuien4.jpeg', '/foto/Schuifpuien5.jpeg', '/foto/Schuifpuien6.jpeg', '/foto/Schuifpuien7.jpeg', '/foto/Schuifpuien8.jpeg']
@@ -698,6 +717,7 @@ export const translations = {
             { src: '/foto/Schilderwerkzaamheden%20amsterdam%20po%2019.jpeg', label: 'After' },
             { src: '/foto/Schilderwerkzaamheden%20amsterdam%20po%2020.jpeg', label: 'After' },
             { src: '/foto/Schilderwerkzaamheden%20amsterdam%20po%2021.jpeg', label: 'After' },
+            { src: '/foto/Schilderwerkzaamheden%20amsterdam%20po.jpeg', label: 'After' },
           ]
         },
         { 
@@ -732,9 +752,9 @@ export const translations = {
         { title: 'Dormers', desc: 'Dormers are the perfect solution for more light and space on the upper floor. We design and install custom dormers for a stylish and functional result.', image: '/foto/foto-03.jpeg', features: ['More daylight', 'Extra space', 'Custom made', 'Clean finishing'] },
         { title: 'Wooden frames & keralit facade finishing', desc: 'Classic wooden frames combined with high-quality keralit facade cladding for a warm and durable appearance. We handle the complete installation of wooden frames and keralit facade panels.', image: '/foto/Houten%20kozijnen%20met%20gevel%20bekleding6.jpeg', features: ['Wooden frames', 'Keralit cladding', 'Durable materials', 'Complete finishing'] },
         { title: 'Door Installation', desc: 'Professional installation of front doors, back doors, sliding doors, and interior doors. Every door is precision-mounted for perfect operation.', image: '/foto/Deuren%20Montage.jpeg', features: ['Front doors', 'Back doors', 'Sliding doors', 'Interior doors'] },
-        { title: 'Sliding Systems', desc: 'High-quality sliding doors for a seamless transition between indoor and outdoor living. Our sliding systems combine design, comfort, and functionality.', image: '/foto/Schuifpuien1.jpeg', features: ['Large glass panels', 'Smooth operation', 'Thermally insulated', 'Space saving'] },
+        { title: 'Sliding Systems', desc: 'High-quality sliding doors for a seamless transition between indoor and outdoor living. Our sliding systems combine design, comfort, and functionality.', image: '/foto/Schuifpuien6.jpeg', features: ['Large glass panels', 'Smooth operation', 'Thermally insulated', 'Space saving'] },
         { title: 'New Construction', desc: 'Complete window and door solutions for large-scale new construction projects. We work closely with contractors and architects for a flawless result.', image: '/foto/Nieuwbouw%20Projecten.jpeg', video: '/wideo/Nieuwbouw%20Projecten.mp4', features: ['Project guidance', 'Custom solutions', 'Timely delivery', 'Full service'] },
-        { title: 'Painting Services', desc: 'Expert interior and exterior painting — from window and door frames to facades and walls. We deliver a flawless, long-lasting finish using premium paint systems built to withstand the elements for years to come.', image: '/foto/Schilderwerken.jpeg', features: ['Interior & exterior painting', 'Window frame painting', 'Facade & wall finishing', 'Durable paint systems'] },
+        { title: 'Painting Services', desc: 'Expert interior and exterior painting — from window and door frames to facades and walls. We deliver a flawless, long-lasting finish using premium paint systems built to withstand the elements for years to come.', image: '/foto/schilderwerk-interieur.jpeg', features: ['Interior & exterior painting', 'Window frame painting', 'Facade & wall finishing', 'Durable paint systems'] },
         { title: 'Glass Works', desc: 'From crystal-clear insulated glazing to striking glass facades — we are your specialist for all glasswork. Whether it involves upgrading single glazing to energy-efficient HR++ or triple glazing, repairing a cracked pane, or installing a complete glass front or facade — we deliver expert craftsmanship focused on safety, insulation, and aesthetics.', image: '/foto/Glaswerkzaamheden.jpeg', features: ['HR++ & triple glazing', 'Safety glass', 'Glass facades & fronts', 'Fast glass repair'] },
       ],
       guarantee: {
@@ -1081,7 +1101,7 @@ export const translations = {
           title: 'Okna PCV - Haga', 
           desc: 'Wymiana starych drewnianych ram na nowoczesne okna PCV z podwójnymi szybami. Lepsza izolacja i odświeżony wygląd całego domu.',
           mainImage: '/foto/foto-01.jpeg',
-          gallery: ['/foto/foto-02.jpeg', '/foto/foto-03.jpeg']
+          gallery: ['/foto/foto-02.jpeg']
         },
         { 
           title: 'Renowacja okien - Lisse', 
@@ -1090,13 +1110,25 @@ export const translations = {
           gallery: ['/foto/foto-09.jpeg', '/foto/foto-07.jpeg', '/foto/foto-08.jpeg']
         },
         { 
+          title: 'Szklana fasada willi - Aalsmeer', 
+          desc: 'Montaż dużej szklanej fasady i aluminiowych okien w wolnostojącej, nowo budowanej willi w Aalsmeer. Smukłe profile i przeszklenia od podłogi do sufitu na dwóch kondygnacjach, aż po szczyt dwuspadowego dachu, wpuszczają maksimum światła i otwierają widok na krajobraz.',
+          mainImage: '/foto/aalsmeer-01.jpeg',
+          gallery: ['/foto/aalsmeer-02.jpeg', '/foto/aalsmeer-03.jpeg', '/foto/aalsmeer-04.jpeg', '/foto/aalsmeer-05.jpeg', '/foto/aalsmeer-06.jpeg', '/foto/aalsmeer-07.jpeg', '/foto/aalsmeer-08.jpeg']
+        },
+        { 
+          title: 'Lukarny - montaż', 
+          desc: 'Montaż i wykończenie lukarny z oknami PCV. Lukarna jest szczelnie połączona z dachówką i starannie wykończona, dając więcej światła i przestrzeni na poddaszu.',
+          mainImage: '/foto/foto-03.jpeg',
+          gallery: ['/foto/foto-05.jpeg']
+        },
+        { 
           title: 'Drewniane ościeżnice z okładziną elewacyjną', 
           desc: 'Fachowy montaż masywnych drewnianych ościeżnic okiennych w połączeniu ze stylową okładziną elewacyjną. Projekt obejmuje kompletną wymianę i renowację elewacji, gdzie trwałe drewno i wysokiej jakości panele elewacyjne tworzą ciepły, naturalny wygląd z doskonałą izolacją termiczną i ponadczasowym charakterem.',
           mainImage: '/foto/Houten%20kozijnen%20met%20gevel%20bekleding.jpeg',
           gallery: ['/foto/Houten%20kozijnen%20met%20gevel%20bekleding1.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding2.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding3.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding4.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding5.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding6.jpeg']
         },
         { 
-          title: 'Drzwi przesuwne', 
+          title: 'Drzwi przesuwne i harmonijkowe', 
           desc: 'Montaż eleganckich drzwi przesuwnych zapewniających płynne połączenie między przestrzenią mieszkalną a ogrodem. Duże tafle szklane gwarantują maksymalne doświetlenie i poczucie przestrzeni, a termicznie izolowane profile aluminiowe zapewniają energooszczędność i komfort przez cały rok. Płynna obsługa i nowoczesny, elegancki design.',
           mainImage: '/foto/Schuifpuien.jpeg',
           gallery: ['/foto/Schuifpuien1.jpeg', '/foto/Schuifpuien2.jpeg', '/foto/Schuifpuien3.jpeg', '/foto/Schuifpuien4.jpeg', '/foto/Schuifpuien5.jpeg', '/foto/Schuifpuien6.jpeg', '/foto/Schuifpuien7.jpeg', '/foto/Schuifpuien8.jpeg']
@@ -1153,6 +1185,7 @@ export const translations = {
             { src: '/foto/Schilderwerkzaamheden%20amsterdam%20po%2019.jpeg', label: 'Po' },
             { src: '/foto/Schilderwerkzaamheden%20amsterdam%20po%2020.jpeg', label: 'Po' },
             { src: '/foto/Schilderwerkzaamheden%20amsterdam%20po%2021.jpeg', label: 'Po' },
+            { src: '/foto/Schilderwerkzaamheden%20amsterdam%20po.jpeg', label: 'Po' },
           ]
         },
         { 
@@ -1185,11 +1218,11 @@ export const translations = {
       items: [
         { title: 'Okna PCV', desc: 'Trwałe i łatwe w utrzymaniu ramy PCV z doskonałą izolacją termiczną. Nasze okna PCV zapewniają wieloletnią niezawodność i elegancki wygląd.', image: '/foto/foto-02.jpeg', features: ['Energooszczędne', 'Łatwe w utrzymaniu', 'Dźwiękoszczelne', 'Antywłamaniowe'] },
         { title: 'Lukarny', desc: 'Lukarny to idealne rozwiązanie dla większej ilości światła i przestrzeni na górnym piętrze. Projektujemy i montujemy lukarny na miarę dla stylowego i funkcjonalnego efektu.', image: '/foto/foto-03.jpeg', features: ['Więcej światła', 'Dodatkowa przestrzeń', 'Na zamówienie', 'Czyste wykończenie'] },
-        { title: 'Drewniane oŜciężnice i wykończenie elewacji keralit', desc: 'Klasyczne drewniane oŜciężnice w połączeniu z wysokiej jakości okładziną elewacyjną keralit dla ciepłego i trwałego wyglądu. Wykonujemy kompleksowy montaż drewnianych oŜciężnic i paneli keralit.', image: '/foto/Houten%20kozijnen%20met%20gevel%20bekleding6.jpeg', features: ['Drewniane oŜciężnice', 'Okładzina keralit', 'Trwałe materiały', 'Kompleksowe wykończenie'] },
+        { title: 'Drewniane ościeżnice i wykończenie elewacji keralit', desc: 'Klasyczne drewniane ościeżnice w połączeniu z wysokiej jakości okładziną elewacyjną keralit dla ciepłego i trwałego wyglądu. Wykonujemy kompleksowy montaż drewnianych oŜciężnic i paneli keralit.', image: '/foto/Houten%20kozijnen%20met%20gevel%20bekleding6.jpeg', features: ['Drewniane ościeżnice', 'Okładzina keralit', 'Trwałe materiały', 'Kompleksowe wykończenie'] },
         { title: 'Montaż Drzwi', desc: 'Profesjonalny montaż drzwi wejściowych, tylnych, przesuwnych i wewnętrznych. Każde drzwi są montowane z precyzją zapewniającą perfekcyjne działanie.', image: '/foto/Deuren%20Montage.jpeg', features: ['Drzwi wejściowe', 'Drzwi tylne', 'Drzwi przesuwne', 'Drzwi wewnętrzne'] },
-        { title: 'Systemy Przesuwne', desc: 'Wysokiej jakości drzwi przesuwne zapewniające płynne przejście między wnętrzem a zewnętrzem. Nasze systemy łączą design, komfort i funkcjonalność.', image: '/foto/Schuifpuien1.jpeg', features: ['Duże przeszklenia', 'Płynne działanie', 'Izolacja termiczna', 'Oszczędność miejsca'] },
+        { title: 'Systemy Przesuwne', desc: 'Wysokiej jakości drzwi przesuwne zapewniające płynne przejście między wnętrzem a zewnętrzem. Nasze systemy łączą design, komfort i funkcjonalność.', image: '/foto/Schuifpuien6.jpeg', features: ['Duże przeszklenia', 'Płynne działanie', 'Izolacja termiczna', 'Oszczędność miejsca'] },
         { title: 'Projekty Nowobudowlane', desc: 'Kompleksowe rozwiązania okienno-drzwiowe dla dużych projektów budowlanych. Ściśle współpracujemy z wykonawcami i architektami dla nieskazitelnego rezultatu.', image: '/foto/Nieuwbouw%20Projecten.jpeg', video: '/wideo/Nieuwbouw%20Projecten.mp4', features: ['Prowadzenie projektu', 'Rozwiązania na miarę', 'Terminowa dostawa', 'Pełen serwis'] },
-        { title: 'Usługi Malarskie', desc: 'Profesjonalne malowanie wnętrz i elewacji — od ram okiennych i drzwi po fasady i ściany. Zapewniamy nienaganne, trwałe wykończenie przy użyciu wysokiej jakości systemów malarskich odpornych na warunki atmosferyczne przez długie lata.', image: '/foto/Schilderwerken.jpeg', features: ['Malowanie wnętrz i elewacji', 'Malowanie ram okiennych', 'Wykończenie fasad i ścian', 'Trwałe systemy malarskie'] },
+        { title: 'Usługi Malarskie', desc: 'Profesjonalne malowanie wnętrz i elewacji — od ram okiennych i drzwi po fasady i ściany. Zapewniamy nienaganne, trwałe wykończenie przy użyciu wysokiej jakości systemów malarskich odpornych na warunki atmosferyczne przez długie lata.', image: '/foto/schilderwerk-interieur.jpeg', features: ['Malowanie wnętrz i elewacji', 'Malowanie ram okiennych', 'Wykończenie fasad i ścian', 'Trwałe systemy malarskie'] },
         { title: 'Usługi Szklarskie', desc: 'Od przezroczystych szyb zespolonych po imponujące szklane elewacje — jesteśmy specjalistami od wszelkich prac szklarskich. Niezależnie czy chodzi o wymianę pojedynczej szyby na energooszczędną HR++ lub potrójną, naprawę pękniętej szyby, czy montaż kompletnej przeszklonej fasady lub ściany — zapewniamy fachowe wykonanie z dbałością o bezpieczeństwo, izolację i estetykę.', image: '/foto/Glaswerkzaamheden.jpeg', features: ['Szyby HR++ i potrójne', 'Szkło bezpieczne', 'Elewacje i fasady szklane', 'Szybka naprawa szyb'] },
       ],
       guarantee: {
@@ -1536,7 +1569,7 @@ export const translations = {
           title: 'Kunststofffenster - Den Haag', 
           desc: 'Komplettersatz alter Holzrahmen durch moderne Kunststofffenster mit Doppelverglasung. Verbesserte Isolierung und ein frisches Erscheinungsbild für das gesamte Haus.',
           mainImage: '/foto/foto-01.jpeg',
-          gallery: ['/foto/foto-02.jpeg', '/foto/foto-03.jpeg']
+          gallery: ['/foto/foto-02.jpeg']
         },
         { 
           title: 'Fensterrenovierung - Lisse', 
@@ -1545,13 +1578,25 @@ export const translations = {
           gallery: ['/foto/foto-09.jpeg', '/foto/foto-07.jpeg', '/foto/foto-08.jpeg']
         },
         { 
+          title: 'Glasfassade Villa - Aalsmeer', 
+          desc: 'Montage einer großen Glasfassade und Aluminiumrahmen in einer freistehenden Neubauvilla in Aalsmeer. Schlanke Profile und raumhohe Verglasungen über zwei Geschosse bis in den Giebel des Satteldachs sorgen für maximalen Lichteinfall und freien Blick in die Landschaft.',
+          mainImage: '/foto/aalsmeer-01.jpeg',
+          gallery: ['/foto/aalsmeer-02.jpeg', '/foto/aalsmeer-03.jpeg', '/foto/aalsmeer-04.jpeg', '/foto/aalsmeer-05.jpeg', '/foto/aalsmeer-06.jpeg', '/foto/aalsmeer-07.jpeg', '/foto/aalsmeer-08.jpeg']
+        },
+        { 
+          title: 'Dachgauben - Montage', 
+          desc: 'Einbau und Verkleidung einer Dachgaube mit Kunststofffenstern. Die Gaube wird wasserdicht an die Dachziegel angeschlossen und sauber verkleidet – für mehr Licht und Raum im Obergeschoss.',
+          mainImage: '/foto/foto-03.jpeg',
+          gallery: ['/foto/foto-05.jpeg']
+        },
+        { 
           title: 'Holzrahmen mit Fassadenverkleidung', 
           desc: 'Fachgerechte Montage massiver Holzfensterrahmen in Kombination mit stilvoller Fassadenverkleidung. Dieses Projekt umfasst den kompletten Austausch und die Renovierung der Fassade, wobei nachhaltiges Holz und hochwertige Fassadenpaneele ein warmes, natürliches Erscheinungsbild mit hervorragender Wärmedämmung und zeitlosem Charakter schaffen.',
           mainImage: '/foto/Houten%20kozijnen%20met%20gevel%20bekleding.jpeg',
           gallery: ['/foto/Houten%20kozijnen%20met%20gevel%20bekleding1.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding2.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding3.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding4.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding5.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding6.jpeg']
         },
         { 
-          title: 'Schiebetüren', 
+          title: 'Schiebesysteme & Faltwände', 
           desc: 'Montage eleganter Schiebetüren für einen nahtlosen Übergang zwischen Wohnraum und Garten. Die großen Glasflächen bieten maximalen Lichteinfall und ein großzügiges Raumgefühl, während die thermisch isolierten Aluminiumprofile für Energieeffizienz und ganzjährigen Wohnkomfort sorgen. Sanfter Lauf und ein schlankes, modernes Design.',
           mainImage: '/foto/Schuifpuien.jpeg',
           gallery: ['/foto/Schuifpuien1.jpeg', '/foto/Schuifpuien2.jpeg', '/foto/Schuifpuien3.jpeg', '/foto/Schuifpuien4.jpeg', '/foto/Schuifpuien5.jpeg', '/foto/Schuifpuien6.jpeg', '/foto/Schuifpuien7.jpeg', '/foto/Schuifpuien8.jpeg']
@@ -1608,6 +1653,7 @@ export const translations = {
             { src: '/foto/Schilderwerkzaamheden%20amsterdam%20po%2019.jpeg', label: 'Nachher' },
             { src: '/foto/Schilderwerkzaamheden%20amsterdam%20po%2020.jpeg', label: 'Nachher' },
             { src: '/foto/Schilderwerkzaamheden%20amsterdam%20po%2021.jpeg', label: 'Nachher' },
+            { src: '/foto/Schilderwerkzaamheden%20amsterdam%20po.jpeg', label: 'Nachher' },
           ]
         },
         { 
@@ -1642,9 +1688,9 @@ export const translations = {
         { title: 'Dachgauben', desc: 'Dachgauben sind die perfekte Lösung für mehr Licht und Raum im Obergeschoss. Wir entwerfen und montieren maßgefertigte Dachgauben für ein stilvolles und funktionales Ergebnis.', image: '/foto/foto-03.jpeg', features: ['Mehr Tageslicht', 'Zusätzlicher Raum', 'Maßgefertigt', 'Saubere Verarbeitung'] },
         { title: 'Holzrahmen & Keralit-Fassadenverkleidung', desc: 'Klassische Holzrahmen kombiniert mit hochwertiger Keralit-Fassadenverkleidung für ein warmes und langlebiges Erscheinungsbild. Wir übernehmen die komplette Montage von Holzrahmen und Keralit-Fassadenplatten.', image: '/foto/Houten%20kozijnen%20met%20gevel%20bekleding6.jpeg', features: ['Holzrahmen', 'Keralit-Verkleidung', 'Langlebige Materialien', 'Komplette Verarbeitung'] },
         { title: 'Türenmontage', desc: 'Professionelle Installation von Haustüren, Nebeneingangstüren, Schiebetüren und Innentüren. Jede Tür wird präzise montiert für perfekte Funktion.', image: '/foto/Deuren%20Montage.jpeg', features: ['Haustüren', 'Nebeneingangstüren', 'Schiebetüren', 'Innentüren'] },
-        { title: 'Schiebesysteme', desc: 'Hochwertige Schiebetüren für einen nahtlosen Übergang zwischen Innen- und Außenbereich. Unsere Schiebesysteme vereinen Design, Komfort und Funktionalität.', image: '/foto/Schuifpuien1.jpeg', features: ['Große Glasflächen', 'Sanfter Lauf', 'Thermisch isoliert', 'Platzsparend'] },
+        { title: 'Schiebesysteme', desc: 'Hochwertige Schiebetüren für einen nahtlosen Übergang zwischen Innen- und Außenbereich. Unsere Schiebesysteme vereinen Design, Komfort und Funktionalität.', image: '/foto/Schuifpuien6.jpeg', features: ['Große Glasflächen', 'Sanfter Lauf', 'Thermisch isoliert', 'Platzsparend'] },
         { title: 'Neubauprojekte', desc: 'Komplette Fenster- und Türlösungen für großflächige Neubauprojekte. Wir arbeiten eng mit Bauunternehmern und Architekten für ein makelloses Ergebnis.', image: '/foto/Nieuwbouw%20Projecten.jpeg', video: '/wideo/Nieuwbouw%20Projecten.mp4', features: ['Projektbegleitung', 'Maßgeschneiderte Lösungen', 'Pünktliche Lieferung', 'Komplettservice'] },
-        { title: 'Malerarbeiten', desc: 'Professionelle Innen- und Außenanstriche — von Fenster- und Türrahmen bis hin zu Fassaden und Wänden. Wir sorgen für ein makelloses, langlebiges Finish mit hochwertigen Farbsystemen, die Wind und Wetter jahrelang trotzen.', image: '/foto/Schilderwerken.jpeg', features: ['Innen- und Außenanstrich', 'Streichen von Fensterrahmen', 'Fassaden- und Wandveredelung', 'Langlebige Farbsysteme'] },
+        { title: 'Malerarbeiten', desc: 'Professionelle Innen- und Außenanstriche — von Fenster- und Türrahmen bis hin zu Fassaden und Wänden. Wir sorgen für ein makelloses, langlebiges Finish mit hochwertigen Farbsystemen, die Wind und Wetter jahrelang trotzen.', image: '/foto/schilderwerk-interieur.jpeg', features: ['Innen- und Außenanstrich', 'Streichen von Fensterrahmen', 'Fassaden- und Wandveredelung', 'Langlebige Farbsysteme'] },
         { title: 'Glasarbeiten', desc: 'Von klaren Isolierglasscheiben bis zu beeindruckenden Glasfassaden — wir sind Ihr Spezialist für alle Glasarbeiten. Ob Umrüstung von Einfachverglasung auf energieeffiziente HR++ oder Dreifachverglasung, Reparatur einer gesprungenen Scheibe oder Montage einer kompletten Glasfront oder -fassade — wir liefern fachmännische Arbeit mit Fokus auf Sicherheit, Isolierung und Ästhetik.', image: '/foto/Glaswerkzaamheden.jpeg', features: ['HR++ & Dreifachverglasung', 'Sicherheitsglas', 'Glasfassaden & -fronten', 'Schnelle Glasreparatur'] },
       ],
       guarantee: {
@@ -1991,7 +2037,7 @@ export const translations = {
           title: 'PVC Pencere Çerçeveleri - Lahey', 
           desc: 'Eski ahşap çerçevelerin çift camlı modern PVC pencerelerle tam değişimi. Tüm ev için geliştirilmiş yalıtım ve taze bir görünüm.',
           mainImage: '/foto/foto-01.jpeg',
-          gallery: ['/foto/foto-02.jpeg', '/foto/foto-03.jpeg']
+          gallery: ['/foto/foto-02.jpeg']
         },
         { 
           title: 'Pencere Renovasyonu - Lisse', 
@@ -2000,13 +2046,25 @@ export const translations = {
           gallery: ['/foto/foto-09.jpeg', '/foto/foto-07.jpeg', '/foto/foto-08.jpeg']
         },
         { 
+          title: 'Cam Cephe Villa - Aalsmeer', 
+          desc: 'Aalsmeer’de müstakil yeni yapı bir villaya büyük cam cephe ve alüminyum doğrama montajı. İki kat boyunca, beşik çatının tepesine kadar uzanan ince profiller ve tavana kadar camlar maksimum gün ışığı ve açık bir manzara sağlar.',
+          mainImage: '/foto/aalsmeer-01.jpeg',
+          gallery: ['/foto/aalsmeer-02.jpeg', '/foto/aalsmeer-03.jpeg', '/foto/aalsmeer-04.jpeg', '/foto/aalsmeer-05.jpeg', '/foto/aalsmeer-06.jpeg', '/foto/aalsmeer-07.jpeg', '/foto/aalsmeer-08.jpeg']
+        },
+        { 
+          title: 'Çatı Çıkmaları - montaj', 
+          desc: 'PVC doğramalı bir çatı çıkmasının montajı ve son işçiliği. Çatı çıkması kiremitlere su geçirmez şekilde bağlanır ve özenle tamamlanır; üst katta daha fazla ışık ve alan sağlar.',
+          mainImage: '/foto/foto-03.jpeg',
+          gallery: ['/foto/foto-05.jpeg']
+        },
+        { 
           title: 'Ahşap Çerçeveler ve Cephe Kaplaması', 
           desc: 'Şık cephe kaplaması ile birlikte masif ahşap pencere çerçevelerinin uzman montajı. Bu proje, sürdürülebilir ahşap ve yüksek kaliteli cephe panellerinin sıcak, doğal bir görünüm, mükemmel ısı yalıtımı ve zamansız bir karakter sağladığı cephenin tam değişimi ve renovasyonunu kapsamaktadır.',
           mainImage: '/foto/Houten%20kozijnen%20met%20gevel%20bekleding.jpeg',
           gallery: ['/foto/Houten%20kozijnen%20met%20gevel%20bekleding1.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding2.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding3.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding4.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding5.jpeg', '/foto/Houten%20kozijnen%20met%20gevel%20bekleding6.jpeg']
         },
         { 
-          title: 'Sürgülü Kapılar', 
+          title: 'Sürme ve Katlanır Kapı Sistemleri', 
           desc: 'Yaşam alanı ile bahçe arasında kesintisiz bağlantı sağlayan zarif sürgülü kapıların montajı. Büyük cam paneller maksimum doğal ışık ve ferah bir his sunarken, termal yalıtımlı alüminyum profiller enerji verimliliği ve yıl boyunca konfor sağlar. Akıcı çalışma ve şık, modern tasarım.',
           mainImage: '/foto/Schuifpuien.jpeg',
           gallery: ['/foto/Schuifpuien1.jpeg', '/foto/Schuifpuien2.jpeg', '/foto/Schuifpuien3.jpeg', '/foto/Schuifpuien4.jpeg', '/foto/Schuifpuien5.jpeg', '/foto/Schuifpuien6.jpeg', '/foto/Schuifpuien7.jpeg', '/foto/Schuifpuien8.jpeg']
@@ -2063,6 +2121,7 @@ export const translations = {
             { src: '/foto/Schilderwerkzaamheden%20amsterdam%20po%2019.jpeg', label: 'Sonra' },
             { src: '/foto/Schilderwerkzaamheden%20amsterdam%20po%2020.jpeg', label: 'Sonra' },
             { src: '/foto/Schilderwerkzaamheden%20amsterdam%20po%2021.jpeg', label: 'Sonra' },
+            { src: '/foto/Schilderwerkzaamheden%20amsterdam%20po.jpeg', label: 'Sonra' },
           ]
         },
         { 
@@ -2097,9 +2156,9 @@ export const translations = {
         { title: 'Çatı Çıkmaları', desc: 'Çatı çıkmaları, üst katta daha fazla ışık ve alan için mükemmel bir çözümdür. Şık ve işlevsel bir sonuç için özel çatı çıkmaları tasarlıyor ve montaj yapıyoruz.', image: '/foto/foto-03.jpeg', features: ['Daha fazla ışık', 'Ekstra alan', 'Özel yapım', 'Temiz bitirme'] },
         { title: 'Ahşap çerçeveler ve keralit cephe kaplaması', desc: 'Sıcak ve dayanıklı bir görünüm için klasik ahşap çerçeveler ve yüksek kaliteli keralit cephe kaplamalarının kombinasyonu. Ahşap çerçevelerin ve keralit panellerin eksiksiz montajını gerçekleştiriyoruz.', image: '/foto/Houten%20kozijnen%20met%20gevel%20bekleding6.jpeg', features: ['Ahşap çerçeveler', 'Keralit kaplama', 'Dayanıklı malzeme', 'Eksiksiz bitirme'] },
         { title: 'Kapı Montajı', desc: 'Giriş kapıları, arka kapılar, sürme kapılar ve iç kapıların profesyonel montajı. Her kapı mükemmel çalışma için hassas bir şekilde monte edilir.', image: '/foto/Deuren%20Montage.jpeg', features: ['Giriş kapıları', 'Arka kapılar', 'Sürme kapılar', 'İç kapılar'] },
-        { title: 'Sürme Sistemler', desc: 'İç ve dış mekan arasında kesintisiz geçiş için yüksek kaliteli sürme kapılar. Sürme sistemlerimiz tasarım, konfor ve işlevselliği bir araya getirir.', image: '/foto/Schuifpuien1.jpeg', features: ['Büyük cam paneller', 'Akıcı çalışma', 'Termal yalıtımlı', 'Alan tasarrufu'] },
+        { title: 'Sürme Sistemler', desc: 'İç ve dış mekan arasında kesintisiz geçiş için yüksek kaliteli sürme kapılar. Sürme sistemlerimiz tasarım, konfor ve işlevselliği bir araya getirir.', image: '/foto/Schuifpuien6.jpeg', features: ['Büyük cam paneller', 'Akıcı çalışma', 'Termal yalıtımlı', 'Alan tasarrufu'] },
         { title: 'Yeni İnşaat Projeleri', desc: 'Büyük ölçekli yeni inşaat projeleri için eksiksiz pencere ve kapı çözümleri. Kusursuz bir sonuç için müteahhitler ve mimarlarla yakın işbirliği yapıyoruz.', image: '/foto/Nieuwbouw%20Projecten.jpeg', video: '/wideo/Nieuwbouw%20Projecten.mp4', features: ['Proje yönetimi', 'Özel çözümler', 'Zamanında teslimat', 'Tam hizmet'] },
-        { title: 'Boya İşleri', desc: 'Pencere ve kapı çerçevelerinden cephelere ve duvarlara kadar profesyonel iç ve dış mekan boyama hizmeti. Her türlü hava koşuluna yıllarca dayanıklı, üstün kaliteli boya sistemleriyle kusursuz ve uzun ömürlü bir sonuç sunuyoruz.', image: '/foto/Schilderwerken.jpeg', features: ['İç ve dış mekan boyama', 'Pencere çerçevesi boyama', 'Cephe ve duvar kaplama', 'Dayanıklı boya sistemleri'] },
+        { title: 'Boya İşleri', desc: 'Pencere ve kapı çerçevelerinden cephelere ve duvarlara kadar profesyonel iç ve dış mekan boyama hizmeti. Her türlü hava koşuluna yıllarca dayanıklı, üstün kaliteli boya sistemleriyle kusursuz ve uzun ömürlü bir sonuç sunuyoruz.', image: '/foto/schilderwerk-interieur.jpeg', features: ['İç ve dış mekan boyama', 'Pencere çerçevesi boyama', 'Cephe ve duvar kaplama', 'Dayanıklı boya sistemleri'] },
         { title: 'Cam İşleri', desc: 'Berrak yalıtımlı camlardan etkileyici cam cephelere kadar — tüm cam işleriniz için uzmanınızız. İster tek camdan enerji tasarruflu HR++ veya üçlü cama geçiş, ister çatlak bir camın onarımı, ister komple bir cam cephe veya ön yüz montajı olsun — güvenlik, yalıtım ve estetiğe odaklanan uzman işçilik sunuyoruz.', image: '/foto/Glaswerkzaamheden.jpeg', features: ['HR++ ve üçlü cam', 'Güvenlik camı', 'Cam cepheler', 'Hızlı cam onarımı'] },
       ],
       guarantee: {

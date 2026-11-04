@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, CheckCircle2, ChevronLeft, ChevronRight, ZoomIn, ArrowUpRight, Images } from 'lucide-react';
+import { SERVICE_TO_PROJECT } from '../serviceProjects';
 import { useLanguage } from '../context/LanguageContext';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { useLocation } from 'react-router-dom';
@@ -87,14 +88,19 @@ const Projects = () => {
   const items = t.projectDetails.items as ProjectItem[];
 
   useEffect(() => {
-    const state = location.state as { openProject?: string } | null;
-    if (state?.openProject) {
-      const serviceTitle = state.openProject.toLowerCase();
-      const match = items.find((p) => {
-        const pt = p.title.toLowerCase();
-        return pt.includes(serviceTitle) || serviceTitle.includes(pt) ||
-          serviceTitle.split(/\s+/).some((w: string) => w.length > 3 && pt.includes(w));
-      });
+    const state = location.state as { openProject?: string; serviceIndex?: number } | null;
+    if (state && (state.serviceIndex !== undefined || state.openProject)) {
+      let match: ProjectItem | undefined;
+      if (state.serviceIndex !== undefined) {
+        const idx = SERVICE_TO_PROJECT[state.serviceIndex];
+        match = idx == null ? undefined : items[idx];
+      } else if (state.openProject) {
+        const serviceTitle = state.openProject.toLowerCase();
+        match = items.find((p) => {
+          const pt = p.title.toLowerCase();
+          return pt.includes(serviceTitle) || serviceTitle.includes(pt);
+        });
+      }
       if (match) setSelectedProject(match);
       window.history.replaceState({ ...window.history.state, usr: undefined }, '');
     }

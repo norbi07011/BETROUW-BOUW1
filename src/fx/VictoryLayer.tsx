@@ -68,7 +68,7 @@ export function VictoryLayer() {
       <div className="v-flash absolute inset-0 bg-amber-200 pointer-events-none" style={{ opacity: 0 }} />
       <div className="v-stage relative flex flex-col items-center" style={{ perspective: 1100 }}>
         {[0, 1, 2].map((i) => (
-          <div key={i} className="v-wave absolute left-1/2 top-[58%] -translate-x-1/2 -translate-y-1/2 w-56 h-24 rounded-[50%] border-2 border-amber-400 shadow-[0_0_40px_rgba(245,158,11,.6)]" />
+          <div key={i} className="v-wave absolute left-1/2 top-[58%] -translate-x-1/2 -translate-y-1/2 w-56 h-24 rounded-[50%] border-2 border-amber-400 shadow-[0_0_40px_rgba(191, 159, 110,.6)]" />
         ))}
         <div className="v-window" style={{ transformStyle: 'preserve-3d', transform: `scale(${size})` }}>
           <Window3D
