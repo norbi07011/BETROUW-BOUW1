@@ -113,7 +113,7 @@ const ZoomThrough = () => {
 
   return (
     <section ref={section} className="relative h-[100svh] overflow-hidden">
-      <img ref={img} src="/foto/aalsmeer-06.jpeg" alt="" className="absolute inset-0 w-full h-full object-cover will-change-transform" loading="lazy" />
+      <img ref={img} src="/foto/ai/uitzicht-polder.webp" alt="" className="absolute inset-0 w-full h-full object-cover will-change-transform" loading="lazy" />
       <div className="absolute inset-0 bg-black/30" />
       <div className="absolute inset-0 flex items-center justify-center">
         <div

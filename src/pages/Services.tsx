@@ -118,7 +118,7 @@ const Services = () => {
   return (
     <div>
       <PageHero
-        image="/foto/foto-10.jpeg"
+        image="/foto/ai/villa-avond.webp"
         badge={<Badge icon={<Construction className="w-3.5 h-3.5" />}>{t.services.heroBadge}</Badge>}
         title={t.services.title}
         subtitle={t.services.subtitle}
@@ -361,7 +361,7 @@ const Services = () => {
             <div className="relative rounded-[2.5rem] overflow-hidden border border-zinc-800">
               <div className="absolute inset-0 -inset-y-[20%]">
                 <Parallax speed={0.12} className="w-full h-full">
-                  <img src="/foto/foto-01.jpeg" alt="" className="w-full h-full object-cover" loading="lazy" />
+                  <img src="/foto/ai/kozijn-hoek.webp" alt="" className="w-full h-full object-cover object-right" loading="lazy" />
                 </Parallax>
               </div>
               <div className="absolute inset-0 bg-gradient-to-r from-black via-black/90 to-black/60" />

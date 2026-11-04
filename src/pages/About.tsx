@@ -13,7 +13,7 @@ const About = () => {
   return (
     <div>
       <PageHero
-        image="/foto/Houten%20kozijnen%20met%20gevel%20bekleding6.jpeg"
+        image="/foto/ai/montage-handen.webp"
         minH="min-h-[70svh]"
         badge={<Badge icon={<Building2 className="w-3.5 h-3.5" />}>Betrouw Bouw B.V.</Badge>}
         title={t.about.title}

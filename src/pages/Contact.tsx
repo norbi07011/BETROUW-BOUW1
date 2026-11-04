@@ -152,7 +152,7 @@ const Contact = () => {
   return (
     <div>
       <PageHero
-        image="/foto/Deuren%20Montage.jpeg"
+        image="/foto/ai/greep-detail.webp"
         minH="min-h-[58svh]"
         badge={<Badge icon={<Send className="w-3.5 h-3.5" />}>{t.contact.submit}</Badge>}
         title={t.contact.title}

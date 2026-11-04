@@ -140,7 +140,7 @@ const Projects = () => {
   return (
     <div>
       <PageHero
-        image="/foto/Schuifpuien4.jpeg"
+        image="/foto/ai/straat-avond.webp"
         minH="min-h-[64svh]"
         badge={<Badge icon={<Images className="w-3.5 h-3.5" />}>{fx.galleryKicker}</Badge>}
         title={t.nav.projects}

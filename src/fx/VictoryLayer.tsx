@@ -78,7 +78,7 @@ export function VictoryLayer() {
             depth={56}
             showMeasure={false}
             className="[--bb-glass:1] [--bb-solid:1]"
-            view={<img src="/foto/Schuifpuien.jpeg" alt="" className="w-full h-full object-cover opacity-80" />}
+            view={<img src="/foto/ai/tuin-polder.webp" alt="" className="w-full h-full object-cover opacity-80" />}
           />
         </div>
         <div className="v-title mt-16 text-center px-6">
